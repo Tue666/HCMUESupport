@@ -21,7 +21,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="data">
             <?php foreach ($model['product'] as $item) : ?>
                 <tr>
                     <td><?php echo $item['ID']; ?></td>
@@ -34,11 +34,26 @@
                     <td><?php echo $item['Status']; ?></td>
                     <td>
                         <button class="btn btn-secondary" title="View"><i class="far fa-eye"></i></button>
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit"><i class="far fa-edit"></i></button>
+                        <button
+                            class="btn btn-success"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal"
+                            title="Edit"
+                            onclick="passDataEdit(
+                                <?php echo $item['ID'] ?>,
+                                '<?php echo $item['ProductName'] ?>',
+                                <?php echo $item['IDCate'] ?>,
+                                <?php echo $item['Price'] ?>,
+                                <?php echo $item['Quantity'] ?>,
+                                <?php echo $item['Discount'] ?>
+                            );">
+                                <i class="far fa-edit"></i>
+                        </button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeModal" title="Remove"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
             <?php endforeach; ?>
+        </tbody>
     </table>
     <!-- table end -->
 
@@ -111,7 +126,34 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    EDIT ITEM HERE
+                    <form>
+                        <input type="hidden" name="edit-id">
+                        <div class="form-group">
+                            <label>Product Name:</label>
+                            <input type="text" class="form-control" name="edit-productName">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="edit-option" class="form-control">
+                                <option>Mobiles</option>
+                                <option>Tablets</option>
+                                <option>Cameras</option>
+                                <option>Laptops</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price:</label>
+                            <input type="number" min="0" class="form-control" name="edit-price">
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity:</label>
+                            <input type="number" min="0" class="form-control" name="edit-quantity">
+                        </div>
+                        <div class="form-group">
+                            <label>Discount:</label>
+                            <input type="number" max="100" class="form-control" name="edit-discount">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

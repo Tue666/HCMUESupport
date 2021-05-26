@@ -15,4 +15,8 @@ class ProductDAL extends Database{
         }
         return json_encode($array);
     }
+    public function editProduct($productID,$productName,$idCate,$price,$quantity,$discount){
+        $query = "UPDATE product SET ProductName = '$productName', IDCate = $idCate, Price = $price, Quantity = $quantity, Discount = $discount WHERE ID = $productID";
+        return json_encode(mysqli_query($this->connectionString,$query));
+    }
 }
