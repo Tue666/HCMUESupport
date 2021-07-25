@@ -1,53 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href=<?php echo CSS_URL . '/style.css'; ?>>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><?php echo $model['title']; ?></title>
+	<link rel="icon" href="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png">
+	<link rel="stylesheet" href="<?php echo CSS_URL; ?>/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <!-- container start -->
-    <div class="my-container">
-        <?php
-            if (file_exists('./MVC/Views/'.$model['screen'].'.php')){
-                require_once('./MVC/Views/'.$model['screen'].'.php');
-            }
-            else {
-                echo 'The page you are looking for does not exist. Check your url and try again.';
-            }
-        ?>
-    </div>
-    <!-- container end -->
+	<!-- header start -->
+	<div class="header">
+		<img style="width:200; height:100%;" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" />
+		<div style="display:flex;flex-direction:row;align-items:center">
+			<?php if (empty($_SESSION['USER_SESSION'])) : ?>
+				<a class="btn btn-danger" href="<?php echo BASE_URL . 'Login/Index'; ?>">ĐĂNG NHẬP</a>
+			<?php else : ?>
+				<div class="cart">
+					
+				</div>
+				<label style="margin:0;margin-right:10px;">Xin chào, <?php echo $_SESSION['USER_SESSION']; ?></label>
+				<i data-toggle="modal" data-target="#logoutModal" class="fas fa-power-off" style="color:red;cursor:pointer;"></i>
+			<?php endif; ?>
+		</div>
+	</div>
+	<!-- header end -->
 
-    <!-- bubbles start -->
-    <div>
-        <ul class="bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-    <!-- bubbles end -->
+	<!-- content start -->
+	<?php
+	if (file_exists($link . $model['page'] . '.php')) {
+		require_once($link . $model['page'] . '.php');
+	}
+	?>
+	<!-- content end -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-    <script src=<?php echo JS_URL.'/js.js'; ?>></script>
+	<!-- Logout Modal Start -->
+	<div class="modal fade" id="logoutModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Bạn có chắc muốn thoát?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Nhấn 'Thoát' để thoát :D</div>
+				<div class="modal-footer">
+					<a class="btn btn-danger" href="<?php echo BASE_URL; ?>Login/Logout">Thoát</a>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Logout Modal End -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="<?php echo JS_URL; ?>/layout.js"></script>
 </body>
 
 </html>

@@ -1,213 +1,63 @@
-<?php if ($model['totalItem'] > 0) : ?>
-    <!-- title start -->
-    <div class="title">
-        <p class="text-title">MIDDLE TERM WEB 2020-2021</p>
-    </div>
-    <!-- title end -->
-
-    <!-- table start -->
-    <a class="btn btn-primary btn-add" data-bs-toggle="modal" data-bs-target="#addModal" title="Add"><i class="fas fa-plus-circle"></i></a>
-    <table class="table table-striped table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>ProductName</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Discount</th>
-                <th>CreatedDay</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="data">
-            <?php foreach ($model['product'] as $item) : ?>
-                <tr>
-                    <td><?php echo $item['ID']; ?></td>
-                    <td><?php echo $item['ProductName']; ?></td>
-                    <td><?php echo $item['IDCate']; ?></td>
-                    <td><?php echo number_format($item['Price'], 0, '', ','); ?></td>
-                    <td><?php echo $item['Quantity']; ?></td>
-                    <td><?php echo $item['Discount']; ?></td>
-                    <td><?php echo $item['CreatedDay']; ?></td>
-                    <td><?php echo $item['Status']; ?></td>
-                    <td>
-                        <button class="btn btn-secondary" title="View"><i class="far fa-eye"></i></button>
-                        <button
-                            class="btn btn-success"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editModal"
-                            title="Edit"
-                            onclick="passDataEdit(
-                                <?php echo $item['ID'] ?>,
-                                '<?php echo $item['ProductName'] ?>',
-                                <?php echo $item['IDCate'] ?>,
-                                <?php echo $item['Price'] ?>,
-                                <?php echo $item['Quantity'] ?>,
-                                <?php echo $item['Discount'] ?>
-                            );">
-                                <i class="far fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeModal" title="Remove"><i class="far fa-trash-alt"></i></button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <!-- table end -->
-
-    <!-- pagination start -->
-    <nav class="pagination">
-        <ul class="pagination">
-            <?php if ($model['currentPage'] > 1) : ?>
-                <li class="page-item" style="cursor:pointer"><a class="page-link" href=<?php echo BASE_URL; ?>>First</a></li>
-                <li class="page-item" style="cursor:pointer"><a class="page-link" href=<?php echo BASE_URL . '/Home/Index/' . $model['prevPage']; ?>><span aria-hidden="true">&laquo;</span></a></li>
-            <?php endif; ?>
-
-            <?php
-            $startPage = 1;
-            $endPage = $model['totalPage'];
-            if ($model['currentPage'] - ($model['maxPage'] / 2) > 1) {
-                $startPage = $model['currentPage'] - ($model['maxPage'] / 2);
-            }
-            if ($model['currentPage'] + ($model['maxPage'] / 2) < $model['totalPage']) {
-                $endPage = $model['currentPage'] + ($model['maxPage'] / 2);
-            }
-            ?>
-            <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
-                <?php if ($model['currentPage'] == $i) : ?>
-                    <li class="page-item active" style="cursor:pointer"><a class="page-link" href=<?php echo BASE_URL . '/Home/Index/' . $i; ?>><?php echo $i; ?></a></li>
-                <?php else : ?>
-                    <li class="page-item" style="cursor:pointer"><a class="page-link" href=<?php echo BASE_URL . '/Home/Index/' . $i; ?>><?php echo $i; ?></a></li>
-                <?php endif; ?>
-            <?php endfor; ?>
-
-            <?php if ($model['currentPage'] < $model['totalPage']) : ?>
-                <li class="page-item" style="cursor:pointer"><a class="page-link" href=<?php echo BASE_URL . '/Home/Index/' . $model['nextPage']; ?>><span aria-hidden="true">&raquo;</span></a></li>
-                <li class="page-item" style="cursor:pointer"><a class="page-link" href=<?php echo BASE_URL . '/Home/Index/' . $model['totalPage']; ?>>End</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-    <!-- pagination end -->
-
-
-
-
-
-    <!-- modal start -->
-
-    <!-- modal add start -->
-    <div class="modal fade" id="addModal">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">ADD</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="content">
+    <!-- wrapper start -->
+    <div class="wrapper">
+        <!-- searching start -->
+        <div class="searching">
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" placeholder="Nhập sản phẩm cần tìm ...">
+                    <small class="form-text text-muted">Ví dụ: rau, nước uống, ...</small>
                 </div>
-                <div class="modal-body">
-                    ADD ITEM HERE
+                <div class="col-sm-3">
+                    <select class="form-control">
+                        <option>Tất cả</option>
+                        <?php foreach ($model['listCategories'] as $item) : ?>
+                            <option><?php echo $item['CateName']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="form-text text-muted">Loại</small>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addItem();">Save changes</button>
+                <div class="col-sm-3">
+                    <select class="form-control">
+                        <option>Tất cả</option>
+                        <option>Còn hàng</option>
+                        <option>Được mua</option>
+                    </select>
+                    <small class="form-text text-muted">Số lượng</small>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
+        <!-- searching end -->
+        <!-- products start -->
+        <div class="products">
+            
+        </div>
+        <!-- products end -->
     </div>
-    <!-- modal add end -->
+    <!-- wrapper end -->
+</div>
 
-    <!-- modal edit start -->
-    <div class="modal fade" id="editModal">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">EDIT</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <input type="hidden" name="edit-id">
-                        <div class="form-group">
-                            <label>Product Name:</label>
-                            <input type="text" class="form-control" name="edit-productName">
-                        </div>
-                        <div class="form-group">
-                            <label>Category</label>
-                            <select id="edit-option" class="form-control">
-                                <option>Mobiles</option>
-                                <option>Tablets</option>
-                                <option>Cameras</option>
-                                <option>Laptops</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Price:</label>
-                            <input type="number" min="0" class="form-control" name="edit-price">
-                        </div>
-                        <div class="form-group">
-                            <label>Quantity:</label>
-                            <input type="number" min="0" class="form-control" name="edit-quantity">
-                        </div>
-                        <div class="form-group">
-                            <label>Discount:</label>
-                            <input type="number" max="100" class="form-control" name="edit-discount">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="editItem();">Save changes</button>
-                </div>
+<!-- start login permission modal -->
+<div class="modal fade" id="loginPermissionModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:black;" class="modal-title">Oops!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="color:black;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label style="color:black;">Đăng nhập để sử dụng. Cảm ơn :D</label>
+            </div>
+            <div class="modal-footer">
+                <button onclick="window.location.href='<?php echo BASE_URL; ?>Login/Index'" type="button" class="btn btn-danger" data-dismiss="modal">Đăng nhập</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
             </div>
         </div>
     </div>
-    <!-- modal edit end -->
-
-    <!-- modal remove start -->
-    <div class="modal fade" id="removeModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">REMOVE</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you wanna remvove this item?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="removeItem()">Remove</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- modal remove end -->
-
-    <!-- modal end -->
-
-    <!-- toasts start -->
-    <div class="toast" role="alert" style="position: fixed; top: 0.8rem; right: 1rem; width: 17%; z-index: 999">
-        <div class="toast-header" style="display:flex;justify-content:space-between;align-items:center;">
-            <strong id="titleToast" style="color:#fff;">Success</strong>
-            <a style="color:#fff;cursor:pointer;" onclick="hideToast();"><i class="fas fa-times"></i></a>
-        </div>
-        <div class="toast-body">
-            <div style="display:flex;flex-direction:column;justify-content:space-between;align-items:center;">
-                <div id="iconToast">
-
-                </div>
-                <div id="contentToast">
-
-                </div>
-            </div>
-            <div id="cooldown-line">
-
-            </div>
-        </div>
-
-    </div>
-    <!-- toasts end -->
-<?php else : ?>
-
-<?php endif; ?>
+</div>
+<!-- end login permission modal -->

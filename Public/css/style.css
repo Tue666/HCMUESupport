@@ -1,8 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap'); */
 body {
 	width: 100%;
-	min-height: 100vh;
+	height: 100vh;
+    background-color: #eee !important;
+}
+body::-webkit-scrollbar {
+    display: none;
 }
 * {
 	margin: 0;
@@ -12,156 +15,203 @@ body {
 	list-style: none;
 	font-family: 'Poppins', sans-serif;
 }
-/* styles container start */
-.my-container {
-    width: 100%;
-    min-height: 100%;
+.logo {
+    width: 220px;
+    height: 120px;
+}
+
+/* Start Layout CSS */
+
+.header {
+	width: 100%;
+	height: 13%;
+	background-color: #fff;
+	position: sticky;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+	box-shadow: 0 4px 10px #ccc;
+	transition: 1.5s;
+	z-index: 999;
+    padding: 10px;
+    padding-inline: 40px;
+}
+.header .cart {
+    margin: 0px 10px;
+    position: relative;
+    cursor: pointer;
+}
+.header .cart .number {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: red;
+    top: -8px;
+    left: -11px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.my-container .title {
-    margin-top: 2%;
-}
-.my-container .title .text-title {
-    font-family: 'Big Shoulders Display', cursive;
-    font-size: xx-large;
-    color: red;
+.header .cart .number label {
+    color: #fff;
+    font-size: 12px;
     margin: 0;
+    font-weight: bold;
 }
-.my-container .btn-add {
-    z-index: 2;
-    margin-bottom: 5px;
-}
-.my-container .table {
-    max-width: 80%;
-    z-index: 2;
+.header .cart .show-cart {
+    position: absolute;
+    top: 25px;
+    right: 2px;
+    width: 300px;
+    max-height: 300px;
+    background-color: #f5f5f5;
+    padding: 10px;
     overflow: scroll;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
 }
-.my-container .pagination {
-    z-index: 2;
+.header .cart .show-cart::-webkit-scrollbar {
+    display: none;
 }
-/* styles container end */
+.header .cart:hover .show-cart {
+    opacity: 1;
+    visibility: visible;
+}
+.header .cart .show-cart .cart-item {
+    width: 100%;
+    height: 39px;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px 0px;
+}
+.header .cart .show-cart .cart-item label {
+    display: block;
+    margin-bottom: 2px;
+}
+.header .cart .show-cart .cart-item .name {
+    font-weight: bold;
+    font-size: 17px;
+    max-width: 100%;
+    max-height: 100%;
+    line-height: 17px;
+    overflow: hidden;
+}
+.header .cart .show-cart .cart-item:hover {
+    box-shadow: 0 0 10px #ccc;
+}
+.content {
+	width: 100%;
+	position: relative;
+}
+.content .wrapper {
+	width: 100%;
+	min-height: 87%;
+	margin: auto;
+	padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+.content .wrapper .searching {
+    width: 50%;
+    margin: 20px auto;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+.content .wrapper .products {
+    width: 100%;
+    padding: 25px;
+	margin: auto;
+	position: relative;
+    flex-wrap: wrap;
+}
+.content .wrapper .products .product-card {
+    width: 200px;
+	height: 150px;
+	margin: 0.5%;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+    background-color: #fff;
+    padding: 10px;
+}
+.content .wrapper .products .product-card .infor {
+    height: 70%;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    border-bottom-color: #bbb;
+}
+.content .wrapper .products .product-card .infor label {
+    display: block;
+    margin-bottom: 2px;
+}
+.content .wrapper .products .product-card .infor .name {
+    font-weight: bold;
+    font-size: 17px;
+    max-width: 100%;
+    max-height: 40%;
+    line-height: 17px;
+    overflow: hidden;
+}
+.content .wrapper .products .product-card .infor .category,
+.content .wrapper .products .product-card .infor .quantity {
+    font-size: 15px;
+    max-height: 30%;
+}
+.content .wrapper .products .product-card .action {
+    height: 30%;
+}
+.content .wrapper .products .product-card:hover {
+    box-shadow: 0 0 10px #ccc;
+}
 
-/* styles toasts start */
-#line {
-	height: 2px;
-	background-color: green;
-	margin-top: 5px;
-	animation: cooldown 5.4s linear;
-}
-@keyframes cooldown{
-	0% {width: 100%;}
-	100% {width: 0%;}
-}
-/* styles toasts end */
+/* End Layout CSS */
 
-/* styles bubbles start */
-.bubbles {
-	position: fixed;
-	top: 0;
-	left: 0;
+/* Start Login CSS */
+
+.login-container {
 	width: 100%;
 	height: 100%;
-	z-index: 1;
-	overflow: hidden;
-    z-index: 1;
-}
-.bubbles li {
-	position: absolute;
-	display: block;
-	width: 70px;
-	height: 70px;
-	bottom: -200px;
-	animation: square linear 25s infinite;
-	box-shadow: 0 0 180px #bbb;
+	background: #eee;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    flex-direction: column;
 }
-.bubbles li:nth-child(2) {
-	left: 6%;
-	width: 30px;
-	height: 30px;
-	animation-delay: 6s;
-	animation-duration: 17s;
+.login-container .login-wrapper {
+	width: 35%;
+	background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 100px #ccc;
 }
-.bubbles li:nth-child(3) {
-	left: 10%;
-	width: 150px;
-	height: 150px;
-	animation-delay: 2s;
-	animation-duration: 14s;
+.login-container .login-wrapper .btn {
+	width: 100%;
+	height: 55px;
+	background-color: #369DDE;
+	color: #fff;
+	margin-bottom: 10px;
 }
-.bubbles li:nth-child(4) {
-	left: 25%;
-	width: 20px;
-	height: 20px;
-	animation-duration: 14s;
+.login-container .login-wrapper .btn:hover {
+	border-left: solid 8px rgba(255,255,255,0.5);
+	border-right: solid 8px rgba(255,255,255,0.5);
+	box-shadow: 0 0 10px rgba(54, 157, 222,0.8);
+	color: #fff;
 }
-.bubbles li:nth-child(5) {
-	left: 25%;
-	width: 95px;
-	height: 95px;
-	animation-delay: 5s;
-	animation-duration: 16s;
+.login-container .login-wrapper .option-2 {
+    text-align: center;
 }
-.bubbles li:nth-child(6) {
-	left: 35%;
-	width: 125px;
-	height: 125px;
-	animation-delay: 2s;
-	animation-duration: 16s;
+.login-container .login-wrapper .option-2 a {
+	text-decoration: none;
+	margin-left:5px;
 }
-.bubbles li:nth-child(7) {
-	left: 47%;
-	width: 30px;
-	height: 30px;
-	animation-delay: 2s;
-	animation-duration: 14s;
+.login-container .login-wrapper .regis-form {
+	display: none;
 }
-.bubbles li:nth-child(8) {
-	left: 52%;
-	width: 100px;
-	height: 100px;
-	animation-delay: 6s;
-	animation-duration: 16s;
-}
-.bubbles li:nth-child(9) {
-	left: 62%;
-	width: 170px;
-	height: 170px;
-	animation-delay: 3s;
-	animation-duration: 15s;
-}
-.bubbles li:nth-child(10) {
-	left: 79%;
-	width: 30px;
-	height: 30px;
-	animation-delay: 5s;
-	animation-duration: 10s;
-}
-.bubbles li:nth-child(11) {
-	left: 83%;
-	width: 125px;
-	height: 125px;
-	animation-delay: 3s;
-	animation-duration: 13s;
-}
-.bubbles li:nth-child(12) {
-	left: 94%;
-	width: 150px;
-	height: 150px;
-	animation-delay: 10s;
-	animation-duration: 10s;
-}
-@keyframes square {
-	0% { transform: translateY(0); }
-	100% {transform: translateY(-850px) rotate(360deg);}
-}
-.bubbles li:hover {
-	box-shadow: 0 0 100px rgba(0,0,255,0.6);
-	transition: 1s;
-}
-/* styles bubbles end */
+
+/* End Login CSS */
