@@ -1,3 +1,11 @@
+/* search product function */
+function searching() {
+    var keyWord = $('.content .searching input[name="search-key-word"]').val();
+    var category = $('.content .searching #search-category').val();
+    var status = $('.content .searching #search-status').val();
+    loadProducts(keyWord,category,status);
+}
+
 /* add order function */
 function addOrder() {
     var mssv = $('.detail-form input[name="detail-mssv"]').val();
@@ -143,10 +151,15 @@ function addCart(productID) {
 
 /* load products function*/
 loadProducts();
-function loadProducts() {
+function loadProducts(keyWord = "", category = "Tất cả", status = "Tất cả") {
     $.ajax({
         url: 'http://localhost/HCMUESupport/Ajax/loadProducts',
         method: 'post',
+        data: {
+            keyWord: keyWord,
+            category: category,
+            status: status
+        },
         success: function (response) {
             $('.content .wrapper .products').html(response);
         }

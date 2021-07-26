@@ -17,4 +17,11 @@ class ProductCategoriesDAL extends Database
 		$result = mysqli_query($this->connectionString,$query);
 		return json_encode(mysqli_fetch_assoc($result));
     }
+    public function getCateIDByName($cateName)
+    {
+        $query = "SELECT ID FROM productcategories WHERE CateName = '$cateName' AND Status = true LIMIT 1";
+		$result = mysqli_query($this->connectionString,$query);
+		$rows = mysqli_fetch_assoc($result);
+		return json_encode($rows['ID']);
+    }
 }

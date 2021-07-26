@@ -5,11 +5,11 @@
         <div class="searching">
             <div class="form-group row">
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" placeholder="Nhập sản phẩm cần tìm ...">
+                    <input type="text" class="form-control" name="search-key-word" placeholder="Nhập sản phẩm cần tìm ...">
                     <small class="form-text text-muted">Ví dụ: rau, nước uống, ...</small>
                 </div>
                 <div class="col-sm-3">
-                    <select class="form-control">
+                    <select class="form-control" id="search-category">
                         <option>Tất cả</option>
                         <?php foreach ($model['listCategories'] as $item) : ?>
                             <option><?php echo $item['CateName']; ?></option>
@@ -18,15 +18,14 @@
                     <small class="form-text text-muted">Loại</small>
                 </div>
                 <div class="col-sm-3">
-                    <select class="form-control">
+                    <select class="form-control" id="search-status">
                         <option>Tất cả</option>
                         <option>Còn hàng</option>
-                        <option>Được mua</option>
                     </select>
                     <small class="form-text text-muted">Số lượng</small>
                 </div>
                 <div class="col-sm-1">
-                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-primary" onclick="searching();"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>

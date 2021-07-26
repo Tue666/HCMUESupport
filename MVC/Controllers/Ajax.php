@@ -122,11 +122,24 @@ class Ajax extends ViewModel
 
 	public function loadProducts()
 	{
+		$keyWord = $_POST['keyWord'];
+		$category = $_POST['category'];
+		$status = $_POST['status'];
+
 		$products = $this->getModel('ProductsDAL');
 		$productcategories = $this->getModel('ProductCategoriesDAL');
 		$stored = $this->getModel('StoreDAL');
 
-		$listProductsJSON = json_decode($products->getProduct(), true);
+		$listProductsJSON = [];
+		if ($keyWord == "" && $category == "Tất cả" && $status == "Tất cả") {
+			$listProductsJSON = json_decode($products->getProduct(), true);
+		}
+		else {
+			if ($category != 'Tất cả'){
+				$category = json_decode($productcategories->getCateIDByName($_POST['category']),true);
+			}
+			$listProductsJSON = json_decode($products->getProductAdvanced($keyWord,$category,$status), true);
+		}
 		$listProducts = array();
 		$store = array();
 		if (!empty($_SESSION['USER_SESSION'])) {
