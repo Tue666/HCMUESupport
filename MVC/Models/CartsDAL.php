@@ -14,4 +14,12 @@ class CartsDAL extends Database
         $query = "INSERT carts VALUES (NULL,$userID,$productID)";
         return json_encode(mysqli_query($this->connectionString,$query));
     }
+    public function removeItem($userID,$productID){
+        $query = "DELETE FROM carts WHERE UserID = $userID AND ProductID = $productID";
+        return json_encode(mysqli_query($this->connectionString,$query));
+    }
+    public function clearCarts($userID){
+        $query = "DELETE FROM carts WHERE UserID = $userID";
+        return json_encode(mysqli_query($this->connectionString,$query));
+    }
 }

@@ -15,4 +15,18 @@ class Home extends ViewModel
 			'listCategories' => $listCategories
 		]);
 	}
+	public function Success()
+	{
+		$this->loadView('Shared', 'Layout', [
+			'title' => 'Success',
+			'page' => 'Shared/Success'
+		]);
+	}
+	public function Failed()
+	{
+		$this->loadView('Shared', 'Layout', [
+			'title' => 'Failed',
+			'page' => 'Shared/Fail'
+		]);
+	}
 }

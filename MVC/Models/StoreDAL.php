@@ -15,4 +15,12 @@ class StoreDAL extends Database
         $query = "INSERT store VALUES (NULL,$userID,$productID,1)";
         return json_encode(mysqli_query($this->connectionString,$query));
     }
+    public function removeItem($userID,$productID){
+        $query = "DELETE FROM store WHERE UserID = $userID AND ProductID = $productID";
+        return json_encode(mysqli_query($this->connectionString,$query));
+    }
+    public function clearStored($userID){
+        $query = "DELETE FROM store WHERE UserID = $userID";
+        return json_encode(mysqli_query($this->connectionString,$query));
+    }
 }

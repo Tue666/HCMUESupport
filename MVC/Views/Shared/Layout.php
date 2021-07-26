@@ -16,13 +16,13 @@
 <body>
 	<!-- header start -->
 	<div class="header">
-		<img style="width:200; height:100%;" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" />
+		<img onclick="window.location.href='<?php echo BASE_URL; ?>'" style="width:200; height:100%;cursor:pointer;" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" />
 		<div style="display:flex;flex-direction:row;align-items:center">
 			<?php if (empty($_SESSION['USER_SESSION'])) : ?>
 				<a class="btn btn-danger" href="<?php echo BASE_URL . 'Login/Index'; ?>">ĐĂNG NHẬP</a>
 			<?php else : ?>
-				<div class="cart">
-					
+				<div class="cart" onclick="window.location.href='<?php echo BASE_URL . 'Order/Index'; ?>'">
+
 				</div>
 				<label style="margin:0;margin-right:10px;">Xin chào, <?php echo $_SESSION['USER_SESSION']; ?></label>
 				<i data-toggle="modal" data-target="#logoutModal" class="fas fa-power-off" style="color:red;cursor:pointer;"></i>

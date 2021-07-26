@@ -106,11 +106,12 @@ body::-webkit-scrollbar {
 }
 .content {
 	width: 100%;
+    height: 87%;
 	position: relative;
 }
 .content .wrapper {
 	width: 100%;
-	min-height: 87%;
+	min-height: 100%;
 	margin: auto;
 	padding: 5px;
     justify-content: center;
@@ -169,6 +170,57 @@ body::-webkit-scrollbar {
 }
 .content .wrapper .products .product-card:hover {
     box-shadow: 0 0 10px #ccc;
+}
+.content .order-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.content .order-wrapper .detail {
+    box-shadow: 0 0 10px #ccc;
+}
+.content .order-wrapper .carts,
+.content .order-wrapper .detail,
+.content .order-wrapper .method {
+    width: 33%;
+    height: 100%;
+    max-width: 33%;
+    max-height: 100%;
+    padding: 13px;
+    overflow: scroll;
+}
+.content .order-wrapper .carts::-webkit-scrollbar,
+.content .order-wrapper .detail::-webkit-scrollbar,
+.content .order-wrapper .method::-webkit-scrollbar {
+    display: none;
+}
+.content .order-wrapper .carts .item {
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    padding: 15px;
+    margin: 15px 0px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.content .order-wrapper .carts .item:hover {
+    box-shadow: 0 0 10px #ccc;
+}
+.content .order-wrapper .carts .item .item-name {
+    width: 80%;
+    height: 100%;
+    max-width: 80%;
+    margin: 0;
+    font-weight: bold;
+    overflow: hidden;
+}
+.content .order-wrapper .carts .item .item-remove {
+    cursor: pointer;
+}
+.content .order-wrapper .carts .item .item-remove:hover {
+    color: red;
 }
 
 /* End Layout CSS */
