@@ -20,6 +20,7 @@
                             <th>Nơi nhận</th>
                             <th>Vị trí</th>
                             <th>Ngày tạo</th>
+                            <th>Ngày nhận</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -50,3 +51,30 @@
     </div>
 </div>
 <!-- end view modal -->
+
+<!-- received modal -->
+<div class="modal fade" id="receivedModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ngày nhận</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" name="id-received-order" />
+                        <input type="date" id="date-received" class="form-control" placeholder="Enter new password ...">
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-success" data-dismiss="modal" onclick="updateReceivedDay();">Lưu</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end received modal -->

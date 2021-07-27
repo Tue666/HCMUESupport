@@ -18,17 +18,19 @@ class Ajax extends ViewModel
 		$orders = $this->getModel('OrdersDAL');
 		$orderdetails = $this->getModel('OrderDetailsDAL');
 		$carts = $this->getModel('CartsDAL');
+		$stored = $this->getModel('StoreDAL');
 
-		$orderID = json_decode($orders->insertOrder($_SESSION['USER_ID_SESSION'],$_POST['name'],$_POST['email'],$_POST['address'],$_POST['phone'],$_POST['mssv'],$_POST['khoa'],$_POST['method'],$_POST['method_address'],$_POST['method_note']),true);
-		if ($orderID > 0){
+		$today = date("Y-m-d");
+		$orderID = json_decode($orders->insertOrder($_SESSION['USER_ID_SESSION'], $_POST['name'], $_POST['email'], $_POST['address'], $_POST['phone'], $_POST['mssv'], $_POST['khoa'], $_POST['method'], $_POST['method_address'], $_POST['method_note']), true);
+		if ($orderID > 0) {
 			$listCarts = json_decode($carts->getCartsByUserID($_SESSION['USER_ID_SESSION']), true);
 			foreach ($listCarts as $item) {
-				json_decode($orderdetails->insertOrderDetail($orderID,$item['ProductID']),true);
+				json_decode($stored->updateStoreDay($_SESSION['USER_ID_SESSION'], $item['ProductID'], $today));
+				json_decode($orderdetails->insertOrderDetail($orderID, $item['ProductID']), true);
 			}
-			json_decode($carts->clearCarts($_SESSION['USER_ID_SESSION']),true);
+			json_decode($carts->clearCarts($_SESSION['USER_ID_SESSION']), true);
 			echo true;
-		}
-		else echo false;
+		} else echo false;
 	}
 	public function loadCart()
 	{
@@ -130,15 +132,15 @@ class Ajax extends ViewModel
 		$productcategories = $this->getModel('ProductCategoriesDAL');
 		$stored = $this->getModel('StoreDAL');
 
+		$today = date("Y-m-d");
 		$listProductsJSON = [];
 		if ($keyWord == "" && $category == "Tất cả" && $status == "Tất cả") {
 			$listProductsJSON = json_decode($products->getProduct(), true);
-		}
-		else {
-			if ($category != 'Tất cả'){
-				$category = json_decode($productcategories->getCateIDByName($_POST['category']),true);
+		} else {
+			if ($category != 'Tất cả') {
+				$category = json_decode($productcategories->getCateIDByName($_POST['category']), true);
 			}
-			$listProductsJSON = json_decode($products->getProductAdvanced($keyWord,$category,$status), true);
+			$listProductsJSON = json_decode($products->getProductAdvanced($keyWord, $category, $status), true);
 		}
 		$listProducts = array();
 		$store = array();
@@ -160,7 +162,7 @@ class Ajax extends ViewModel
 
 		$output = '';
 		if (count($listProducts) < 1) {
-			$output .= '<label>Không có sản phẩm nào</label>';
+			$output .= '<label>Không có sản phẩm nào hehe</label>';
 		} else {
 			foreach ($listProducts as $item) {
 				$output .= '
@@ -179,12 +181,22 @@ class Ajax extends ViewModel
 				} else {
 					if (empty($_SESSION['USER_SESSION']) || !in_array($item['ID'], $store)) {
 						$output .= '
-					<button onclick="addCart(' . $item['ID'] . ');" class="btn btn-danger">Đặt</button>
+						<button onclick="addCart(' . $item['ID'] . ');" class="btn btn-danger">Đặt</button>
 				';
-					} else {
-						$output .= '
-				<label style="color:red">Đã thêm vào giỏ</label>
+					} else if (in_array($item['ID'], $store)) {
+						$storeDay = json_decode($stored->getStoreDay($_SESSION['USER_ID_SESSION'], $item['ID']), true);
+						if ($storeDay != "") {
+							$dayTo = strtotime($today);
+							$dayFrom = strtotime($storeDay);
+							$datediff = $dayTo - $dayFrom;
+							$output .= '
+						<label style="color:red">Lần đặt tiếp: ' . 3 - (round($datediff / (60 * 60 * 24))) . ' ngày</label>
 			';
+						} else {
+							$output .= '
+							<label style="color:red">Đã thêm vào giỏ</label>
+				';
+						}
 					}
 				}
 				$output .= '		

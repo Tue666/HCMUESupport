@@ -1,16 +1,3 @@
-function passDataViewOrder(orderID) {
-  $.ajax({
-    url: 'http://localhost/HCMUESupport/Admin/Ajax/dataViewOrder',
-    method: 'post',
-    data: {
-      orderID: orderID
-    },
-    success: function (response) {
-      $('#viewModal .modal-body').html(response);
-      $('#viewModal').modal();
-    }
-  });
-}
 // defalt 0 is order
 function switchStatus(ID, type = 0) {
   $.ajax({
@@ -21,7 +8,7 @@ function switchStatus(ID, type = 0) {
       type: type
     },
     success: function (response) {
-      if (response){
+      if (response) {
         loadOrder();
         showToast('Thành công', 'Cập nhật trạng thái thành công');
       }
@@ -56,9 +43,6 @@ function loadAccount() {
       },
       {
         "data": "Phone"
-      },
-      {
-        "data": "Created"
       },
       {
         "data": "Type"
@@ -173,6 +157,9 @@ function loadOrder() {
         "data": "Ngày tạo"
       },
       {
+        "data": "Ngày nhận"
+      },
+      {
         "data": "Status"
       },
       {
@@ -182,7 +169,67 @@ function loadOrder() {
     });
   });
 }
-/* Start Orders Manager */
+// update day received order
+function updateReceivedDay() {
+  var date = $('#date-received').val();
+  var orderID = $('#receivedModal input[name="id-received-order"]').val();
+  $.ajax({
+    url: 'http://localhost/HCMUESupport/Admin/Ajax/updateReceivedDay',
+    method: 'post',
+    data: {
+      date: date,
+      orderID: orderID
+    },
+    success: function (response) {
+      if (response) {
+        switchStatus(orderID);
+        loadOrder();
+        showToast('Thành công', 'Cập nhật ngày nhận thành công');
+      }
+      else{
+        showToast('Thất bại', 'Cập nhật ngày nhận thất bại');
+      }
+    }
+  });
+}
+// clear day received order
+function clearReceivedDay(orderID) {
+  $.ajax({
+    url: 'http://localhost/HCMUESupport/Admin/Ajax/clearReceivedDay',
+    method: 'post',
+    data: {
+      orderID: orderID
+    },
+    success: function (response) {
+      if (response) {
+        switchStatus(orderID);
+        loadOrder();
+        showToast('Thành công', 'Cập nhật ngày nhận thành công');
+      }
+      else{
+        showToast('Thất bại', 'Cập nhật ngày nhận thất bại');
+      }
+    }
+  });
+}
+function passDataReceivedDay(orderID) {
+  $('#receivedModal input[name="id-received-order"]').val(orderID);
+  $('#receivedModal').modal();
+}
+function passDataViewOrder(orderID) {
+  $.ajax({
+    url: 'http://localhost/HCMUESupport/Admin/Ajax/dataViewOrder',
+    method: 'post',
+    data: {
+      orderID: orderID
+    },
+    success: function (response) {
+      $('#viewModal .modal-body').html(response);
+      $('#viewModal').modal();
+    }
+  });
+}
+/* End Orders Manager */
 
 // remove item admin function | default 0 is users, 1 is products
 function removeItem(type = 0) {

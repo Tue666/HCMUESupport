@@ -18,7 +18,6 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Created</th>
                             <th>Type</th>
                             <th>Status</th>
                             <th>Action</th>

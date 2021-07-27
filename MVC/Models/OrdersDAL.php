@@ -13,19 +13,20 @@ class OrdersDAL extends Database
 		$result = mysqli_query($this->connectionString, $query);
 		return json_encode(mysqli_num_rows($result));
 	}
-	public function switchStatus($orderID){
+	public function switchStatus($orderID)
+	{
 		$query = "UPDATE orders SET Status = !Status WHERE ID = $orderID";
-		return (mysqli_query($this->connectionString,$query));
+		return (mysqli_query($this->connectionString, $query));
 	}
 	public function getListOrders()
 	{
 		$query = "SELECT * FROM orders";
-        $result = mysqli_query($this->connectionString, $query);
-        $array = array();
-        while ($rows = mysqli_fetch_assoc($result)) {
-            $array[] = $rows;
-        }
-        return json_encode($array);
+		$result = mysqli_query($this->connectionString, $query);
+		$array = array();
+		while ($rows = mysqli_fetch_assoc($result)) {
+			$array[] = $rows;
+		}
+		return json_encode($array);
 	}
 	public function getOrderByID($orderID)
 	{
@@ -54,11 +55,23 @@ class OrdersDAL extends Database
 		}
 		return json_encode($array);
 	}
+	public function getCreatedDay($orderID)
+	{
+		$query = "SELECT CreatedDay FROM orders WHERE ID = $orderID";
+		$result = mysqli_query($this->connectionString, $query);
+		$rows = mysqli_fetch_assoc($result);
+		return json_encode($rows['CreatedDay']);
+	}
 	public function insertOrder($customerID, $customerName, $customerEmail, $customerAddress, $customerPhone, $MSSV, $khoa, $place, $address, $note)
 	{
-		$query = "INSERT orders VALUES (NULL,$customerID,'$customerName','$customerEmail','$customerAddress','$customerPhone','$MSSV','$khoa','$place','$address','$note',NOW(),0)";
+		$query = "INSERT orders VALUES (NULL,$customerID,'$customerName','$customerEmail','$customerAddress','$customerPhone','$MSSV','$khoa','$place','$address','$note',NOW(),NULL,0)";
 		if (mysqli_query($this->connectionString, $query)) {
 			return json_encode(mysqli_insert_id($this->connectionString));
 		}
+	}
+	public function updateReceivedDay($orderID, $receivedDay)
+	{
+		$query = "UPDATE orders SET ReceivedDay = '$receivedDay' WHERE ID = $orderID";
+		return (mysqli_query($this->connectionString, $query));
 	}
 }

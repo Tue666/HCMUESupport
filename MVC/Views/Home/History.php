@@ -8,6 +8,7 @@
                     <th>Nơi nhận</th>
                     <th>Ghi chú</th>
                     <th>Ngày tạo</th>
+                    <th>Ngày nhận</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -20,6 +21,7 @@
                         <td><?php echo $item['Place']; ?></td>
                         <td><?php echo $item['Note']; ?></td>
                         <td><?php echo $item['CreatedDay']; ?></td>
+                        <td><?php echo $item['ReceivedDay']; ?></td>
                         <td>
                             <?php if ($item['Status']) : ?>
                                 <label class="text-success" style="font-weight:bold;">Đã nhận</label>

@@ -35,16 +35,22 @@
             </div>
             <div class="infor-item">
                 <label style="font-weight:bold">Nơi nhận hàng:</label>
-                <label><?php echo $model['orderByID']['Place']; ?></label>
+                <label style="font-weight:bold;"><?php echo $model['orderByID']['Place']; ?></label>
             </div>
             <div class="infor-item">
                 <label style="font-weight:bold">Địa chỉ đính kèm:</label>
-                <label><?php echo $model['orderByID']['Address']; ?></label>
+                <label style="font-weight:bold;"><?php echo $model['orderByID']['Address'] ? $model['orderByID']['Address'] : '-------'; ?></label>
             </div>
             <div class="infor-item">
                 <label style="font-weight:bold">Đặt hàng ngày:</label>
                 <label><?php echo $model['orderByID']['CreatedDay']; ?></label>
             </div>
+            <div class="infor-item">
+                <label style="font-weight:bold">Ngày nhận:</label>
+                <label><?php echo $model['orderByID']['ReceivedDay'] ? $model['orderByID']['ReceivedDay'] : '-------'; ?></label>
+            </div>
+            <label style="font-weight:bold">Ghi chú</label>
+            <label><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>
         </div>
         <div class="status">
             <?php if ($model['orderByID']['Status']) : ?>

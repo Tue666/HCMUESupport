@@ -20,7 +20,6 @@
                 <div class="col-sm-3">
                     <select class="form-control" id="search-status">
                         <option>Tất cả</option>
-                        <option>Còn hàng</option>
                     </select>
                     <small class="form-text text-muted">Số lượng</small>
                 </div>
