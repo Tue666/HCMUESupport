@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $model['title']; ?></title>
-    <link rel="icon" href="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png">
+    <!-- <link rel="icon" href="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png"> -->
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/vi/5/59/Logo_HCMUP.png">
     <link rel="stylesheet" href="<?php echo CSS_URL; ?>/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -17,7 +18,8 @@
     <!-- login-container-start -->
     <div class="login-container">
         <!-- logo-start -->
-        <img class="logo" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" />
+        <!-- <img class="logo" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" /> -->
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/vi/5/59/Logo_HCMUP.png" />
         <!-- logo-end -->
 
         <!-- login-wrapper-start -->

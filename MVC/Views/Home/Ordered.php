@@ -38,6 +38,10 @@
                 <label><?php echo $model['orderByID']['Place']; ?></label>
             </div>
             <div class="infor-item">
+                <label style="font-weight:bold">Địa chỉ đính kèm:</label>
+                <label><?php echo $model['orderByID']['Address']; ?></label>
+            </div>
+            <div class="infor-item">
                 <label style="font-weight:bold">Đặt hàng ngày:</label>
                 <label><?php echo $model['orderByID']['CreatedDay']; ?></label>
             </div>

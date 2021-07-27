@@ -59,8 +59,9 @@ class Login extends ViewModel
 			if (password_verify($passWord, $account['PassWord'])) {
 				$_SESSION['USER_ID_SESSION'] = $account['ID'];
 				$_SESSION['USER_SESSION'] = $account['UserName'];
+				$_SESSION['USER_TYPE_SESSION'] = $account['Type'];
 				if ($account['Type'] != 0) {
-					// For Admin Manage Page
+					header('Location:' . ADMIN_BASE_URL);
 				} else {
 					// For User Page
 					if ($account['Status'] != 0) {

@@ -8,16 +8,16 @@
             <!-- detail-form-start -->
             <form class="detail-form">
                 <div class="form-group">
-                    <label>MSSV</label>
-                    <input type="text" class="form-control" name="detail-mssv" placeholder="Nhập MSSV ..." required>
+                    <label>Họ và tên</label>
+                    <input type="text" class="form-control" name="detail-name" placeholder="Nhập họ và tên ..." required>
                 </div>
                 <div class="form-group">
                     <label>Khoa</label>
                     <input type="text" class="form-control" name="detail-khoa" placeholder="Nhập vào khoa ..." required>
                 </div>
                 <div class="form-group">
-                    <label>Họ và tên</label>
-                    <input type="text" class="form-control" name="detail-name" value="<?php echo $model['account']['Name']; ?>" placeholder="Nhập vào tên ..." required>
+                    <label>MSSV</label>
+                    <input type="text" class="form-control" name="detail-mssv" value="<?php echo $model['account']['UserName']; ?>" placeholder="Nhập MSSV ..." required>
                 </div>
                 <div class="form-group">
                     <label>Địa chỉ hiện tại</label>

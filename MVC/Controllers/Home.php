@@ -22,24 +22,33 @@ class Home extends ViewModel
 		if (empty($_SESSION['USER_SESSION'])) {
 			header('Location:' . BASE_URL . 'Login/Index');
 		} else {
-			$pageSize = 7;
-			$totalItem = json_decode($this->orders->countTotalRecords($_SESSION['USER_ID_SESSION']), true);
-			$totalPage = ceil($totalItem / $pageSize);
-			$maxPage = 10;
-			$nextPage = $page + 1;
-			$prevPage = $page - 1;
-			$ordersByPage = json_decode($this->orders->getOrdersByPage($_SESSION['USER_ID_SESSION'], $page, $pageSize), true);
+			// Custome Pagination
+			// $pageSize = 7;
+			// $totalItem = json_decode($this->orders->countTotalRecords($_SESSION['USER_ID_SESSION']), true);
+			// $totalPage = ceil($totalItem / $pageSize);
+			// $maxPage = 10;
+			// $nextPage = $page + 1;
+			// $prevPage = $page - 1;
+			// $ordersByPage = json_decode($this->orders->getOrdersByPage($_SESSION['USER_ID_SESSION'], $page, $pageSize), true);
 
+			// $this->loadView('Shared', 'Layout', [
+			// 	'title' => 'History',
+			// 	'page' => 'Home/History',
+			// 	'ordersByPage' => $ordersByPage,
+			// 	'totalItem' => $totalItem,
+			// 	'totalPage' => $totalPage,
+			// 	'maxPage' => $maxPage,
+			// 	'nextPage' => $nextPage,
+			// 	'prevPage' => $prevPage,
+			// 	'currentPage' => $page
+			// ]);
+
+			// Datatable Bootstrap
+			$ordersByUser = json_decode($this->orders->getOrderByUserID($_SESSION['USER_ID_SESSION']), true);
 			$this->loadView('Shared', 'Layout', [
 				'title' => 'History',
 				'page' => 'Home/History',
-				'ordersByPage' => $ordersByPage,
-				'totalItem' => $totalItem,
-				'totalPage' => $totalPage,
-				'maxPage' => $maxPage,
-				'nextPage' => $nextPage,
-				'prevPage' => $prevPage,
-				'currentPage' => $page
+				'ordersByUser'=>$ordersByUser
 			]);
 		}
 	}
