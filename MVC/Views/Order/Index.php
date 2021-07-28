@@ -9,7 +9,7 @@
             <form class="detail-form">
                 <div class="form-group">
                     <label>Họ và tên</label>
-                    <input type="text" class="form-control" name="detail-name" placeholder="Nhập họ và tên ..." required>
+                    <input type="text" class="form-control" name="detail-name" value="<?php echo $model['account']['Name']; ?>" placeholder="Nhập họ và tên ..." required>
                 </div>
                 <div class="form-group">
                     <label>Khoa</label>

@@ -60,6 +60,7 @@ class Login extends ViewModel
 				$_SESSION['USER_ID_SESSION'] = $account['ID'];
 				$_SESSION['USER_SESSION'] = $account['UserName'];
 				$_SESSION['USER_TYPE_SESSION'] = $account['Type'];
+				$_SESSION['USER_STATUS_SESSION'] = $account['Status'];
 				if ($account['Type'] != 0) {
 					header('Location:' . ADMIN_BASE_URL);
 				} else {

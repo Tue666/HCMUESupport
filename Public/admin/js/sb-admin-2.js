@@ -1,11 +1,22 @@
 // print
-function printArea(idDiv) {
-  var printContents = document.getElementById(idDiv).innerHTML;
-  var originalContents = document.body.innerHTML;
+function printArea() {
+  printElement(document.getElementById("printThis"));
+}
 
-  document.body.innerHTML = printContents;
+function printElement(elem) {
+  var domClone = elem.cloneNode(true);
+  
+  var $printSection = document.getElementById("printSection");
+  
+  if (!$printSection) {
+      var $printSection = document.createElement("div");
+      $printSection.id = "printSection";
+      document.body.appendChild($printSection);
+  }
+  
+  $printSection.innerHTML = "";
+  $printSection.appendChild(domClone);
   window.print();
-  document.body.innerHTML = originalContents;
 }
 
 // defalt 0 is order

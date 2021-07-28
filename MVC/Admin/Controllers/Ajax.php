@@ -35,7 +35,7 @@ class Ajax extends ViewModel
         $output = '
         <div class="content">
             <div class="order-wrapper">
-                <div class="infor" id="printArea">
+                <div class="infor">
                     <div class="infor-item">
                         <label style="font-weight:bold">Mã hóa đơn:</label>
                         <label>' . $orderByID['ID'] . '</label>
@@ -100,7 +100,7 @@ class Ajax extends ViewModel
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" title="In" onclick="printArea(\'printArea\');"><i class="fas fa-print"></i></button>
+            <button type="button" class="btn btn-primary" title="In" onclick="printArea();"><i class="fas fa-print"></i></button>
             ' . $button . '
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
         </div>

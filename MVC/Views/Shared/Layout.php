@@ -19,7 +19,7 @@
 <body>
 	<!-- header start -->
 	<div class="header">
-		<img onclick="window.location.href='<?php echo BASE_URL; ?>'" style="width:200; height:100%;cursor:pointer;" src="https://upload.wikimedia.org/wikipedia/vi/5/59/Logo_HCMUP.png" />
+		<img onclick="window.location.href='<?php echo BASE_URL; ?>'" style="width:200; height:100%;cursor:pointer;" src="<?php echo IMAGE_URL . '/logo.png'; ?>" />
 		<!-- <img onclick="window.location.href='<?php echo BASE_URL; ?>'" style="width:200; height:100%;cursor:pointer;" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" /> -->
 		<div style="display:flex;flex-direction:row;align-items:center">
 			<?php if (empty($_SESSION['USER_SESSION'])) : ?>

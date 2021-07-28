@@ -14,19 +14,19 @@ class Home extends ViewModel
 			$this->orders = $this->getModel('OrdersDAL');
 
 			// Unlock order per proruct after 3 days
-			$stored = $this->getModel('StoreDAL');
+			// $stored = $this->getModel('StoreDAL');
 
-			$listStored = json_decode($stored->getAllStored(), true);
-			foreach ($listStored as $item) {
-				if ($item['StoreDay'] != "") {
-					$dayFrom = strtotime($item['StoreDay']);
-					$dayTo = strtotime(date("Y-m-d"));
-					$datediff = $dayTo - $dayFrom;
-					if (3 - (round($datediff / (60 * 60 * 24))) == 0) {
-						json_decode($stored->removeItem($item['UserID'], $item['ProductID']));
-					}
-				}
-			}
+			// $listStored = json_decode($stored->getAllStored(), true);
+			// foreach ($listStored as $item) {
+			// 	if ($item['StoreDay'] != "") {
+			// 		$dayFrom = strtotime($item['StoreDay']);
+			// 		$dayTo = strtotime(date("Y-m-d"));
+			// 		$datediff = $dayTo - $dayFrom;
+			// 		if (3 - (round($datediff / (60 * 60 * 24))) == 0) {
+			// 			json_decode($stored->removeItem($item['UserID'], $item['ProductID']));
+			// 		}
+			// 	}
+			// }
 		}
 	}
 	public function Index()

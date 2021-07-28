@@ -82,3 +82,26 @@
     </div>
 </div>
 <!-- end out quantity modal -->
+
+<!-- start order permisstion modal -->
+<div class="modal fade" id="orderPermisstionModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:black;" class="modal-title">Oops!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="color:black;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>
+                    Bạn đã đặt hàng rồi. Hãy đợi đến lượt tiếp theo nhé :D.
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end out quantity modal -->

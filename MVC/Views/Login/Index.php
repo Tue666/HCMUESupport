@@ -45,7 +45,7 @@
             <form class="regis-form" action="<?php echo BASE_URL; ?>Login/Register" method="POST">
                 <div class="form-group">
                     <label>Tên tài khoản</label>
-                    <input type="text" id="checkUserName" class="form-control" name="regis-user-name" placeholder="Nhập tên tài khoản ..." autocomplete="off" required>
+                    <input type="text" id="checkUserName" class="form-control" name="regis-user-name" placeholder="Nhập MSSV(có chấm) ..." autocomplete="off" required>
                 </div>
                 <div id="showMessage" style="margin-bottom:10px;color:red"></div>
                 <div class="form-group">

@@ -11,12 +11,13 @@ class Auth extends ViewModel
 	{
 		if (isset($_POST['update-btn'])) {
 			$accounts = $this->getModel('AccountsDAL');
-			$name = strtolower($_POST['update-name']);
+			$name = $_POST['update-name'];
 			$email = $_POST['update-email'];
 			$address = $_POST['update-address'];
 			$phone = $_POST['update-phone'];
 
 			if (json_decode($accounts->updateAccount($_SESSION['USER_ID_SESSION'],$name,$email,$phone,$address,0,1))) {
+				$_SESSION['USER_STATUS_SESSION'] = 1;
 				header('Location:' . BASE_URL);
 			}
 			else{

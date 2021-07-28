@@ -18,6 +18,12 @@ class OrdersDAL extends Database
 		$query = "UPDATE orders SET Status = !Status WHERE ID = $orderID";
 		return (mysqli_query($this->connectionString, $query));
 	}
+	public function getLastOrdered($userID)
+	{
+		$query = "SELECT * FROM orders WHERE CustomerID = $userID ORDER BY CreatedDay DESC LIMIT 1";
+		$result = mysqli_query($this->connectionString, $query);
+		return json_encode(mysqli_fetch_assoc($result));
+	}
 	public function getListOrders()
 	{
 		$query = "SELECT * FROM orders";

@@ -48,26 +48,30 @@ class Home extends ViewModel
 			$this->loadView('Shared', 'Layout', [
 				'title' => 'History',
 				'page' => 'Home/History',
-				'ordersByUser'=>$ordersByUser
+				'ordersByUser' => $ordersByUser
 			]);
 		}
 	}
-	public function Ordered($orderID){
+	public function Ordered($orderID)
+	{
+		if (empty($_SESSION['USER_SESSION']) || !$_SESSION['USER_STATUS_SESSION']) {
+            header('Location:' . BASE_URL . 'Login/Index');
+        }
 		$products = $this->getModel('ProductsDAL');
 		$orderdetails = $this->getModel('OrderDetailsDAL');
 
-		$listOrderDetail = json_decode($orderdetails->getOrderDetailByOrderID($orderID),true);
-		$orderByID = json_decode($this->orders->getOrderByID($orderID),true);
+		$listOrderDetail = json_decode($orderdetails->getOrderDetailByOrderID($orderID), true);
+		$orderByID = json_decode($this->orders->getOrderByID($orderID), true);
 		$listOrdered = array();
 		foreach ($listOrderDetail as $item) {
-			$productName = json_decode($products->getProductNameByID($item['ProductID']),true);
-			array_push($listOrdered,$productName);
+			$productName = json_decode($products->getProductNameByID($item['ProductID']), true);
+			array_push($listOrdered, $productName);
 		}
 		$this->loadView('Shared', 'Layout', [
 			'title' => 'Orderd',
 			'page' => 'Home/Ordered',
-			'orderByID'=>$orderByID,
-			'listOrdered'=>$listOrdered
+			'orderByID' => $orderByID,
+			'listOrdered' => $listOrdered
 		]);
 	}
 	public function Success()

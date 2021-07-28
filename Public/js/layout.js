@@ -139,6 +139,9 @@ function addCart(productID) {
                         else if (response == 2) {
                             $('#outQuantityModal').modal();
                         }
+                        else if (response == 3) {
+                            $('#orderPermisstionModal').modal();
+                        }
                     }
                 });
             }
