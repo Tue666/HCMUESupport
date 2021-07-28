@@ -19,22 +19,29 @@ class Ajax extends ViewModel
 
         $orderByID = json_decode($this->orders->getOrderByID($_POST['orderID']), true);
         $listOrderdByOrderID = json_decode($orderdetails->getOrderDetailByOrderID($_POST['orderID']), true);
-        $button = $orderByID['Status'] ?
-            '
-            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="clearReceivedDay(' . $_POST['orderID'] . ');">Chuyển sang đang giao hàng</button>
-        ' :
-            '
-            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="passDataReceivedDay(' . $_POST['orderID'] . ');">Chuyển sang đã nhận</button>
+        $button = '';
+        if ($orderByID['Status'] == 0) {
+            $button = '
+            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="switchStatus(' . $orderByID['ID'] . ');">Chuyển sang soạn hàng</button>
         ';
+        } else if ($orderByID['Status'] == 1) {
+            $button = '
+            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="switchStatus(' . $orderByID['ID'] . ');">Chuyển sang đã nhận</button>
+        ';
+        }
         $address = $orderByID['Address'] ? $orderByID['Address'] : '---------';
         $note = $orderByID['Note'] ? $orderByID['Note'] : '---------';
         $receivedDay = $orderByID['ReceivedDay'] ? $orderByID['ReceivedDay'] : '---------';
         $output = '
         <div class="content">
             <div class="order-wrapper">
-                <div class="infor">
+                <div class="infor" id="printArea">
                     <div class="infor-item">
-                        <label style="font-weight:bold">(MSSV):</label>
+                        <label style="font-weight:bold">Mã hóa đơn:</label>
+                        <label>' . $orderByID['ID'] . '</label>
+                    </div>
+                    <div class="infor-item">
+                        <label style="font-weight:bold">MSSV:</label>
                         <label>' . $orderByID['MSSV'] . '</label>
                     </div>
                     <div class="infor-item">
@@ -50,11 +57,11 @@ class Ajax extends ViewModel
                         <label>' . $orderByID['CustomerEmail'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Address:</label>
+                        <label style="font-weight:bold">Địa chỉ:</label>
                         <label>' . $orderByID['CustomerAddress'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Phone:</label>
+                        <label style="font-weight:bold">Số điện thoại:</label>
                         <label>' . $orderByID['CustomerPhone'] . '</label>
                     </div>
                     <div class="infor-item">
@@ -93,6 +100,7 @@ class Ajax extends ViewModel
             </div>
         </div>
         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" title="In" onclick="printArea(\'printArea\');"><i class="fas fa-print"></i></button>
             ' . $button . '
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
         </div>
@@ -103,7 +111,8 @@ class Ajax extends ViewModel
     {
         $type = $_POST['type'];
         if ($type == 0) {
-            echo json_decode($this->orders->switchStatus($_POST['ID']));
+            $orderByID = json_decode($this->orders->getOrderByID($_POST['ID']), true);
+            echo json_decode($this->orders->updateStatus($orderByID['ID'], $orderByID['Status'] + 1));
         }
     }
 
@@ -240,25 +249,36 @@ class Ajax extends ViewModel
         $listOrders = json_decode($this->orders->getListOrders(), true);
         $data = [];
         foreach ($listOrders as $item) {
-            $button = $item['Status'] ?
-                '
-                <button
-                    class="btn btn-danger mb-1"
-                    title="Trả về xử lý"
-                    onclick="clearReceivedDay(' . $item['ID'] . ');"
-                >
-                    <i class="far fa-clock"></i>
-                </button>
-            ' :
-                '
-                <button
-                    class="btn btn-success mb-1"
-                    title="Chuyển sang đã nhận"
-                    onclick="passDataReceivedDay(' . $item['ID'] . ');"
-                >
-                    <i class="fab fa-get-pocket"></i>
-                </button>
-            ';
+            $button = '';
+            if ($item['Status'] == 0) {
+                $button = '
+                    <button
+                        class="btn btn-danger mb-1"
+                        title="Chuyển sang soạn hàng"
+                        onclick="switchStatus(' . $item['ID'] . ');"
+                    >
+                        <i class="fas fa-gifts"></i>
+                    </button>
+                ';
+            } else if ($item['Status'] == 1) {
+                $button = '
+                    <button
+                        class="btn btn-success mb-1"
+                        title="Chuyển sang đã nhận"
+                        onclick="switchStatus(' . $item['ID'] . ');"
+                    >
+                        <i class="fas fa-check-double"></i>
+                    </button>
+                    ';
+            }
+            $status = '';
+            if ($item['Status'] == 0) {
+                $status = '<label style="color:red;font-weight:bold;">Đang xử lý</label>';
+            } else if ($item['Status'] == 1) {
+                $status = '<label style="color:red;font-weight:bold;">Đang soạn hàng</label>';
+            } else if ($item['Status'] == 2) {
+                $status = '<label style="color:green;font-weight:bold;">Đã nhận</label>';
+            }
             $data[] = (object)array(
                 'ID' => $item['ID'],
                 'MSSV' => $item['MSSV'],
@@ -267,8 +287,16 @@ class Ajax extends ViewModel
                 'Nơi nhận' => $item['Place'],
                 'Vị trí' => $item['Address'],
                 'Ngày tạo' => $item['CreatedDay'],
-                'Ngày nhận' => $item['ReceivedDay'],
-                'Status' => $item['Status'] ? '<label style="color:green;font-weight:bold;">Đã nhận</label>' : '<label style="color:red;font-weight:bold;">Đang giao hàng</label>',
+                'Ngày nhận' => $item['ReceivedDay'] ? $item['ReceivedDay'] : '
+                    <button
+                        class="btn btn-primary mb-1"
+                        title="Cập nhật ngày nhận"
+                        onclick="passDataReceivedDay(' . $item['ID'] . ')"
+                    >
+                        <i class="far fa-calendar-plus"></i>
+                    </button>
+                ',
+                'Status' => $status,
                 'Action' => '
                     <button
                         class="btn btn-secondary mb-1"
@@ -292,10 +320,6 @@ class Ajax extends ViewModel
             $receivedDay = $today;
         }
         echo json_decode($this->orders->updateReceivedDay($_POST['orderID'], $receivedDay));
-    }
-    public function clearReceivedDay()
-    {
-        echo json_decode($this->orders->updateReceivedDay($_POST['orderID'], ''));
     }
 
 

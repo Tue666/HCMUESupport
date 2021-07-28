@@ -23,10 +23,12 @@
                         <td><?php echo $item['CreatedDay']; ?></td>
                         <td><?php echo $item['ReceivedDay']; ?></td>
                         <td>
-                            <?php if ($item['Status']) : ?>
+                            <?php if ($item['Status'] == 2) : ?>
                                 <label class="text-success" style="font-weight:bold;">Đã nhận</label>
-                            <?php else : ?>
+                            <?php elseif ($item['Status'] == 0) : ?>
                                 <label class="text-danger"  style="font-weight:bold;">Đang xử lý</label>
+                            <?php else: ?>
+                                <label class="text-danger"  style="font-weight:bold;">Đang soạn hàng</label>
                             <?php endif; ?>
                         </td>
                         <td>

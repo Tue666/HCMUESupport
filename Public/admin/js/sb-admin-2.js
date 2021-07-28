@@ -1,3 +1,13 @@
+// print
+function printArea(idDiv) {
+  var printContents = document.getElementById(idDiv).innerHTML;
+  var originalContents = document.body.innerHTML;
+
+  document.body.innerHTML = printContents;
+  window.print();
+  document.body.innerHTML = originalContents;
+}
+
 // defalt 0 is order
 function switchStatus(ID, type = 0) {
   $.ajax({
@@ -182,31 +192,10 @@ function updateReceivedDay() {
     },
     success: function (response) {
       if (response) {
-        switchStatus(orderID);
         loadOrder();
         showToast('Thành công', 'Cập nhật ngày nhận thành công');
       }
-      else{
-        showToast('Thất bại', 'Cập nhật ngày nhận thất bại');
-      }
-    }
-  });
-}
-// clear day received order
-function clearReceivedDay(orderID) {
-  $.ajax({
-    url: 'http://localhost/HCMUESupport/Admin/Ajax/clearReceivedDay',
-    method: 'post',
-    data: {
-      orderID: orderID
-    },
-    success: function (response) {
-      if (response) {
-        switchStatus(orderID);
-        loadOrder();
-        showToast('Thành công', 'Cập nhật ngày nhận thành công');
-      }
-      else{
+      else {
         showToast('Thất bại', 'Cập nhật ngày nhận thất bại');
       }
     }

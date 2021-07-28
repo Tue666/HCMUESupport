@@ -53,11 +53,14 @@
             <label><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>
         </div>
         <div class="status">
-            <?php if ($model['orderByID']['Status']) : ?>
+            <?php if ($model['orderByID']['Status'] == 2) : ?>
                 <label style="color:green;font-weight:bold">Đã nhận</label>
-                <img style="width:300px;height:300px" src="https://lh3.googleusercontent.com/proxy/m4vkS3tUzdbTgsRCOyEhYiDJ8R2ycgLr6C1NDx1G4Rrntk4Pobp3dN58bQYR9ccA3CyOVSWYHv7yHU3brNIIEFRISNmX1aL42QJ_H0O2Crg_gAjdqTH0Ng" />
-            <?php else : ?>
+                <img style="width:300px;height:300px" src="https://lh3.googleusercontent.com/proxy/NUqVG0-hII_ol6QoXK6TDOG8J1U_e_qwQbXuqZfb_4bvPo7J5MmrvQJvftkXbC7SmNiVXMIABDb_nkPZth_p2fhVFmZ2218RFefIaYO0fyqrzK8NtyPquA" />
+            <?php elseif ($model['orderByID']['Status'] == 0) : ?>
                 <label style="color:red;font-weight:bold">Đang xử lý</label>
+                <img style="width:300px;height:300px" src="https://acegif.com/wp-content/uploads/loading-36.gif" />
+            <?php else : ?>
+                <label style="color:red;font-weight:bold">Đang soạn hàng</label>
                 <img style="width:300px;height:300px" src="https://acegif.com/wp-content/uploads/loading-36.gif" />
             <?php endif; ?>
         </div>

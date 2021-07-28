@@ -74,4 +74,9 @@ class OrdersDAL extends Database
 		$query = "UPDATE orders SET ReceivedDay = '$receivedDay' WHERE ID = $orderID";
 		return (mysqli_query($this->connectionString, $query));
 	}
+	public function updateStatus($orderID, $status)
+	{
+		$query = "UPDATE orders SET Status = $status WHERE ID = $orderID";
+		return (mysqli_query($this->connectionString, $query));
+	}
 }
