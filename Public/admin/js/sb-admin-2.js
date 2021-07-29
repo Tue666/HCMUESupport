@@ -5,15 +5,15 @@ function printArea() {
 
 function printElement(elem) {
   var domClone = elem.cloneNode(true);
-  
+
   var $printSection = document.getElementById("printSection");
-  
+
   if (!$printSection) {
-      var $printSection = document.createElement("div");
-      $printSection.id = "printSection";
-      document.body.appendChild($printSection);
+    var $printSection = document.createElement("div");
+    $printSection.id = "printSection";
+    document.body.appendChild($printSection);
   }
-  
+
   $printSection.innerHTML = "";
   $printSection.appendChild(domClone);
   window.print();
@@ -271,18 +271,46 @@ function passDataRemove(id, name) {
 
 // show toast function
 function showToast(title, content, type = 1) {
-  document.getElementById('titleToast').innerHTML = title;
-  document.getElementById('contentToast').innerHTML = content;
-  if (type == 0) {
-    document.getElementById('iconToast').innerHTML = '<i class="fas fa-times-circle fa-2x" style="color:red"></i>';
-    $('.toast .toast-header').css("background-color", "red");
+  if (type) {
+    toastr.success(content, title, {
+      timeOut: 1300,
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": true,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "tapToDismiss": false
+    })
   }
   else {
-    document.getElementById('iconToast').innerHTML = '<i class="fas fa-check-circle fa-2x" style="color:green"></i>';
-    $('.toast .toast-header').css("background-color", "green");
+    toastr.error(content, title, {
+      timeOut: 1300,
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": true,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "tapToDismiss": false
+    })
   }
-  document.getElementById('cooldown-line').innerHTML = '<div id="line"></div>';
-  $('.toast').toast('show');
 }
 // hide toast function
 function hideToast() {

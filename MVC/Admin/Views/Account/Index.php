@@ -1,35 +1,62 @@
 <div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h4 mb-1 text-gray-800">Tài khoản</h1>
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <span data-toggle="modal" data-target="#addModal">
-                <button title="Add User" class="btn btn-primary"><i class="fas fa-user-plus"></i></button>
-            </span>
+    <div class="row">
+        <div class="col-lg-8 p-r-0 title-margin-right">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Tài khoản</h1>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="accountTable" width="100%">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>UserName</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
+        <div class="col-lg-4 p-l-0 title-margin-left">
+            <div class="page-header">
+                <div class="page-title">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Accounts</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
+
+    <section id="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="bootstrap-data-table-panel">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="accountTable" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>UserName</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer">
+                    <p>Copyright © 9hT <?php echo date('Y'); ?></p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <!-- add modal -->

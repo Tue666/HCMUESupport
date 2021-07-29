@@ -12,4 +12,3 @@ class Account extends ViewModel{
 		],1);
     }
 }
-?>
