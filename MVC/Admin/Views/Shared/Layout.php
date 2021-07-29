@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><a href="#"><i class="far fa-id-card mr-2"></i><span>Profile</span></a></li>
+                                            <li><a onclick="window.location.href='<?php echo ADMIN_BASE_URL . 'Home/Profile'; ?>';"><i class="far fa-id-card mr-2"></i><span>Profile</span></a></li>
                                             <li><a onclick="$('#logoutModal').modal();"><i class="fas fa-sign-out-alt mr-2"></i><span>Logout</span></a></li>
                                         </ul>
                                     </div>
@@ -118,7 +118,7 @@
     <!-- toastr -->
     <script src="<?php echo ADMIN_JS_URL; ?>/sb-admin-2.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 </html>

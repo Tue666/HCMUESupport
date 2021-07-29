@@ -31,4 +31,11 @@ class Home extends ViewModel
             'totalProcessOrder' => $totalProcessOrder
         ], 1);
     }
+    public function Profile()
+    {
+        $this->loadView('Shared', 'Layout', [
+            'title' => 'Profile',
+            'page' => 'Home/Profile'
+        ], 1);
+    }
 }
