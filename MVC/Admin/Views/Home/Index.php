@@ -53,7 +53,7 @@
                         </div>
                         <div class="stat-content dib">
                             <div class="stat-digit">Hóa đơn</div>
-                            <div class="stat-text">Tất cả: <?php echo $model['totalProcessOrder'] + $model['totalSuccessOrder']; ?> (Chưa xử lý: <?php echo $model['totalProcessOrder']; ?>)</div>
+                            <div class="stat-text">Tất cả: <?php echo $model['totalProcessOrder'] + $model['totalSuccessOrder'] + $model['totalDoingOrder']; ?> (Chưa xử lý: <?php echo $model['totalProcessOrder'] + $model['totalDoingOrder']; ?>)</div>
                         </div>
                     </div>
                 </div>

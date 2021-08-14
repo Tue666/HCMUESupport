@@ -37,8 +37,8 @@
                                         <th>Vị trí</th>
                                         <th>Ngày tạo</th>
                                         <th>Ngày nhận</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>

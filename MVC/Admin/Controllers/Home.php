@@ -19,7 +19,8 @@ class Home extends ViewModel
         $totalAdmin = json_decode($this->accounts->countAccount(1), true);
         $totalUser = json_decode($this->accounts->countAccount(0), true);
         $totalProduct = json_decode($this->products->countProduct(), true);
-        $totalSuccessOrder = json_decode($this->orders->countOrder(1), true);
+        $totalSuccessOrder = json_decode($this->orders->countOrder(2), true);
+        $totalDoingOrder = json_decode($this->orders->countOrder(1), true);
         $totalProcessOrder = json_decode($this->orders->countOrder(0), true);
         $this->loadView('Shared', 'Layout', [
             'title' => 'Dashboard',
@@ -28,6 +29,7 @@ class Home extends ViewModel
             'totalUser' => $totalUser,
             'totalProduct' => $totalProduct,
             'totalSuccessOrder' => $totalSuccessOrder,
+            'totalDoingOrder'=>$totalDoingOrder,
             'totalProcessOrder' => $totalProcessOrder
         ], 1);
     }

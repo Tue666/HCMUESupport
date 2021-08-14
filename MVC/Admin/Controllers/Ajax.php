@@ -130,13 +130,13 @@ class Ajax extends ViewModel
         foreach ($listAccount as $item) {
             $data[] = (object)array(
                 'ID' => $item['ID'],
-                'UserName' => $item['UserName'],
-                'Name' => $item['Name'],
+                'MSSV' => $item['UserName'],
+                'Họ tên' => $item['Name'],
                 'Email' => $item['Email'],
-                'Phone' => $item['Phone'],
-                'Type' => $item['Type'] ? '<label style="color:red;font-weight:bold;">Admin</label>' : '<label>User</label>',
-                'Status' => $item['Status'] ? '<label style="color:green;font-weight:bold;">Activated</label>' : '<label style="color:red;font-weight:bold;">Locked</label>',
-                'Action' => '
+                'Điện thoại' => $item['Phone'],
+                'Loại' => $item['Type'] ? '<label style="color:red;font-weight:bold;">Quản lý</label>' : '<label>Người dùng</label>',
+                'Trạng thái' => $item['Status'] ? '<label style="color:green;font-weight:bold;">Sử dụng</label>' : '<label style="color:red;font-weight:bold;">Khóa</label>',
+                'Hành động' => '
                     <button
                         data-toggle="modal"
                         data-target="#editModal"
@@ -195,21 +195,32 @@ class Ajax extends ViewModel
         $listProduct = json_decode($this->products->getAllProduct(), true);
         $data = [];
         foreach ($listProduct as $item) {
+            $image = $item['Image'] ? $item['Image'] : 'image_not_found.png';
             $cateName = json_decode($productCategories->getCateNameByID($item['IDCate']), true);
             $data[] = (object)array(
                 'ID' => $item['ID'],
-                'ProductName' => $item['ProductName'],
-                'Category' => $cateName,
-                'Quantity' => $item['Quantity'] > 0 ? '<label>' . $item['Quantity'] . '</label>' : '<label style="color:red;font-weight:bold;">' . $item['Quantity'] . '</label>',
-                'Created' => $item['CreatedDay'],
-                'Status' => $item['Status'] ? '<label style="color:green;font-weight:bold;">Activated</label>' : '<label style="color:red;font-weight:bold;">Locked</label>',
-                'Action' => '
+                'Tên' => $item['ProductName'],
+                'Hình' => '<img style="width:50px;height:50px;background-size:100% auto;" src="' . IMAGE_URL . '/' . $image . '" />',
+                'Loại' => $cateName,
+                'Mô tả' => $item['Description'],
+                'Số lượng' => $item['Quantity'] > 0 ? '<label>' . $item['Quantity'] . '</label>' : '<label style="color:red;font-weight:bold;">' . $item['Quantity'] . '</label>',
+                'Ngày tạo' => $item['CreatedDay'],
+                'Trạng thái' => $item['Status'] ? '<label style="color:green;font-weight:bold;">Sử dụng</label>' : '<label style="color:red;font-weight:bold;">Khóa</label>',
+                'Hành động' => '
                     <button
                         data-toggle="modal"
                         data-target="#editModal"
                         class="btn btn-success mb-1"
                         title="Sửa"
-                        onclick="passDataEditProduct(' . $item['ID'] . ',\'' . $item['ProductName'] . '\',\'' . $cateName . '\', ' . $item['Quantity'] . ', ' . $item['Status'] . ');"
+                        onclick="passDataEditProduct(
+                            ' . $item['ID'] . ',
+                            \'' . $item['ProductName'] . '\',
+                            \'' . $cateName . '\',
+                            ' . $item['Quantity'] . ',
+                            \'' . IMAGE_URL . '/' . $item['Image'] . '\',
+                            \'' . $item['Description'] . '\',
+                            ' . $item['Status'] . '
+                        );"
                     >
                         <i class="fas fa-edit"></i>
                     </button>
@@ -232,15 +243,46 @@ class Ajax extends ViewModel
     {
         $productCategories = $this->getModel('ProductCategoriesDAL');
 
-        $cateID = json_decode($productCategories->getCateIDByName($_POST['cate']), true);
-        echo json_decode($this->products->insertProduct($_POST['name'], $cateID, $_POST['quantity']));
+        $image = "image_not_found.png";
+        if (isset($_FILES['file']['name'])) {
+            $fileName = $_FILES['file']['name'];
+            $fileExt = explode('.', $fileName);
+            $imageFileType = strtolower(end($fileExt));
+
+            $allowed = array("jpg", "jpeg", "png");
+
+            if (in_array($imageFileType, $allowed)) {
+                $location = 'Public/images/' . $fileName;
+                if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+                    $image = $fileName;
+                }
+            }
+        }
+        $cateID = json_decode($productCategories->getCateIDByName($_POST['inputCate']), true);
+        echo json_decode($this->products->insertProduct($_POST['inputName'], $cateID, $image, $_POST['inputQuantity'], $_POST['inputDescription']));
     }
     public function editProduct()
     {
         $productCategories = $this->getModel('ProductCategoriesDAL');
 
+        $linkImage = $_POST['image'];
+        if (isset($_FILES['file']['name'])) {
+            $linkImage = $_FILES['file']['name'];
+            $fileExt = explode('.', $linkImage);
+            $imageFileType = strtolower(end($fileExt));
+
+            $allowed = array("jpg", "jpeg", "png");
+
+            if (in_array($imageFileType, $allowed)) {
+                $location = 'Public/images/' . $linkImage;
+                move_uploaded_file($_FILES['file']['tmp_name'], $location);
+            }
+        }
+        $linkImage = explode('/', $linkImage);
+        $image = end($linkImage);
+
         $cateID = json_decode($productCategories->getCateIDByName($_POST['productCate']), true);
-        echo json_decode($this->products->editProduct($_POST['id'], $_POST['productName'], $cateID, $_POST['quantity'], $_POST['status']), true);
+        echo json_decode($this->products->editProduct($_POST['id'], $_POST['productName'], $cateID, $_POST['quantity'], $image, $_POST['description'], $_POST['status']), true);
     }
 
 
@@ -296,8 +338,8 @@ class Ajax extends ViewModel
                         <i class="far fa-calendar-plus"></i>
                     </button>
                 ',
-                'Status' => $status,
-                'Action' => '
+                'Trạng thái' => $status,
+                'Hành động' => '
                     <button
                         class="btn btn-secondary mb-1"
                         title="Xem"

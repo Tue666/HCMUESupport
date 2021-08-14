@@ -19,6 +19,22 @@
     top:0;
   }
 }
+
+.content .order-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.content .order-wrapper .infor {
+  width: 90%;
+}
+.content .order-wrapper .infor .infor-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 /*
     Template: Admin Board
     Author: Saiful

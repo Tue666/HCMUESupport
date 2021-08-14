@@ -198,7 +198,9 @@ class Ajax extends ViewModel
 				'ID' => $item['ID'],
 				'ProductName' => $item['ProductName'],
 				'CateName' => $cateJSON['CateName'],
-				'Quantity' => $item['Quantity']
+				'Quantity' => $item['Quantity'],
+				'Image' => $item['Image'],
+				'Description' => $item['Description']
 			]);
 		}
 
@@ -228,12 +230,17 @@ class Ajax extends ViewModel
 			$output .= '<label>Không có sản phẩm nào hehe</label>';
 		} else {
 			foreach ($listProducts as $item) {
+				$image = $item['Image'] ? $item['Image'] : 'image_not_found.png';
 				$output .= '
 				<div class="product-card">
+					<div class="image-wrap">
+						<img class="image" src="' . IMAGE_URL . '/' . $image . '" />
+					</div>
 					<div class="infor">
 						<label title="' . $item['ProductName'] . '" class="name">' . $item['ProductName'] . '</label>
 						<label class="category">Loại: ' . $item['CateName'] . '</label>
 						<label class="quantity">Số lượng: ' . $item['Quantity'] . '</label>
+						<label title="' . ($item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D")  . '" class="descrip">' . ($item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D") . '</label>
 					</div>
 					<div class="action">
 				';

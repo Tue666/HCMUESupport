@@ -54,25 +54,25 @@ function loadAccount() {
         "data": "ID"
       },
       {
-        "data": "UserName"
+        "data": "MSSV"
       },
       {
-        "data": "Name"
+        "data": "Họ tên"
       },
       {
         "data": "Email"
       },
       {
-        "data": "Phone"
+        "data": "Điện thoại"
       },
       {
-        "data": "Type"
+        "data": "Loại"
       },
       {
-        "data": "Status"
+        "data": "Trạng thái"
       },
       {
-        "data": "Action"
+        "data": "Hành động"
       }
       ]
     });
@@ -111,22 +111,28 @@ function loadProduct() {
         "data": "ID"
       },
       {
-        "data": "ProductName"
+        "data": "Tên"
       },
       {
-        "data": "Category"
+        "data": "Hình"
       },
       {
-        "data": "Quantity"
+        "data": "Loại"
       },
       {
-        "data": "Created"
+        "data": "Mô tả"
       },
       {
-        "data": "Status"
+        "data": "Số lượng"
       },
       {
-        "data": "Action"
+        "data": "Ngày tạo"
+      },
+      {
+        "data": "Trạng thái"
+      },
+      {
+        "data": "Hành động"
       }
       ]
     });
@@ -134,11 +140,13 @@ function loadProduct() {
 }
 
 // pass data to edit modal product function
-function passDataEditProduct(id, name, cateName, quantity, status) {
+function passDataEditProduct(id, name, cateName, quantity, image, description, status) {
   $('#editModal input[name="id-edit"]').val(id);
   $('#editModal input[name="edit-product-name"]').val(name);
   $('#editModal select').val(cateName);
   $('#editModal input[name="edit-quantity"]').val(quantity);
+  $('#editImage').attr('src', image);
+  $('#edit-description').val(description);
   status == 0 ? $('#editModal input[name="edit-status"]').prop('checked', true) : $('#editModal input[name="edit-status"]').prop('checked', false);
 }
 /* End Products Manager */
@@ -181,10 +189,10 @@ function loadOrder() {
         "data": "Ngày nhận"
       },
       {
-        "data": "Status"
+        "data": "Trạng thái"
       },
       {
-        "data": "Action"
+        "data": "Hành động"
       }
       ]
     });
@@ -443,14 +451,20 @@ function hideToast() {
     var name = $('#addModal input[name="add-name"]').val();
     var cate = $('#addModal select option:selected').val();
     var quantity = $('#addModal input[name="add-quantity"]').val();
+    var description = $('#addModal #add-description').val();
+    var file_data = $('#fileID').prop('files')[0];
+    var formData = new FormData();
+    formData.append('file', file_data);
+    formData.append('inputName', name);
+    formData.append('inputCate', cate);
+    formData.append('inputQuantity', quantity);
+    formData.append('inputDescription', description);
     $.ajax({
       url: 'http://localhost/HCMUESupport/Admin/Ajax/addProduct',
       method: 'post',
-      data: {
-        name: name,
-        cate: cate,
-        quantity: quantity
-      },
+      data: formData,
+      contentType: false,
+      processData: false,
       success: function (response) {
         if (response) {
           loadProduct();
@@ -468,17 +482,25 @@ function hideToast() {
     var productName = $('#editModal input[name="edit-product-name"]').val();
     var productCate = $('#editModal select option:selected').val();
     var quantity = $('#editModal input[name="edit-quantity"]').val();
+    var image = $('#editModal #editImage').attr('src');
+    var description = $('#editModal #edit-description').val();
     var status = $('#editModal input[name="edit-status"]').is(':checked');
+    var file_data = $('#editFileID').prop('files')[0];
+    var formData = new FormData();
+    formData.append('file', file_data);
+    formData.append('id', id);
+    formData.append('productName', productName);
+    formData.append('productCate', productCate);
+    formData.append('quantity', quantity);
+    formData.append('image', image);
+    formData.append('description', description);
+    formData.append('status', !status);
     $.ajax({
       url: 'http://localhost/HCMUESupport/Admin/Ajax/editProduct',
       method: 'post',
-      data: {
-        id: id,
-        productName: productName,
-        productCate: productCate,
-        quantity: quantity,
-        status: !status
-      },
+      data: formData,
+      contentType: false,
+      processData: false,
       success: function (response) {
         if (response) {
           loadProduct();
@@ -494,7 +516,7 @@ function hideToast() {
   // check fill input add product
   $('.add-product-form input').keyup(function () {
     var areEmpty = false;
-    $(".add-product-form input").each(function () {
+    $(".add-product-form input[type!=file]").each(function () {
       if ($(this).val() == "") {
         areEmpty = true;
       }

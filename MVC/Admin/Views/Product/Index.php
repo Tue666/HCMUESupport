@@ -20,6 +20,11 @@
         </div>
     </div>
 
+    <div>
+        <span data-toggle="modal" data-target="#addModal">
+            <button title="Add Product" class="btn btn-primary"><i class="fas fa-plus-circle"></i></button>
+        </span>
+    </div>
     <section id="main-content">
         <div class="row">
             <div class="col-lg-12">
@@ -30,12 +35,14 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>ProductName</th>
-                                        <th>Category</th>
-                                        <th>Quantity</th>
-                                        <th>Created</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Tên</th>
+                                        <th>Hình</th>
+                                        <th>Loại</th>
+                                        <th>Mô tả</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,7 +79,7 @@
                 <form id="formID" class="add-product-form" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Tên hàng hóa</label>
-                        <input type="text" autocomplete="off" name="add-name" class="form-control" placeholder="Enter product name ...">
+                        <input type="text" autocomplete="off" name="add-name" class="form-control" placeholder="Nhập tên hàng hóa ...">
                     </div>
                     <div class="form-group">
                         <label>Loại</label>
@@ -83,8 +90,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="number" class="form-control" name="add-quantity" placeholder="Enter quantity ..." min='0'>
+                        <label>Hình ảnh</label>
+                        <input type="file" id="fileID" name="add-image" class="form-control-file">
+                        <small>Chỉ nhận file .jpg .jpeg .png</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng</label>
+                        <input type="number" class="form-control" name="add-quantity" placeholder="Nhập số lượng ..." min='0'>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <textarea class="form-control" id="add-description" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
                         <a id="addProduct" type="button" class="btn btn-primary disabled" data-dismiss="modal">Lưu</a>
@@ -123,8 +139,21 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Quantity</label>
+                        <label>Số lượng</label>
                         <input type="number" name="edit-quantity" class="form-control" min='0'>
+                    </div>
+                    <div class="form-group row d-flex align-items-center justify-content-around">
+                        <div>
+                            <img id="editImage" style="width:150px;height:100px;" />
+                        </div>
+                        <div>
+                            <input type="file" id="editFileID" name="edit-image" class="form-control-file">
+                            <small>Để nguyên nếu không muốn thay đổi hình ảnh</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <textarea class="form-control" id="edit-description" rows="3"></textarea>
                     </div>
                     <div class="form-group form-check">
                         <input class="form-check-input" name="edit-status" type="checkbox">

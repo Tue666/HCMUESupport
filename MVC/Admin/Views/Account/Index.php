@@ -30,13 +30,13 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>UserName</th>
-                                        <th>Name</th>
+                                        <th>MSSV</th>
+                                        <th>Họ tên</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Điện thoại</th>
+                                        <th>Loại</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
