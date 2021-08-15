@@ -1,9 +1,40 @@
+/* set height home carts depend on header height */
+function getVisible() {
+    var $el = $('.header'),
+        scrollTop = $(this).scrollTop(),
+        scrollBot = scrollTop + $(this).height(),
+        elTop = $el.offset().top,
+        elBottom = elTop + $el.outerHeight(),
+        visibleTop = elTop < scrollTop ? scrollTop : elTop,
+        visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+    return visibleBottom - visibleTop;
+}
+$(window).scroll(function () {
+    var headerHeight = getVisible();
+    var screenHeight = screen.height;
+    $('.content .wrapper-carts').css({ "top": headerHeight + 5, "height": (screenHeight - headerHeight - 140) + 'px' });
+});
+
+/* format size home cart */
+function formatHomeCart() {
+    if (!window.matchMedia('(max-width: 500px)').matches) {
+        if ($('.content .wrapper-carts').children().length < 1) {
+            $('.content .wrapper-carts').css("width", "0px");
+            $('.content .wrapper').css("width", "97%");
+        }
+        else {
+            $('.content .wrapper-carts').css("width", "33%");
+            $('.content .wrapper').css("width", "67%");
+        }   
+    }
+}
+
 /* search product function */
 function searching() {
     var keyWord = $('.content .searching input[name="search-key-word"]').val();
     var category = $('.content .searching #search-category').val();
     var status = $('.content .searching #search-status').val();
-    loadProducts(keyWord,category,status);
+    loadProducts(keyWord, category, status);
 }
 
 /* add order function */
@@ -32,11 +63,11 @@ function addOrder() {
             method_note: method_note
         },
         success: function (response) {
-            if (response){
-                window.location.href="http://localhost/HCMUESupport/Home/Success";
+            if (response) {
+                window.location.href = "http://localhost/HCMUESupport/Home/Success";
             }
-            else{
-                window.location.href="http://localhost/HCMUESupport/Home/Failed";
+            else {
+                window.location.href = "http://localhost/HCMUESupport/Home/Failed";
             }
         }
     });
@@ -88,8 +119,8 @@ function passDataRemove(id, name) {
     $('#removeModal').modal();
 }
 
-/* remove cart function*/
-function removeCart() {
+/* remove cart function (type default 1 is cart, 0 is home cart)*/
+function removeCart(type = 1) {
     var productID = $('#removeModal input[name="id-remove"]').val();
     $.ajax({
         url: 'http://localhost/HCMUESupport/Ajax/removeCart',
@@ -101,6 +132,10 @@ function removeCart() {
             if (response) {
                 loadCart();
                 loadCartHover();
+                loadHomeCart();
+            }
+            if (type == 0) {
+                loadProducts();
             }
         }
     });
@@ -114,6 +149,19 @@ function loadCartHover() {
         method: 'post',
         success: function (response) {
             $('.header .cart').html(response);
+        }
+    });
+}
+
+loadHomeCart();
+/* load home cart function*/
+function loadHomeCart() {
+    $.ajax({
+        url: 'http://localhost/HCMUESupport/Ajax/loadHomeCart',
+        method: 'post',
+        success: function (response) {
+            $('.content .wrapper-carts').html(response);
+            formatHomeCart();
         }
     });
 }
@@ -135,6 +183,7 @@ function addCart(productID) {
                         if (response == 1) {
                             loadCartHover();
                             loadProducts();
+                            loadHomeCart();
                         }
                         else if (response == 2) {
                             $('#outQuantityModal').modal();
@@ -146,6 +195,7 @@ function addCart(productID) {
                 });
             }
             else {
+                alert('Chưa đăng nhập');
                 $('#loginPermissionModal').modal();
             }
         }

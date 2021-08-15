@@ -64,8 +64,12 @@ class Home extends ViewModel
 		$orderByID = json_decode($this->orders->getOrderByID($orderID), true);
 		$listOrdered = array();
 		foreach ($listOrderDetail as $item) {
-			$productName = json_decode($products->getProductNameByID($item['ProductID']), true);
-			array_push($listOrdered, $productName);
+			$product = json_decode($products->getProductByID($item['ProductID']), true);
+			array_push($listOrdered, [
+				'ProductName'=>$product['ProductName'],
+				'Image'=>$product['Image'],
+				'Description'=>$product['Description']
+			]);
 		}
 		$this->loadView('Shared', 'Layout', [
 			'title' => 'Orderd',

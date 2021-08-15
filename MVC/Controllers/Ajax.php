@@ -45,9 +45,15 @@ class Ajax extends ViewModel
 			foreach ($listCarts as $item) {
 				$product = json_decode($products->getProductByID($item['ProductID']), true);
 				$output .= '
-				<div class="item">
-					<label class="item-name" title="' . $product['ProductName'] . '">' . $product['ProductName'] . '</label>
-					<i class="far fa-trash-alt item-remove" onclick="passDataRemove(' . $item['ProductID'] . ',\'' . $product['ProductName'] . '\')"></i>
+				<div class="item appear">
+					<div class="item-image">
+						<img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="' . IMAGE_URL . '/' . $product['Image'] . '" />
+					</div>
+					<div class="item-infor">
+						<label class="item-name" title="' . $product['ProductName'] . '">' . $product['ProductName'] . '</label>
+						<label class="item-description" title="' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này") . '">' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này") . '</label>
+						<i title="Xóa" class="far fa-trash-alt item-remove" onclick="passDataRemove(' . $item['ProductID'] . ',\'' . $product['ProductName'] . '\')"></i>
+					</div>
 				</div>
 				';
 			}
@@ -138,35 +144,63 @@ class Ajax extends ViewModel
 	public function loadCartHover()
 	{
 		$carts = $this->getModel('CartsDAL');
-		$products = $this->getModel('ProductsDAL');
+		//$products = $this->getModel('ProductsDAL');
 
 		$listCarts = json_decode($carts->getCartsByUserID($_SESSION['USER_ID_SESSION']), true);
 		$output = '
 			<i class="fas fa-shopping-cart"></i>
 		';
-		if (count($listCarts) < 1) {
-			$output .= '
-				<div class="show-cart" style="display:flex;justify-content:center;align-items:center">
-					<label style="margin:0;">Chưa có sản phẩm nào</label>
-				</div>
-			';
-		} else {
-			$output .= '
-				<div class="number"><label>' . count($listCarts) . '</label></div>
-				<div class="show-cart">
-			';
-			foreach ($listCarts as $item) {
-				$product = json_decode($products->getProductByID($item['ProductID']), true);
-				$output .= '
-					<div class="cart-item">
-						<label title="' . $product['ProductName'] . '" class="name">' . $product['ProductName'] . '</label>
-					</div>
-				';
-			}
-			$output .= '
-				</div>
-				';
+		if (count($listCarts) > 0) {
+			$output .= '<div class="number"><label>' . count($listCarts) . '</label></div>';
 		}
+		// if (count($listCarts) < 1) {
+		// 	$output .= '
+		// 		<div class="show-cart" style="display:flex;justify-content:center;align-items:center">
+		// 			<label style="margin:0;">Chưa có sản phẩm nào</label>
+		// 		</div>
+		// 	';
+		// } else {
+		// 	$output .= '
+		// 		<div class="number"><label>' . count($listCarts) . '</label></div>
+		// 		<div class="show-cart">
+		// 	';
+		// 	foreach ($listCarts as $item) {
+		// 		$product = json_decode($products->getProductByID($item['ProductID']), true);
+		// 		$output .= '
+		// 			<div class="cart-item">
+		// 				<label title="' . $product['ProductName'] . '" class="name">' . $product['ProductName'] . '</label>
+		// 			</div>
+		// 		';
+		// 	}
+		// 	$output .= '
+		// 		</div>
+		// 		';
+		// }
+		echo $output;
+	}
+	public function loadHomeCart()
+	{
+		$carts = $this->getModel('CartsDAL');
+		$products = $this->getModel('ProductsDAL');
+
+		$output = '';
+		$listCarts = json_decode($carts->getCartsByUserID($_SESSION['USER_ID_SESSION']), true);
+		foreach ($listCarts as $item) {
+			$product = json_decode($products->getProductByID($item['ProductID']), true);
+			$output .= '
+			<div class="item">
+				<div class="item-image">
+					<img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="' . IMAGE_URL . '/' . $product['Image'] . '" />
+				</div>
+				<div class="item-infor">
+					<label class="item-name" title="' . $product['ProductName'] . '">' . $product['ProductName'] . '</label>
+					<label class="item-description" title="' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này") . '">' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này") . '</label>
+					<i title="Xóa" class="far fa-trash-alt item-remove" onclick="passDataRemove(' . $item['ProductID'] . ',\'' . $product['ProductName'] . '\')"></i>
+				</div>
+			</div>
+			';
+		}
+
 		echo $output;
 	}
 
@@ -234,7 +268,9 @@ class Ajax extends ViewModel
 				$output .= '
 				<div class="product-card">
 					<div class="image-wrap">
-						<img class="image" src="' . IMAGE_URL . '/' . $image . '" />
+						<a href="' . IMAGE_URL . '/' . $image . '" target="_blank">
+							<img class="image" src="' . IMAGE_URL . '/' . $image . '" />
+						</a>
 					</div>
 					<div class="infor">
 						<label title="' . $item['ProductName'] . '" class="name">' . $item['ProductName'] . '</label>

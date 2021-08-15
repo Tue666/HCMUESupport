@@ -4,7 +4,7 @@
         <div class="carts">
 
         </div>
-        <div class="detail">
+        <div class="detail scroll-down">
             <!-- detail-form-start -->
             <form class="detail-form">
                 <div class="form-group">
@@ -37,7 +37,7 @@
             </form>
             <!-- detail-form-end -->
         </div>
-        <div class="method">
+        <div class="method scroll-down">
             <div class="form-group">
                 <label style="color:red;font-weight:bold;">Chọn phương thức nhận đồ</label>
                 <select class="form-control" id="method">

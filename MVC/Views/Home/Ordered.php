@@ -2,13 +2,19 @@
     <!-- wrapper start -->
     <div class="order-wrapper">
         <div class="ordered">
-            <?php foreach ($model['listOrdered'] as $item) : ?>
-                <div class="item">
-                    <label class="item-name" title="<?php echo $item; ?>"><?php echo $item; ?></label>
+            <?php foreach ($model['listOrdered'] as $key => $value) : ?>
+                <div class="item appear">
+                    <div class="item-image">
+                        <img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="<?php echo IMAGE_URL . '/' . $value['Image']; ?>" />
+                    </div>
+                    <div class="item-infor">
+                        <label class="item-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></label>
+                        <label class="item-description" title="<?php echo ($value['Description'] ? $value['Description'] : 'Chưa có mô tả cho sản phẩm này'); ?>"><?php echo ($value['Description'] ? $value['Description'] : 'Chưa có mô tả cho sản phẩm này'); ?></label>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="infor">
+        <div class="infor scroll-down">
             <div class="infor-item">
                 <label style="font-weight:bold">(MSSV):</label>
                 <label>(<?php echo $model['orderByID']['MSSV']; ?>)</label>
@@ -52,16 +58,16 @@
             <label style="font-weight:bold">Ghi chú</label>
             <label><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>
         </div>
-        <div class="status">
+        <div class="status scroll-down">
             <?php if ($model['orderByID']['Status'] == 2) : ?>
                 <label style="color:green;font-weight:bold">Đã nhận</label>
-                <img style="width:300px;height:300px" src="<?php echo IMAGE_URL.'/received.gif'; ?>" />
+                <img style="width:300px;height:300px" src="<?php echo IMAGE_URL . '/received.gif'; ?>" />
             <?php elseif ($model['orderByID']['Status'] == 0) : ?>
                 <label style="color:red;font-weight:bold">Đang xử lý</label>
-                <img style="width:300px;height:300px" src="<?php echo IMAGE_URL.'/process.gif'; ?>" />
+                <img style="width:300px;height:300px" src="<?php echo IMAGE_URL . '/process.gif'; ?>" />
             <?php else : ?>
                 <label style="color:red;font-weight:bold">Đang soạn hàng</label>
-                <img style="width:300px;height:300px" src="<?php echo IMAGE_URL.'/process.gif'; ?>" />
+                <img style="width:300px;height:300px" src="<?php echo IMAGE_URL . '/process.gif'; ?>" />
             <?php endif; ?>
         </div>
     </div>

@@ -31,12 +31,43 @@
         <!-- searching end -->
         <!-- products start -->
         <div class="products">
-            
+
         </div>
         <!-- products end -->
     </div>
     <!-- wrapper end -->
+
+    <?php if (!empty($_SESSION['USER_SESSION'])) : ?>
+        <!-- wrapper-carts start -->
+        <div class="wrapper-carts">
+
+        </div>
+        <!-- wrapper-carts end -->
+    <?php endif; ?>
 </div>
+
+<!-- remove modal -->
+<div class="modal fade" id="removeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id-remove" />
+                Bạn có chắc muốn xóa <label style="font-weight:bold;color:red;"></label> ?
+            </div>
+            <div class="modal-footer">
+                <button onclick="removeCart(0)" type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end remove modal -->
 
 <!-- start login permission modal -->
 <div class="modal fade" id="loginPermissionModal">
