@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>MSSV</th>
+                                        <th>Mã</th>
                                         <th>Tên</th>
                                         <th>Điện thoại</th>
                                         <th>Nơi nhận</th>
@@ -64,7 +64,7 @@
 <!-- view modal -->
 <div id="printThis">
     <div class="modal fade" id="viewModal">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Xem</h5>
@@ -107,38 +107,3 @@
     </div>
 </div>
 <!-- end received modal -->
-
-<div id="printThis">
-    <div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-
-        <div class="modal-dialog modal-lg">
-
-            <!-- Modal Content: begins -->
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Your Headings</h4>
-                </div>
-
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <div class="body-message">
-                        <h4>Any Heading</h4>
-                        <p>And a paragraph with a full sentence or something else...</p>
-                    </div>
-                </div>
-
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button id="btnPrint" type="button" class="btn btn-default">Print</button>
-                </div>
-
-            </div>
-            <!-- Modal Content: ends -->
-
-        </div>
-    </div>
-</div>

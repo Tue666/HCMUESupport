@@ -16,8 +16,12 @@
         </div>
         <div class="infor scroll-down">
             <div class="infor-item">
-                <label style="font-weight:bold">(MSSV):</label>
-                <label>(<?php echo $model['orderByID']['MSSV']; ?>)</label>
+                <label style="font-weight:bold">Mã số:</label>
+                <label><?php echo $model['orderByID']['MSSV']; ?></label>
+            </div>
+            <div class="infor-item">
+                <label style="font-weight:bold">Đối tượng:</label>
+                <label><?php echo $model['orderByID']['Object']; ?></label>
             </div>
             <div class="infor-item">
                 <label style="font-weight:bold">Khoa:</label>
@@ -32,15 +36,15 @@
                 <label><?php echo $model['orderByID']['CustomerEmail']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Address:</label>
+                <label style="font-weight:bold">Địa chỉ:</label>
                 <label><?php echo $model['orderByID']['CustomerAddress']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Phone:</label>
+                <label style="font-weight:bold">Điện thoại:</label>
                 <label><?php echo $model['orderByID']['CustomerPhone']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Nơi nhận hàng:</label>
+                <label style="font-weight:bold">Nơi nhận:</label>
                 <label style="font-weight:bold;"><?php echo $model['orderByID']['Place']; ?></label>
             </div>
             <div class="infor-item">

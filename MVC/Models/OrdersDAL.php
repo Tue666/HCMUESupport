@@ -68,9 +68,9 @@ class OrdersDAL extends Database
 		$rows = mysqli_fetch_assoc($result);
 		return json_encode($rows['CreatedDay']);
 	}
-	public function insertOrder($customerID, $customerName, $customerEmail, $customerAddress, $customerPhone, $MSSV, $khoa, $place, $address, $note)
+	public function insertOrder($customerID, $customerName, $customerEmail, $customerAddress, $customerPhone, $MSSV, $object, $khoa, $place, $address, $note)
 	{
-		$query = "INSERT orders VALUES (NULL,$customerID,'$customerName','$customerEmail','$customerAddress','$customerPhone','$MSSV','$khoa','$place','$address','$note',NOW(),NULL,0)";
+		$query = "INSERT orders VALUES (NULL,$customerID,'$customerName','$customerEmail','$customerAddress','$customerPhone','$MSSV','$object','$khoa','$place','$address','$note',NOW(),NULL,0)";
 		if (mysqli_query($this->connectionString, $query)) {
 			return json_encode(mysqli_insert_id($this->connectionString));
 		}

@@ -22,8 +22,19 @@ class Ajax extends ViewModel
 
 		$listCarts = json_decode($carts->getCartsByUserID($_SESSION['USER_ID_SESSION']), true);
 		if (count($listCarts) > 0) {
-			$today = date("Y-m-d");
-			$orderID = json_decode($orders->insertOrder($_SESSION['USER_ID_SESSION'], $_POST['name'], $_POST['email'], $_POST['address'], $_POST['phone'], $_POST['mssv'], $_POST['khoa'], $_POST['method'], $_POST['method_address'], $_POST['method_note']), true);
+			$orderID = json_decode($orders->insertOrder(
+				$_SESSION['USER_ID_SESSION'],
+				$_POST['name'],
+				$_POST['email'],
+				$_POST['address'],
+				$_POST['phone'],
+				$_POST['mssv'],
+				$_POST['object'],
+				$_POST['khoa'],
+				$_POST['method'],
+				$_POST['method_address'],
+				$_POST['method_note']
+			), true);
 			if ($orderID > 0) {
 				foreach ($listCarts as $item) {
 					json_decode($orderdetails->insertOrderDetail($orderID, $item['ProductID']), true);

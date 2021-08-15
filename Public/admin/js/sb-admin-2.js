@@ -45,7 +45,7 @@ function loadAccount() {
   $(document).ready(function () {
     $('#accountTable').DataTable({
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/accountData",
-      "scrollY": 650,
+      "scrollY": 800,
       "scrollX": true,
       "bDestroy": true,
       "stateSave": true,
@@ -102,7 +102,7 @@ function loadProduct() {
   $(document).ready(function () {
     $('#productTable').DataTable({
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/productData",
-      "scrollY": 650,
+      "scrollY": 800,
       "scrollX": true,
       "bDestroy": true,
       "stateSave": true,
@@ -159,7 +159,7 @@ function loadOrder() {
   $(document).ready(function () {
     $('#orderTable').DataTable({
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/orderData",
-      "scrollY": 650,
+      "scrollY": 1650,
       "scrollX": true,
       "bDestroy": true,
       "stateSave": true,
@@ -168,7 +168,7 @@ function loadOrder() {
         "data": "ID"
       },
       {
-        "data": "MSSV"
+        "data": "Mã"
       },
       {
         "data": "Tên"

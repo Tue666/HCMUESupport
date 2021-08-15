@@ -1,4 +1,10 @@
 <div class="content">
+    <!-- logo start -->
+    <div class="logo">
+        <img class="img-logo" src="http://hehe292001.000webhostapp.com/Public/images/egg.jpg" alt="">
+    </div>
+    <!-- logo end -->
+
     <!-- wrapper start -->
     <div class="wrapper">
         <!-- searching start -->

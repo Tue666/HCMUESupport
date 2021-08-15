@@ -19,8 +19,10 @@
 <body>
 	<!-- header start -->
 	<div class="header">
-		<img class="image" onclick="window.location.href='<?php echo BASE_URL; ?>'" src="<?php echo IMAGE_URL . '/logo.png'; ?>" />
+		<img class="image" onclick="window.location.href='<?php echo BASE_URL; ?>'" src="<?php echo IMAGE_URL . '/heart_logo.png'; ?>" />
+		<!-- <img class="image" onclick="window.location.href='<?php echo BASE_URL; ?>'" src="<?php echo IMAGE_URL . '/logo.png'; ?>" /> -->
 		<!-- <img onclick="window.location.href='<?php echo BASE_URL; ?>'" style="width:200; height:100%;cursor:pointer;" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" /> -->
+		<div></div>
 		<div style="display:flex;flex-direction:row;align-items:center">
 			<?php if (empty($_SESSION['USER_SESSION'])) : ?>
 				<a class="btn btn-danger" href="<?php echo BASE_URL . 'Login/Index'; ?>">ĐĂNG NHẬP</a>

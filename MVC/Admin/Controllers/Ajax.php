@@ -41,8 +41,12 @@ class Ajax extends ViewModel
                         <label>' . $orderByID['ID'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">MSSV:</label>
+                        <label style="font-weight:bold">Mã số:</label>
                         <label>' . $orderByID['MSSV'] . '</label>
+                    </div>
+                    <div class="infor-item">
+                        <label style="font-weight:bold">Đối tượng:</label>
+                        <label>' . $orderByID['Object'] . '</label>
                     </div>
                     <div class="infor-item">
                         <label style="font-weight:bold">Khoa:</label>
@@ -323,7 +327,7 @@ class Ajax extends ViewModel
             }
             $data[] = (object)array(
                 'ID' => $item['ID'],
-                'MSSV' => $item['MSSV'],
+                'Mã' => $item['MSSV'],
                 'Tên' => $item['CustomerName'],
                 'Điện thoại' => $item['CustomerPhone'],
                 'Nơi nhận' => $item['Place'],

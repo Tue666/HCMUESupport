@@ -1,31 +1,39 @@
 /* set height home carts depend on header height */
-function getVisible() {
-    var $el = $('.header'),
-        scrollTop = $(this).scrollTop(),
-        scrollBot = scrollTop + $(this).height(),
-        elTop = $el.offset().top,
-        elBottom = elTop + $el.outerHeight(),
-        visibleTop = elTop < scrollTop ? scrollTop : elTop,
-        visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
-    return visibleBottom - visibleTop;
-}
+// function getVisible() {
+//     var $el = $(window),
+//         scrollTop = $(this).scrollTop(),
+//         scrollBot = scrollTop + $(this).height(),
+//         elTop = $el.offset().top,
+//         elBottom = elTop + $el.outerHeight(),
+//         visibleTop = elTop < scrollTop ? scrollTop : elTop,
+//         visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+//     return visibleBottom - visibleTop;
+// }
+// $(window).scroll(function () {
+//     var headerHeight = getVisible();
+//     var screenHeight = screen.height;
+//     $('.content .wrapper-carts').css({ "top": headerHeight + 5, "height": (screenHeight - headerHeight - 140) + 'px' });
+// });
 $(window).scroll(function () {
-    var headerHeight = getVisible();
-    var screenHeight = screen.height;
-    $('.content .wrapper-carts').css({ "top": headerHeight + 5, "height": (screenHeight - headerHeight - 140) + 'px' });
+    if (window.scrollY > 500) {
+        $('.content .wrapper-carts').addClass('active');
+    }
+    else {
+        $('.content .wrapper-carts').removeClass('active');
+    }
 });
 
 /* format size home cart */
 function formatHomeCart() {
     if (!window.matchMedia('(max-width: 500px)').matches) {
         if ($('.content .wrapper-carts').children().length < 1) {
-            $('.content .wrapper-carts').css("width", "0px");
+            $('.content .wrapper-carts').css({ "width": "0px", "padding": "0px" });
             $('.content .wrapper').css("width", "97%");
         }
         else {
-            $('.content .wrapper-carts').css("width", "33%");
+            $('.content .wrapper-carts').css({ "width": "33%", "padding": "13px" });
             $('.content .wrapper').css("width", "67%");
-        }   
+        }
     }
 }
 
@@ -39,22 +47,25 @@ function searching() {
 
 /* add order function */
 function addOrder() {
-    var mssv = $('.detail-form input[name="detail-mssv"]').val();
-    var khoa = $('.detail-form input[name="detail-khoa"]').val();
     var name = $('.detail-form input[name="detail-name"]').val();
+    var object = $('.order-wrapper #detail-object').val();
+    var khoa = $('.order-wrapper #detail-khoa').val();
+    var mssv = $('.detail-form input[name="detail-mssv"]').val();
     var address = $('.detail-form input[name="detail-address"]').val();
     var phone = $('.detail-form input[name="detail-phone"]').val();
     var email = $('.detail-form input[name="detail-email"]').val();
     var method = $('.order-wrapper #method').val();
     var method_address = $('.order-wrapper #method-address').val();
     var method_note = $('.order-wrapper #method-note').val();
+    // alert(name + '\n' + object + '\n' + khoa + '\n' + mssv + '\n' + address + '\n' + phone + '\n' + email + '\n' + method + '\n' + method_address + '\n' + method_note);
     $.ajax({
         url: 'http://localhost/HCMUESupport/Ajax/addOrder',
         method: 'post',
         data: {
-            mssv: mssv,
-            khoa: khoa,
             name: name,
+            object: object,
+            khoa: khoa,
+            mssv: mssv,
             address: address,
             phone: phone,
             email: email,
@@ -91,12 +102,27 @@ $('.detail-form input[type!="hidden"]').keyup(function () {
 
 /* change status address order */
 $('.order-wrapper #method').on('change', function () {
-    $('.order-wrapper #method-address').val('');
-    if (this.value == 'Nhận theo địa chỉ') {
-        $('.order-wrapper #method-address').prop('readonly', false);
+    if (this.value == 'Chuyển đến nhà qua ứng dụng grap, now, ... (người nhận trả phí vận chuyển)') {
+        var address = $('.detail-form input[name="detail-address"]').val();
+        $('.order-wrapper #method-area').html(`
+            <label>Địa chỉ hiện tại</label>
+            <input type="text" class="form-control" id="method-address" placeholder="Địa chỉ hiện tại" value="${address}" readonly>
+        `);
     }
-    else {
-        $('.order-wrapper #method-address').prop('readonly', true);
+    else if (this.value == 'Nhận tại điểm tiếp nhận (người nhận tự đến lấy)') {
+        $('.order-wrapper #method-area').html(`
+            <label>Chọn địa chỉ</label>
+            <select class="form-control" id="method-address">
+                <option>Cơ sở 280 An Dương Vương (Dành cho khu vực Quận 5, 10, 11)</option>
+                <option>Cơ sở 222 Lê Văn Sỹ (Dành cho khu vực Quận 1, 3, 10, Phú Nhuận, Bình Thạnh, Tân Bình)</option>
+                <option>Khu vực Quận 4 (Dành cho khu vực Quận 1, 4, 7, huyện Nhà Bè)</option>
+                <option>Khu vực Quận 6 (Dành cho khu vực Quận 6, 8, huyện Bình Chánh)</option>
+                <option>Khu vực Quận Bình Tân (Dành cho khu vực Quận 6, Tân Phú, Bình Tân, huyện Bình Chánh)</option>
+                <option>Khu vực Quận 12 (Dành cho khu vực Quận 12, Tân Bình, Gò Vấp, huyện Hóc Môn)</option>
+            </select>
+        `);
+    } else {
+        $('.order-wrapper #method-area').html(`<input type="hidden" id="method-address" readonly></input>`);
     }
 });
 
