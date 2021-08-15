@@ -367,10 +367,20 @@ class Ajax extends ViewModel
 
     public function removeItem()
     {
+        $carts = $this->getModel('CartsDAL');
+        $stored = $this->getModel('StoreDAL');
+
         // 0 is users, 1 is products
         $type = $_POST['type'];
 
         if ($type == 0) {
+            $listCartByUser = json_decode($carts->getCartsByUserID($_POST['itemID']), true);
+            foreach ($listCartByUser as $item) {
+                if (json_decode($carts->removeItem($_POST['itemID'], $item['ProductID']), true)) {
+                    json_decode($this->products->updateQuantity($item['ProductID'], 1));
+                }
+            }
+            json_decode($stored->clearStored($_POST['itemID']));
             echo json_decode($this->accounts->removeAccount($_POST['itemID']));
         } else if ($type == 1) {
             echo json_decode($this->products->removeProduct($_POST['itemID']));

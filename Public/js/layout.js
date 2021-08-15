@@ -195,7 +195,6 @@ function addCart(productID) {
                 });
             }
             else {
-                alert('Chưa đăng nhập');
                 $('#loginPermissionModal').modal();
             }
         }

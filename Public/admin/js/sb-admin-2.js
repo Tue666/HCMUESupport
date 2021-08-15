@@ -253,11 +253,12 @@ function removeItem(type = 0) {
       if (response) {
         if (type == 0) {
           showToast('Thành công', 'Xóa tài khoản thành công');
+          loadAccount();
         }
         else if (type == 1) {
           showToast('Thành công', 'Xóa hàng hóa thành công');
+          loadProduct();
         }
-        loadProduct();
       }
       else {
         if (type == 0) {

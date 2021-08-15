@@ -56,25 +56,33 @@ class Login extends ViewModel
 			$userName = strtolower($_POST['login-user-name']);
 			$passWord = $_POST['login-password'];
 			$account = json_decode($this->accounts->getAccountByName($userName), true);
-			if (password_verify($passWord, $account['PassWord'])) {
-				$_SESSION['USER_ID_SESSION'] = $account['ID'];
-				$_SESSION['USER_SESSION'] = $account['UserName'];
-				$_SESSION['USER_TYPE_SESSION'] = $account['Type'];
-				$_SESSION['USER_STATUS_SESSION'] = $account['Status'];
-				if ($account['Type'] != 0) {
-					header('Location:' . ADMIN_BASE_URL);
-				} else {
-					// For User Page
-					if ($account['Status'] != 0) {
-						header('Location:' . BASE_URL);
+			if (!empty($account)) {
+				if (password_verify($passWord, $account['PassWord'])) {
+					$_SESSION['USER_ID_SESSION'] = $account['ID'];
+					$_SESSION['USER_SESSION'] = $account['UserName'];
+					$_SESSION['USER_TYPE_SESSION'] = $account['Type'];
+					$_SESSION['USER_STATUS_SESSION'] = $account['Status'];
+					if ($account['Type'] != 0) {
+						header('Location:' . ADMIN_BASE_URL);
 					} else {
-						header('Location:'.BASE_URL.'Auth/Index');
+						// For User Page
+						if ($account['Status'] != 0) {
+							header('Location:' . BASE_URL);
+						} else {
+							header('Location:' . BASE_URL . 'Auth/Index');
+						}
 					}
+				} else {
+					$this->loadView('Login', 'Index', [
+						'title' => 'Login',
+						'message' => 'Tên đăng nhập hoặc mật khẩu sai :D',
+						'type' => 'error'
+					]);
 				}
 			} else {
 				$this->loadView('Login', 'Index', [
 					'title' => 'Login',
-					'message' => 'Tên đăng nhập hoặc mật khẩu sai :D',
+					'message' => 'Tên đăng nhập không tồn tại :D',
 					'type' => 'error'
 				]);
 			}
@@ -83,6 +91,6 @@ class Login extends ViewModel
 	public function Logout()
 	{
 		session_destroy();
-		header('Location:'.BASE_URL.'Login/Index');
+		header('Location:' . BASE_URL . 'Login/Index');
 	}
 }

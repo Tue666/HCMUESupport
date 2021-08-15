@@ -76,12 +76,15 @@ class Ajax extends ViewModel
 		$stored = $this->getModel('StoreDAL');
 
 		// Check if not enough time to order
-		$beBought = false;
+		$beBought = true;
 		$lastOrdered = json_decode($orders->getLastOrdered($_SESSION['USER_ID_SESSION']), true);
-		$today = strtotime(date("Y-m-d"));
-		$dayFrom = strtotime($lastOrdered['CreatedDay']);
-		$datediff = $today - $dayFrom;
-		if ((3 - (round($datediff / (60 * 60 * 24)))) < 1) $beBought = true;
+		if (!empty($lastOrdered)) {
+			$beBought = false;
+			$today = strtotime(date("Y-m-d"));
+			$dayFrom = strtotime($lastOrdered['CreatedDay']);
+			$datediff = $today - $dayFrom;
+			if ((3 - (round($datediff / (60 * 60 * 24)))) < 1) $beBought = true;
+		}
 
 		// Check if added to cart
 		$store = array();
@@ -248,15 +251,18 @@ class Ajax extends ViewModel
 		}
 
 		// Check if not enough time to order
-		$beBought = false;
+		$beBought = true;
 		$timeRemain = 0;
 		if (!empty($_SESSION['USER_SESSION'])) {
 			$lastOrdered = json_decode($orders->getLastOrdered($_SESSION['USER_ID_SESSION']), true);
-			$today = strtotime(date("Y-m-d"));
-			$dayFrom = strtotime($lastOrdered['CreatedDay']);
-			$datediff = $today - $dayFrom;
-			$timeRemain = (3 - (round($datediff / (60 * 60 * 24))));
-			if ($timeRemain < 1) $beBought = true;
+			if (!empty($lastOrdered)) {
+				$beBought = false;
+				$today = strtotime(date("Y-m-d"));
+				$dayFrom = strtotime($lastOrdered['CreatedDay']);
+				$datediff = $today - $dayFrom;
+				$timeRemain = (3 - (round($datediff / (60 * 60 * 24))));
+				if ($timeRemain < 1) $beBought = true;
+			}
 		}
 
 		$output = '';

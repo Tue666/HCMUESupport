@@ -155,6 +155,7 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" name="id-remove" />
+                <span style="font-weight:bold;color:red;">Giỏ hàng sẽ trả lại toàn bộ sau khi tài khoản bị xóa.</span>
                 Bạn có chắc muốn xóa <label style="font-weight:bold;color:red;"></label> ?
             </div>
             <div class="modal-footer">
