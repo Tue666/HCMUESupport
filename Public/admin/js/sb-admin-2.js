@@ -44,6 +44,10 @@ loadAccount();
 function loadAccount() {
   $(document).ready(function () {
     $('#accountTable').DataTable({
+      "dom": 'Bfrtip',
+      "buttons": [
+        'excel', 'pdf'
+      ],
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/accountData",
       "scrollY": 1100,
       "scrollX": true,
@@ -101,6 +105,10 @@ loadProduct();
 function loadProduct() {
   $(document).ready(function () {
     $('#productTable').DataTable({
+      "dom": 'Bfrtip',
+      "buttons": [
+        'excel', 'pdf'
+      ],
       "order": [[6, 'desc']],
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/productData",
       "scrollY": 1250,
@@ -159,6 +167,10 @@ loadOrder();
 function loadOrder() {
   $(document).ready(function () {
     $('#orderTable').DataTable({
+      "dom": 'Bfrtip',
+      "buttons": [
+        'excel', 'pdf'
+      ],
       "order": [[6, 'desc']],
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/orderData",
       "scrollY": 1800,

@@ -103,7 +103,7 @@
                 <div class="form-group">
                     <label>Mã số sinh viên/Mã cán bộ, viên chức</label>
                     <input type="text" class="form-control" name="detail-mssv" value="<?php echo $model['account']['UserName']; ?>" placeholder="Nhập mã số sinh viên/Mã cán bộ, viên chức ..." required>
-                    <small>Mã số sinh viên/ Mã cán bộ, viên chức/ SĐT (Đối với thầy, cô nguyên là cán bộ, viên chức, giảng viên Trường)</small>
+                    <small>Số điện thoại (Đối với thầy, cô nguyên là cán bộ, viên chức, giảng viên Trường)</small>
                 </div>
                 <div class="form-group">
                     <label>Địa chỉ hiện tại</label>

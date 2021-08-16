@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label>Tên tài khoản</label>
                     <input type="text" id="checkUserName" class="form-control" name="regis-user-name" placeholder="Nhập mã số sinh viên/ mã cán bộ, viên chức (có chấm) ..." autocomplete="off" required>
-                    <small>Mã số sinh viên/ Mã cán bộ, viên chức/ SĐT (Đối với thầy, cô nguyên là cán bộ, viên chức, giảng viên Trường)</small>
+                    <small>Số điện thoại (Đối với thầy, cô nguyên là cán bộ, viên chức, giảng viên Trường)</small>
                 </div>
                 <div id="showMessage" style="margin-bottom:10px;color:red"></div>
                 <div class="form-group">
