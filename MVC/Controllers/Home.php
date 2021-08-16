@@ -14,7 +14,50 @@ class Home extends ViewModel
 	}
 	public function Index()
 	{
+		// list products
+		$orders = $this->getModel('OrdersDAL');
+		$stored = $this->getModel('StoreDAL');
+
+		$listProductsJSON = json_decode($this->products->getProduct(), true);
+		$listProducts = array();
+		foreach ($listProductsJSON as $item) {
+			$cateJSON = json_decode($this->productcategories->getCategoryByID($item['IDCate']), true);
+			array_push($listProducts, [
+				'ID' => $item['ID'],
+				'ProductName' => $item['ProductName'],
+				'CateName' => $cateJSON['CateName'],
+				'Quantity' => $item['Quantity'],
+				'Image' => $item['Image'],
+				'Description' => $item['Description']
+			]);
+		}
+		// Check if added to cart
+		$store = array();
+		if (!empty($_SESSION['USER_SESSION'])) {
+			$listStored = json_decode($stored->getStored($_SESSION['USER_ID_SESSION']), true);
+			foreach ($listStored as $item) {
+				array_push($store, $item['ProductID']);
+			}
+		}
+		// Check if not enough time to order
+		$beBought = true;
+		$timeRemain = 0;
+		if (!empty($_SESSION['USER_SESSION'])) {
+			$lastOrdered = json_decode($orders->getLastOrdered($_SESSION['USER_ID_SESSION']), true);
+			if (!empty($lastOrdered)) {
+				$beBought = false;
+				$today = strtotime(date("Y-m-d"));
+				$dayFrom = strtotime($lastOrdered['CreatedDay']);
+				$datediff = $today - $dayFrom;
+				$timeRemain = (3 - (round($datediff / (60 * 60 * 24))));
+				if ($timeRemain < 1) $beBought = true;
+			}
+		}
+
+		// list categories
 		$listCategories = json_decode($this->productcategories->getCategories(), true);
+
+		// list cart
 		$cartJSON = array();
 		if (!empty($_SESSION['USER_SESSION'])) {
 			$cartJSON = json_decode($this->carts->getCartsByUserID($_SESSION['USER_ID_SESSION']), true);
@@ -33,7 +76,11 @@ class Home extends ViewModel
 			'title' => 'Trang chủ',
 			'page' => 'Home/Index',
 			'listCategories' => $listCategories,
-			'listCarts' => $listCarts
+			'listCarts' => $listCarts,
+			'listProducts' => $listProducts,
+			'store' => $store,
+			'beBought' => $beBought,
+			'timeRemain' => $timeRemain
 		]);
 	}
 	public function History($page = 1)

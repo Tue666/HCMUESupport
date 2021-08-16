@@ -45,7 +45,7 @@ function loadAccount() {
   $(document).ready(function () {
     $('#accountTable').DataTable({
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/accountData",
-      "scrollY": 1000,
+      "scrollY": 1100,
       "scrollX": true,
       "bDestroy": true,
       "stateSave": true,
@@ -101,9 +101,9 @@ loadProduct();
 function loadProduct() {
   $(document).ready(function () {
     $('#productTable').DataTable({
-      "order": [[6,'desc']],
+      "order": [[6, 'desc']],
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/productData",
-      "scrollY": 1200,
+      "scrollY": 1250,
       "scrollX": true,
       "bDestroy": true,
       "stateSave": true,
@@ -159,7 +159,7 @@ loadOrder();
 function loadOrder() {
   $(document).ready(function () {
     $('#orderTable').DataTable({
-      "order": [[6,'desc']],
+      "order": [[6, 'desc']],
       "ajax": "http://localhost/HCMUESupport/Admin/Ajax/orderData",
       "scrollY": 1800,
       "scrollX": true,

@@ -1,7 +1,7 @@
 <div class="content">
     <!-- logo start -->
     <div class="logo">
-        <img class="img-logo" src="http://hehe292001.000webhostapp.com/Public/images/egg.jpg" alt="">
+        <img class="img-logo" src="<?php echo IMAGE_URL . '/main_poster.png'; ?>" alt="">
     </div>
     <!-- logo end -->
 
@@ -37,7 +37,43 @@
         <!-- searching end -->
         <!-- products start -->
         <div class="products">
-
+            <?php if (count($model['listProducts']) < 1) : ?>
+                <label>Không có sản phẩm nào hehe</label>
+            <?php else : ?>
+                <?php foreach ($model['listProducts'] as $item) : ?>
+                    <div class="product-card">
+                        <input type="hidden" class="product-item" value="<?php echo $item['ID']; ?>">
+                        <div class="image-wrap">
+                            <a href="<?php echo IMAGE_URL . '/' . $item['Image']; ?>" target="_blank">
+                                <img class="image" src="<?php echo IMAGE_URL . '/' . $item['Image']; ?>" />
+                            </a>
+                        </div>
+                        <div class="infor">
+                            <label title="<?php echo $item['ProductName']; ?>" class="name"><?php echo $item['ProductName']; ?></label>
+                            <label class="category">Loại: <?php echo $item['CateName']; ?></label>
+                            <label class="quantity">Số lượng: <?php echo $item['Quantity']; ?></label>
+                            <label title="<?php echo $item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D"; ?>" class="descrip"><?php echo $item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D"; ?></label>
+                        </div>
+                        <div class="action">
+                            <?php if ($item['Quantity'] < 1) : ?>
+                                <label style="color:red;font-weight:bold;">Hết hàng</label>
+                            <?php else : ?>
+                                <?php if (!empty($_SESSION['USER_SESSION'])) : ?>
+                                    <?php if (in_array($item['ID'], $model['store'])) : ?>
+                                        <label style="color:red;font-weight:bold;">Đã thêm vào giỏ</label>
+                                    <?php elseif (!$model['beBought']) : ?>
+                                        <label style="color:red;">Lần đặt tiếp: <label style="color:red;font-weight:bold;"><?php echo $model['timeRemain']; ?></label> ngày</label>
+                                    <?php else : ?>
+                                        <button onclick="addCart(<?php echo $item['ID']; ?>);" class="btn btn-danger">Đặt</button>
+                                    <?php endif; ?>
+                                <?php else : ?>
+                                    <button onclick="addCart(<?php echo $item['ID']; ?>);" class="btn btn-danger">Đặt</button>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
         <!-- products end -->
     </div>
@@ -46,7 +82,7 @@
     <?php if (!empty($_SESSION['USER_SESSION'])) : ?>
         <!-- wrapper-carts start -->
         <div class="wrapper-carts">
-            <?php foreach ($model['listCarts'] as $item) : ?>
+            <?php foreach (array_reverse($model['listCarts']) as $item) : ?>
                 <div class="item">
                     <input type="hidden" class="cart-item" value="<?php echo $item['ProductID']; ?>">
                     <div class="item-image">
@@ -55,7 +91,7 @@
                     <div class="item-infor">
                         <label class="item-name" title="<?php echo $item['ProductName']; ?>"><?php echo $item['ProductName']; ?></label>
                         <label class="item-description" title="<?php echo ($item['Description']) ? $item['Description'] : " Chưa có mô tả cho sản phẩm này"; ?>"><?php echo ($item['Description']) ? $item['Description'] : " Chưa có mô tả cho sản phẩm này"; ?></label>
-                        <i title="Xóa" class="far fa-trash-alt item-remove" onclick="passDataRemove(<?php echo $item['ProductID']; ?>,'<?php echo $item['ProductName']; ?>');"></i>
+                        <i title="Xóa" class="far fa-trash-alt item-remove" onclick="passDataRemove(<?php echo $item['ProductID']; ?>,' <?php echo $item['ProductName']; ?>');"></i>
                     </div>
                 </div>
             <?php endforeach; ?>

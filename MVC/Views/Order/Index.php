@@ -1,9 +1,9 @@
-<div class="content">
+<div class="content" style="height:92%;">
     <!-- wrapper start -->
     <div class="order-wrapper">
         <div class="carts">
             <?php if (count($model['listCarts']) > 0) : ?>
-                <?php foreach ($model['listCarts'] as $item) : ?>
+                <?php foreach (array_reverse($model['listCarts']) as $item) : ?>
                     <div class="item">
                         <input type="hidden" class="cart-item" value="<?php echo $item['ProductID']; ?>">
                         <div class="item-image">
@@ -26,6 +26,7 @@
         <div class="detail scroll-down">
             <!-- detail-form-start -->
             <form class="detail-form">
+                <label style="color:red;font-weight:bold;">Điền đầy đủ thông tin (bắt buộc)</label>
                 <div class="form-group">
                     <label>Họ và tên</label>
                     <input type="text" class="form-control" name="detail-name" value="<?php echo $model['account']['Name']; ?>" placeholder="Nhập họ và tên ..." required>
@@ -90,6 +91,16 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label style="color:red;font-weight:bold;">Tình hình sức khỏe</label>
+                    <select class="form-control" id="detail-health">
+                        <option>F0 điều trị tại nhà</option>
+                        <option>F1 cách ly tại nhà</option>
+                        <option>F2 tự cách ly tại nhà</option>
+                        <option>Có tiếp xúc với đối tượng nghi nhiễm nhưng đảm bảo đủ an toàn, không thuộc diện F1, F2</option>
+                        <option>Không tiếp xúc với đối tượng nghi nhiễm</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Mã số sinh viên/Mã cán bộ, viên chức</label>
                     <input type="text" class="form-control" name="detail-mssv" value="<?php echo $model['account']['UserName']; ?>" placeholder="Nhập mã số sinh viên/Mã cán bộ, viên chức ..." required>
                     <small>Mã số sinh viên/ Mã cán bộ, viên chức/ SĐT (Đối với thầy, cô nguyên là cán bộ, viên chức, giảng viên Trường)</small>
@@ -111,15 +122,16 @@
         </div>
         <div class="method scroll-down">
             <div class="form-group">
-                <label style="color:red;font-weight:bold;">Chọn phương thức nhận đồ</label>
+                <label style="color:red;font-weight:bold;">Chọn phương thức nhận đồ (bắt buộc)</label>
                 <select class="form-control" id="method">
-                    <option>Nhận tại trường (cơ sở 280 An Dương Vương)</option>
-                    <option>Chuyển đến nhà qua ứng dụng grap, now, ... (người nhận trả phí vận chuyển)</option>
-                    <option>Nhận tại điểm tiếp nhận (người nhận tự đến lấy)</option>
+                    <option>Chuyển đến nhà qua các ứng dụng giao hàng (Người nhận trả phí vận chuyển, Ban tổ chức hỗ trợ đặt dịch vụ)</option>
+                    <option>Tình nguyện viên giao hàng tận nơi miễn phí (Chỉ áp dụng đối với người trong khu vực phong tỏa hoặc đang tự cách ly, điều trị tại nhà)</option>
+                    <option>Nhận tại các điểm tiếp nhận (Người nhận tự đến lấy tại điểm tiếp nhận đã đăng ký)</option>
                 </select>
             </div>
             <div class="form-group" id="method-area">
-                <input type="hidden" id="method-address" readonly></input>
+                <label>Địa chỉ hiện tại</label>
+                <input type="text" class="form-control" id="method-address" placeholder="Địa chỉ hiện tại" value="<?php echo $model['account']['Address']; ?>" readonly>
             </div>
             <div class="form-group">
                 <label>Ghi chú (nếu cần thiết)</label>

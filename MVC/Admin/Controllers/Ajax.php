@@ -37,56 +37,60 @@ class Ajax extends ViewModel
             <div class="order-wrapper">
                 <div class="infor">
                     <div class="infor-item">
-                        <label style="font-weight:bold">Mã hóa đơn:</label>
-                        <label>' . $orderByID['ID'] . '</label>
+                        <label style="font-weight:bold;width:20%">Mã hóa đơn:</label>
+                        <label style="width:77%;">' . $orderByID['ID'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Mã số:</label>
-                        <label>' . $orderByID['MSSV'] . '</label>
+                        <label style="font-weight:bold;width:20%">Mã số:</label>
+                        <label style="width:77%;">' . $orderByID['MSSV'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Đối tượng:</label>
-                        <label>' . $orderByID['Object'] . '</label>
+                        <label style="font-weight:bold;width:20%">Đối tượng:</label>
+                        <label style="width:77%;">' . $orderByID['Object'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Khoa:</label>
-                        <label>' . $orderByID['Khoa'] . '</label>
+                        <label style="font-weight:bold;width:20%">Khoa:</label>
+                        <label style="width:77%;">' . $orderByID['Khoa'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Tên:</label>
-                        <label>' . $orderByID['CustomerName'] . '</label>
+                        <label style="font-weight:bold;width:20%">Tên:</label>
+                        <label style="width:77%;">' . $orderByID['CustomerName'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Email:</label>
-                        <label>' . $orderByID['CustomerEmail'] . '</label>
+                        <label style="font-weight:bold;width:20%">Email:</label>
+                        <label style="width:77%;">' . $orderByID['CustomerEmail'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Địa chỉ:</label>
-                        <label>' . $orderByID['CustomerAddress'] . '</label>
+                        <label style="font-weight:bold;width:20%">Địa chỉ:</label>
+                        <label style="width:77%;">' . $orderByID['CustomerAddress'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Số điện thoại:</label>
-                        <label>' . $orderByID['CustomerPhone'] . '</label>
+                        <label style="font-weight:bold;width:20%">Số điện thoại:</label>
+                        <label style="width:77%;">' . $orderByID['CustomerPhone'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Nơi nhận hàng:</label>
-                        <label style="font-weight:bold;">' . $orderByID['Place'] . '</label>
+                        <label style="font-weight:bold;width:20%">Sức khỏe:</label>
+                        <label style="width:77%;" style="font-weight:bold">' . $orderByID['Health'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Địa chỉ đính kèm:</label>
-                        <label style="font-weight:bold;">' . $address . '</label>
+                        <label style="font-weight:bold;width:20%">Nơi nhận hàng:</label>
+                        <label style="width:77%;" style="font-weight:bold;">' . $orderByID['Place'] . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Ghi chú:</label>
-                        <label style="font-weight:bold;">' . $note . '</label>
+                        <label style="font-weight:bold;width:20%">Địa chỉ đính kèm:</label>
+                        <label style="width:77%;" style="font-weight:bold;">' . $address . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Đặt hàng ngày:</label>
-                        <label>' . $orderByID['CreatedDay'] . '</label>
+                        <label style="font-weight:bold;width:20%">Ghi chú:</label>
+                        <label style="width:77%;" style="font-weight:bold;">' . $note . '</label>
                     </div>
                     <div class="infor-item">
-                        <label style="font-weight:bold">Ngày nhận:</label>
-                        <label>' . $receivedDay . '</label>
+                        <label style="font-weight:bold;width:20%">Đặt hàng ngày:</label>
+                        <label style="width:77%;">' . $orderByID['CreatedDay'] . '</label>
+                    </div>
+                    <div class="infor-item">
+                        <label style="font-weight:bold;width:20%">Ngày nhận:</label>
+                        <label style="width:77%;">' . $receivedDay . '</label>
                     </div>
                     <div class="infor-item">
                         <label style="font-weight:bold">Sản phẩm đã đặt:</label>

@@ -19,9 +19,7 @@
 <body>
 	<!-- header start -->
 	<div class="header">
-		<img class="image" onclick="window.location.href='<?php echo BASE_URL; ?>'" src="<?php echo IMAGE_URL . '/heart_logo.png'; ?>" />
-		<!-- <img class="image" onclick="window.location.href='<?php echo BASE_URL; ?>'" src="<?php echo IMAGE_URL . '/logo.png'; ?>" /> -->
-		<!-- <img onclick="window.location.href='<?php echo BASE_URL; ?>'" style="width:200; height:100%;cursor:pointer;" src="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png" /> -->
+		<img class="image" onclick="window.location.href='<?php echo BASE_URL; ?>'" src="<?php echo IMAGE_URL . '/main_logo.png'; ?>" />
 		<div></div>
 		<div style="display:flex;flex-direction:row;align-items:center">
 			<?php if (empty($_SESSION['USER_SESSION'])) : ?>
@@ -48,6 +46,12 @@
 	}
 	?>
 	<!-- content end -->
+
+	<!-- footer start -->
+	<div class="footer">
+		<label class="footer-text">Bản quyền <?php echo date("Y"); ?> thuộc về Đoàn - Hội khoa Công nghệ Thông tin</label>
+	</div>
+	<!-- footer end -->
 
 	<!-- Logout Modal Start -->
 	<div class="modal fade" id="logoutModal">

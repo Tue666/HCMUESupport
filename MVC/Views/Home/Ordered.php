@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" style="height:92%;">
     <!-- wrapper start -->
     <div class="order-wrapper">
         <div class="ordered">
@@ -16,48 +16,52 @@
         </div>
         <div class="infor scroll-down">
             <div class="infor-item">
-                <label style="font-weight:bold">Mã số:</label>
-                <label><?php echo $model['orderByID']['MSSV']; ?></label>
+                <label style="font-weight:bold;width:25%;">Mã số:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['MSSV']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Đối tượng:</label>
-                <label><?php echo $model['orderByID']['Object']; ?></label>
+                <label style="font-weight:bold;width:25%;">Đối tượng:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['Object']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Khoa:</label>
-                <label><?php echo $model['orderByID']['Khoa']; ?></label>
+                <label style="font-weight:bold;width:25%;">Khoa:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['Khoa']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Tên:</label>
-                <label><?php echo $model['orderByID']['CustomerName']; ?></label>
+                <label style="font-weight:bold;width:25%;">Tên:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['CustomerName']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Email:</label>
-                <label><?php echo $model['orderByID']['CustomerEmail']; ?></label>
+                <label style="font-weight:bold;width:25%;">Email:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['CustomerEmail']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Địa chỉ:</label>
-                <label><?php echo $model['orderByID']['CustomerAddress']; ?></label>
+                <label style="font-weight:bold;width:25%;">Địa chỉ:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['CustomerAddress']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Điện thoại:</label>
-                <label><?php echo $model['orderByID']['CustomerPhone']; ?></label>
+                <label style="font-weight:bold;width:25%;">Điện thoại:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['CustomerPhone']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Nơi nhận:</label>
-                <label style="font-weight:bold;"><?php echo $model['orderByID']['Place']; ?></label>
+                <label style="font-weight:bold;width:25%;">Sức khỏe:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['Health']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Địa chỉ đính kèm:</label>
-                <label style="font-weight:bold;"><?php echo $model['orderByID']['Address'] ? $model['orderByID']['Address'] : '-------'; ?></label>
+                <label style="font-weight:bold;width:25%;">Nơi nhận:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['Place']; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Đặt hàng ngày:</label>
-                <label><?php echo $model['orderByID']['CreatedDay']; ?></label>
+                <label style="font-weight:bold;width:25%;">Địa chỉ đính kèm:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['Address'] ? $model['orderByID']['Address'] : '-------'; ?></label>
             </div>
             <div class="infor-item">
-                <label style="font-weight:bold">Ngày nhận:</label>
-                <label><?php echo $model['orderByID']['ReceivedDay'] ? $model['orderByID']['ReceivedDay'] : '-------'; ?></label>
+                <label style="font-weight:bold;width:25%;">Đặt hàng ngày:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['CreatedDay']; ?></label>
+            </div>
+            <div class="infor-item">
+                <label style="font-weight:bold;width:25%;">Ngày nhận:</label>
+                <label style="width:70%;"><?php echo $model['orderByID']['ReceivedDay'] ? $model['orderByID']['ReceivedDay'] : '-------'; ?></label>
             </div>
             <label style="font-weight:bold">Ghi chú</label>
             <label><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>

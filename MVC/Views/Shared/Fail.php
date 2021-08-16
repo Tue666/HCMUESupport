@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" style="height:92%;">
     <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;width:100%;">
         <i class="fas fa-exclamation-circle fa-10x text-danger"></i>
         <label>Đặt hàng không thành công. </label>

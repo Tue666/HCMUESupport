@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer">
-                    <p>Copyright © 9hT <?php echo date('Y'); ?></p>
+                    <p>Bản quyền <?php echo date("Y"); ?> thuộc về Đoàn - Hội khoa Công nghệ Thông tin</p>
                 </div>
             </div>
         </div>

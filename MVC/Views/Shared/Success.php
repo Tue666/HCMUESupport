@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" style="height:92%;">
     <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;width:100%;">
         <i class="fas fa-check-circle fa-10x text-success"></i>
         <label>Đặt hàng thành công. </label>

@@ -30,6 +30,7 @@ class Ajax extends ViewModel
 				$_POST['phone'],
 				$_POST['mssv'],
 				$_POST['object'],
+				$_POST['health'],
 				$_POST['khoa'],
 				$_POST['method'],
 				$_POST['method_address'],
@@ -57,7 +58,7 @@ class Ajax extends ViewModel
 				$product = json_decode($products->getProductByID($item['ProductID']), true);
 				$output .= '
 				<div class="item">
-					<input type="hidden" class="cart-item" value="'.$item['ProductID'].'">
+					<input type="hidden" class="cart-item" value="' . $item['ProductID'] . '">
 					<div class="item-image">
 						<img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="' . IMAGE_URL . '/' . $product['Image'] . '" />
 					</div>
@@ -168,8 +169,9 @@ class Ajax extends ViewModel
 		echo $output;
 	}
 
-	public function loadProducts()
+	public function loadProducts($type = 0)
 	{
+		$output = '';
 		$keyWord = $_POST['keyWord'];
 		$category = $_POST['category'];
 		$status = $_POST['status'];
@@ -225,15 +227,15 @@ class Ajax extends ViewModel
 				if ($timeRemain < 1) $beBought = true;
 			}
 		}
-
-		$output = '';
-		if (count($listProducts) < 1) {
-			$output .= '<label>Không có sản phẩm nào hehe</label>';
-		} else {
-			foreach ($listProducts as $item) {
-				$image = $item['Image'] ? $item['Image'] : 'image_not_found.png';
-				$output .= '
+		if ($type == 0) {
+			if (count($listProducts) < 1) {
+				$output .= '<label>Không có sản phẩm nào hehe</label>';
+			} else {
+				foreach ($listProducts as $item) {
+					$image = $item['Image'] ? $item['Image'] : 'image_not_found.png';
+					$output .= '
 				<div class="product-card">
+					<input type="hidden" class="product-item" value="' . $item['ID'] . '">
 					<div class="image-wrap">
 						<a href="' . IMAGE_URL . '/' . $image . '" target="_blank">
 							<img class="image" src="' . IMAGE_URL . '/' . $image . '" />
@@ -247,24 +249,59 @@ class Ajax extends ViewModel
 					</div>
 					<div class="action">
 				';
-				if ($item['Quantity'] < 1) {
-					$output .= '<label style="color:red;font-weight:bold;">Hết hàng</label>';
-				} else {
-					if (!empty($_SESSION['USER_SESSION'])) {
-						if (in_array($item['ID'], $store)) {
-							$output .= '<label style="color:red;font-weight:bold;">Đã thêm vào giỏ</label>';
-						} else if (!$beBought) {
-							$output .= '<label style="color:red;">Lần đặt tiếp: <label style="color:red;font-weight:bold;">' . $timeRemain . '</label> ngày</label>';
-						} else $output .= '<button onclick="addCart(' . $item['ID'] . ');" class="btn btn-danger">Đặt</button>';
+					if ($item['Quantity'] < 1) {
+						$output .= '<label style="color:red;font-weight:bold;">Hết hàng</label>';
 					} else {
-						$output .= '<button onclick="addCart(' . $item['ID'] . ');" class="btn btn-danger">Đặt</button>';
+						if (!empty($_SESSION['USER_SESSION'])) {
+							if (in_array($item['ID'], $store)) {
+								$output .= '<label style="color:red;font-weight:bold;">Đã thêm vào giỏ</label>';
+							} else if (!$beBought) {
+								$output .= '<label style="color:red;">Lần đặt tiếp: <label style="color:red;font-weight:bold;">' . $timeRemain . '</label> ngày</label>';
+							} else $output .= '<button onclick="addCart(' . $item['ID'] . ');" class="btn btn-danger">Đặt</button>';
+						} else {
+							$output .= '<button onclick="addCart(' . $item['ID'] . ');" class="btn btn-danger">Đặt</button>';
+						}
 					}
-				}
-				$output .= '		
+					$output .= '		
 					</div>
 				</div>
 				';
+				}
 			}
+		} else {
+			$product = json_decode($products->getProductByID($_POST['productID']), true);
+			$cateJSON = json_decode($productcategories->getCategoryByID($product['IDCate']), true);
+			$output = '
+			<input type="hidden" class="product-item" value="' . $product['ID'] . '">
+			<div class="image-wrap">
+				<a href="' . IMAGE_URL . '/' . $product['Image'] . '" target="_blank">
+					<img class="image" src="' . IMAGE_URL . '/' . $product['Image'] . '" />
+				</a>
+			</div>
+			<div class="infor">
+				<label title="' . $product['ProductName'] . '" class="name">' . $product['ProductName'] . '</label>
+				<label class="category">Loại: ' . $cateJSON['CateName'] . '</label>
+				<label class="quantity">Số lượng: ' . $product['Quantity'] . '</label>
+				<label title="' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này :D")  . '" class="descrip">' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này :D") . '</label>
+			</div>
+			<div class="action">
+		';
+			if ($product['Quantity'] < 1) {
+				$output .= '<label style="color:red;font-weight:bold;">Hết hàng</label>';
+			} else {
+				if (!empty($_SESSION['USER_SESSION'])) {
+					if (in_array($product['ID'], $store)) {
+						$output .= '<label style="color:red;font-weight:bold;">Đã thêm vào giỏ</label>';
+					} else if (!$beBought) {
+						$output .= '<label style="color:red;">Lần đặt tiếp: <label style="color:red;font-weight:bold;">' . $timeRemain . '</label> ngày</label>';
+					} else $output .= '<button onclick="addCart(' . $product['ID'] . ');" class="btn btn-danger">Đặt</button>';
+				} else {
+					$output .= '<button onclick="addCart(' . $product['ID'] . ');" class="btn btn-danger">Đặt</button>';
+				}
+			}
+			$output .= '
+			</div>
+		';
 		}
 		echo $output;
 	}
