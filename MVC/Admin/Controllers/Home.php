@@ -23,7 +23,7 @@ class Home extends ViewModel
         $totalDoingOrder = json_decode($this->orders->countOrder(1), true);
         $totalProcessOrder = json_decode($this->orders->countOrder(0), true);
         $this->loadView('Shared', 'Layout', [
-            'title' => 'Dashboard',
+            'title' => 'Quản lí',
             'page' => 'Home/Index',
             'totalAdmin' => $totalAdmin,
             'totalUser' => $totalUser,
@@ -36,7 +36,7 @@ class Home extends ViewModel
     public function Profile()
     {
         $this->loadView('Shared', 'Layout', [
-            'title' => 'Profile',
+            'title' => 'Thông tin quản lí',
             'page' => 'Home/Profile'
         ], 1);
     }

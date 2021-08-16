@@ -46,7 +46,19 @@
     <?php if (!empty($_SESSION['USER_SESSION'])) : ?>
         <!-- wrapper-carts start -->
         <div class="wrapper-carts">
-
+            <?php foreach ($model['listCarts'] as $item) : ?>
+                <div class="item">
+                    <input type="hidden" class="cart-item" value="<?php echo $item['ProductID']; ?>">
+                    <div class="item-image">
+                        <img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="<?php echo IMAGE_URL . '/' . $item['Image']; ?>" />
+                    </div>
+                    <div class="item-infor">
+                        <label class="item-name" title="<?php echo $item['ProductName']; ?>"><?php echo $item['ProductName']; ?></label>
+                        <label class="item-description" title="<?php echo ($item['Description']) ? $item['Description'] : " Chưa có mô tả cho sản phẩm này"; ?>"><?php echo ($item['Description']) ? $item['Description'] : " Chưa có mô tả cho sản phẩm này"; ?></label>
+                        <i title="Xóa" class="far fa-trash-alt item-remove" onclick="passDataRemove(<?php echo $item['ProductID']; ?>,'<?php echo $item['ProductName']; ?>');"></i>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
         <!-- wrapper-carts end -->
     <?php endif; ?>

@@ -10,14 +10,8 @@ class Order extends ViewModel
   public function Index()
   {
     $this->loadView('Shared', 'Layout', [
-      'title' => 'Orders',
+      'title' => 'Lịch sử hóa đơn',
       'page' => 'Order/Index'
-    ], 1);
-  }
-  public function Print()
-  {
-    $this->loadView('Order', 'Print', [
-      'title' => 'Print'
     ], 1);
   }
 }

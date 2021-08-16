@@ -9,7 +9,7 @@ class Product extends ViewModel{
         $productCategories = $this->getModel('ProductCategoriesDAL');
         $listCate = json_decode($productCategories->getCategories(),true);
         $this->loadView('Shared','Layout',[
-			'title'=>'Products',
+			'title'=>'Sản phẩm',
 			'page'=>'Product/Index',
             'listCate'=>$listCate
 		],1);

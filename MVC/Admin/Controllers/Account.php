@@ -7,7 +7,7 @@ class Account extends ViewModel{
     }
     public function Index(){
         $this->loadView('Shared','Layout',[
-			'title'=>'Accounts',
+			'title'=>'Tài khoản',
 			'page'=>'Account/Index'
 		],1);
     }

@@ -12,8 +12,8 @@
             <div class="page-header">
                 <div class="page-title">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Orders</li>
+                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Quản lí</a></li>
+                        <li class="breadcrumb-item active">Hóa đơn</li>
                     </ol>
                 </div>
             </div>

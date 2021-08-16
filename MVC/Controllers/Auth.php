@@ -4,7 +4,7 @@ class Auth extends ViewModel
 	public function Index()
 	{
 		$this->loadView('Auth', 'Index', [
-			'title' => 'Auth',
+			'title' => 'Cập nhật thông tin',
 		]);
 	}
 	public function Update()
@@ -22,7 +22,7 @@ class Auth extends ViewModel
 			}
 			else{
 				$this->loadView('Auth', 'Index', [
-					'title' => 'Auth',
+					'title' => 'Cập nhật thông tin',
 					'message' => 'Lỗi. Liên hệ BCH để hỗ trợ :D',
 					'type' => 'error'
 				]);

@@ -2,7 +2,26 @@
     <!-- wrapper start -->
     <div class="order-wrapper">
         <div class="carts">
-
+            <?php if (count($model['listCarts']) > 0) : ?>
+                <?php foreach ($model['listCarts'] as $item) : ?>
+                    <div class="item">
+                        <input type="hidden" class="cart-item" value="<?php echo $item['ProductID']; ?>">
+                        <div class="item-image">
+                            <img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="<?php echo IMAGE_URL . '/' . $item['Image']; ?>" />
+                        </div>
+                        <div class="item-infor">
+                            <label class="item-name" title="<?php echo $item['ProductName']; ?>"><?php echo $item['ProductName']; ?></label>
+                            <label class="item-description" title="<?php echo ($item['Description']) ? $item['Description'] : " Chưa có mô tả cho sản phẩm này"; ?>"><?php echo ($item['Description']) ? $item['Description'] : " Chưa có mô tả cho sản phẩm này"; ?></label>
+                            <i title="Xóa" class="far fa-trash-alt item-remove" onclick="passDataRemove(<?php echo $item['ProductID']; ?>,'<?php echo $item['ProductName']; ?>');"></i>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center;">
+                    <label style="color:red;font-weight:bold;">Không có sản phẩm nào trong giỏ!</label>
+                    <label style="color:red;font-weight:bold;">NOTE: Không thể tiến hành đặt hàng nếu giỏ hàng rỗng!</label>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="detail scroll-down">
             <!-- detail-form-start -->
@@ -21,7 +40,6 @@
                 </div>
                 <div class="form-group">
                     <label>Đơn vị</label>
-                    <!-- <input type="text" class="form-control" name="detail-khoa" placeholder="Nhập vào khoa ..." required> -->
                     <select class="form-control" id="detail-khoa">
                         <option>Khoa Toán - Tin học</option>
                         <option>Khoa Vật lí</option>
@@ -88,9 +106,6 @@
                     <label>Email/Gmail</label>
                     <input type="email" class="form-control" name="detail-email" value="<?php echo $model['account']['Email']; ?>" placeholder="Nhập email hoặc gmail ..." required>
                 </div>
-                <div style="display:flex;justify-content:center" id="order-btn">
-                    <a onclick="$('#checkOrderModal').modal();" style="width:100%;" class="btn btn-primary">ĐẶT</a>
-                </div>
             </form>
             <!-- detail-form-end -->
         </div>
@@ -109,6 +124,9 @@
             <div class="form-group">
                 <label>Ghi chú (nếu cần thiết)</label>
                 <textarea class="form-control" id="method-note" rows="4"></textarea>
+            </div>
+            <div style="display:flex;justify-content:center" id="order-btn">
+                <a onclick="$('#checkOrderModal').modal();" style="width:100%;" class="btn btn-primary">ĐẶT</a>
             </div>
         </div>
     </div>
@@ -150,6 +168,7 @@
             </div>
             <div class="modal-body">
                 Chắc chắn đã kiểm tra kỹ các <label style="color:red;font-weight:bold;">thông tin, phương thức nhận</label> trước khi tiến hành đặt hàng.
+                <label style="color:red;font-weight:bold;">(Tiến hành đặt hàng sẽ thất bại nếu giỏ hàng rỗng!)</label>
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="addOrder();" class="btn btn-primary" data-dismiss="modal">Đặt</button>

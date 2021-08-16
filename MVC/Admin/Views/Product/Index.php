@@ -12,8 +12,8 @@
             <div class="page-header">
                 <div class="page-title">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Products</li>
+                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Quản lí</a></li>
+                        <li class="breadcrumb-item active">Hàng hóa</li>
                     </ol>
                 </div>
             </div>
@@ -22,7 +22,7 @@
 
     <div>
         <span data-toggle="modal" data-target="#addModal">
-            <button title="Add Product" class="btn btn-primary"><i class="fas fa-plus-circle"></i></button>
+            <button title="Thêm hàng hóa" class="btn btn-primary"><i class="fas fa-plus-circle"></i></button>
         </span>
     </div>
     <section id="main-content">

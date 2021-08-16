@@ -12,14 +12,19 @@
             <div class="page-header">
                 <div class="page-title">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Accounts</li>
+                        <li class="breadcrumb-item"><a href="<?php echo ADMIN_BASE_URL ?>">Quản lí</a></li>
+                        <li class="breadcrumb-item active">Tài khoản</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
+    <div>
+        <span data-toggle="modal" data-target="#addModal">
+            <button title="Thêm tài khoản" class="btn btn-primary"><i class="fas fa-plus-circle"></i></button>
+        </span>
+    </div>
     <section id="main-content">
         <div class="row">
             <div class="col-lg-12">

@@ -9,7 +9,7 @@ class Login extends ViewModel
 	public function Index()
 	{
 		$this->loadView('Login', 'Index', [
-			'title' => 'Login',
+			'title' => 'Đăng nhập/Đăng ký',
 		]);
 	}
 	public function Register()
@@ -20,14 +20,14 @@ class Login extends ViewModel
 			$confirmPassword = $_POST['regis-confirm-password'];
 			if ($passWord != $confirmPassword) {
 				$this->loadView('Login', 'Index', [
-					'title' => 'Login',
+					'title' => 'Đăng nhập/Đăng ký',
 					'message' => 'Mật khẩu không giống nhau :D',
 					'type' => 'error'
 				]);
 			} else {
 				if (json_decode($this->accounts->checkExist($userName))) {
 					$this->loadView('Login', 'Index', [
-						'title' => 'Login',
+						'title' => 'Đăng nhập/Đăng ký',
 						'message' => 'Tên tài khoản đã được sử dụng :D',
 						'type' => 'error'
 					]);
@@ -35,13 +35,13 @@ class Login extends ViewModel
 					$passWord = password_hash($passWord, PASSWORD_DEFAULT);
 					if (json_decode($this->accounts->insertAccount($userName, $passWord))) {
 						$this->loadView('Login', 'Index', [
-							'title' => 'Login',
+							'title' => 'Đăng nhập/Đăng ký',
 							'message' => 'Đăng ký thành công :D',
 							'type' => 'success'
 						]);
 					} else {
 						$this->loadView('Login', 'Index', [
-							'title' => 'Login',
+							'title' => 'Đăng nhập/Đăng ký',
 							'message' => 'Đăng ký thất bại :D',
 							'type' => 'error'
 						]);
@@ -74,14 +74,14 @@ class Login extends ViewModel
 					}
 				} else {
 					$this->loadView('Login', 'Index', [
-						'title' => 'Login',
+						'title' => 'Đăng nhập/Đăng ký',
 						'message' => 'Tên đăng nhập hoặc mật khẩu sai :D',
 						'type' => 'error'
 					]);
 				}
 			} else {
 				$this->loadView('Login', 'Index', [
-					'title' => 'Login',
+					'title' => 'Đăng nhập/Đăng ký',
 					'message' => 'Tên đăng nhập không tồn tại :D',
 					'type' => 'error'
 				]);
