@@ -64,7 +64,7 @@
 <!-- view modal -->
 <div id="printThis">
     <div class="modal fade" id="viewModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Xem</h5>

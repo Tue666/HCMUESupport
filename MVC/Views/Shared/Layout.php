@@ -26,14 +26,14 @@
 				<a class="btn btn-danger" href="<?php echo BASE_URL . 'Login/Index'; ?>">ĐĂNG NHẬP</a>
 			<?php else : ?>
 				<?php if ($_SESSION['USER_TYPE_SESSION']) : ?>
-					<i onclick="window.location.href='<?php echo ADMIN_BASE_URL; ?>'" style="cursor:pointer;margin:0px 7px;color:red;" class="fas fa-tachometer-alt" title="Dashboard"></i>
+					<i onclick="window.location.href='<?php echo ADMIN_BASE_URL; ?>'" style="cursor:pointer;margin:0px 7px;color:#ff838f;" class="fas fa-tachometer-alt" title="Dashboard"></i>
 				<?php endif; ?>
-				<i onclick="window.location.href='<?php echo BASE_URL . 'Home/History'; ?>'" style="cursor:pointer;margin:0px 5px;" class="fas fa-history" title="Lịch sử giao dịch"></i>
+				<i onclick="window.location.href='<?php echo BASE_URL . 'Home/History'; ?>'" style="cursor:pointer;margin:0px 5px;color:#fff;" class="fas fa-history" title="Lịch sử giao dịch"></i>
 				<div class="cart" onclick="window.location.href='<?php echo BASE_URL . 'Order/Index'; ?>'">
 
 				</div>
-				<label style="margin:0;margin-right:10px;">Xin chào, <?php echo $_SESSION['USER_SESSION']; ?></label>
-				<i data-toggle="modal" data-target="#logoutModal" class="fas fa-power-off" style="color:red;cursor:pointer;"></i>
+				<label style="margin:0;margin-right:10px;color:#fff;font-weight:bold;">Xin chào, <?php echo $_SESSION['USER_SESSION']; ?></label>
+				<i data-toggle="modal" data-target="#logoutModal" class="fas fa-power-off" style="color:red;cursor:pointer;color:#ff838f;"></i>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 
 	<!-- footer start -->
 	<div class="footer">
-		<label class="footer-text">Bản quyền <?php echo date("Y"); ?> thuộc về Đoàn - Hội khoa Công nghệ Thông tin</label>
+		<label class="footer-text" style="text-align:center;">Bản quyền <?php echo date("Y"); ?> thuộc về Đoàn - Hội khoa Công nghệ Thông tin</label>
 	</div>
 	<!-- footer end -->
 

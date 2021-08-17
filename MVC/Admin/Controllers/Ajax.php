@@ -92,9 +92,6 @@ class Ajax extends ViewModel
                         <label style="font-weight:bold;width:20%">Ngày nhận:</label>
                         <label style="width:77%;">' . $receivedDay . '</label>
                     </div>
-                    <div class="infor-item">
-                        <label style="font-weight:bold">Sản phẩm đã đặt:</label>
-                    </div>
                     <div style="width:100%;height:1px;background-color:black;margin-bottom:10px"></div>
         ';
         foreach ($listOrderdByOrderID as $item) {

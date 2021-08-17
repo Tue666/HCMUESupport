@@ -56,14 +56,14 @@ body::-webkit-scrollbar {
 .header {
 	width: 100%;
 	height: 8%;
-	background-color: #a4eAf2;
+	background-color: #1b75bc;
 	position: sticky;
 	top: 0;
 	left: 0;
 	display: flex;
 	justify-content: space-between;
     align-items: center;
-	box-shadow: 0 4px 10px #ccc;
+	box-shadow: 0 4px 10px rgba(0,0,255,0.2);
 	transition: 1.5s;
 	z-index: 999;
     padding: 10px;
@@ -159,8 +159,8 @@ body::-webkit-scrollbar {
 .content .wrapper-carts {
     width: 33%;
     position: fixed;
-    height: 86%;
-    min-height: 86%;
+    height: 85%;
+    min-height: 85%;
     right: -500px;
     padding: 13px;
     background-color: #e6e6e6;
@@ -331,6 +331,7 @@ body::-webkit-scrollbar {
 .content .order-wrapper .ordered .item {
     margin: 5px 0px;
 }
+.content .wrapper-carts .item:hover,
 .content .order-wrapper .ordered .item:hover,
 .content .order-wrapper .carts .item:hover {
     box-shadow: 0 0 10px #ccc;
@@ -389,11 +390,14 @@ body::-webkit-scrollbar {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #1b75bc;
+    margin-top: 15px;
 }
 .footer .footer-text {
     font-weight: bold;
-    color: gray;
-    margin-top: 15px;
+    color: #fff;
+    margin: 0px;
+    padding: 10px;
 }
 /* End Layout CSS */
 
@@ -441,8 +445,11 @@ body::-webkit-scrollbar {
 
 @media only screen and (max-width: 500px) {
     /* Start Layout CSS */
-    .header .image {
-        height: 70%;
+    .header {
+        padding-inline: 10px;
+    }
+    .content .logo {
+        height: 315px;
     }
     .content .wrapper {
         width: 100%;

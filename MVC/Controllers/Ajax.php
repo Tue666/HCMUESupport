@@ -161,7 +161,7 @@ class Ajax extends ViewModel
 
 		$listCarts = json_decode($carts->getCartsByUserID($_SESSION['USER_ID_SESSION']), true);
 		$output = '
-			<i class="fas fa-shopping-cart"></i>
+			<i class="fas fa-shopping-cart" style="color:#fff;"></i>
 		';
 		if (count($listCarts) > 0) {
 			$output .= '<div class="number"><label>' . count($listCarts) . '</label></div>';
