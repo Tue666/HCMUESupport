@@ -1,3 +1,5 @@
+var http = 'http://localhost/HCMUESupport/';
+
 $(window).scroll(function () {
     if (window.scrollY > 600) {
         showHomeCart();
@@ -44,7 +46,7 @@ function addOrder() {
     var method_address = $('.order-wrapper #method-address').val();
     var method_note = $('.order-wrapper #method-note').val();
     $.ajax({
-        url: 'http://localhost/HCMUESupport/Ajax/addOrder',
+        url: http + 'Ajax/addOrder',
         method: 'post',
         data: {
             name: name,
@@ -61,10 +63,10 @@ function addOrder() {
         },
         success: function (response) {
             if (response) {
-                window.location.href = "http://localhost/HCMUESupport/Home/Success";
+                window.location.href = http + "Home/Success";
             }
             else {
-                window.location.href = "http://localhost/HCMUESupport/Home/Failed";
+                window.location.href = http + "Home/Failed";
             }
         }
     });
@@ -118,18 +120,6 @@ $('.order-wrapper #method').on('change', function () {
     }
 });
 
-/* load cart function*/
-// loadCart();
-// function loadCart() {
-//     $.ajax({
-//         url: 'http://localhost/HCMUESupport/Ajax/loadCart',
-//         method: 'post',
-//         success: function (response) {
-//             $('.content .order-wrapper .carts').html(response);
-//         }
-//     });
-// }
-
 /* pass data remove cart function*/
 function passDataRemove(id, name) {
     $('#removeModal input[name="id-remove"]').val(id);
@@ -141,7 +131,7 @@ function passDataRemove(id, name) {
 function removeCart(type = 1) {
     var productID = $('#removeModal input[name="id-remove"]').val();
     $.ajax({
-        url: 'http://localhost/HCMUESupport/Ajax/removeCart',
+        url: http + 'Ajax/removeCart',
         method: 'post',
         data: {
             productID: productID
@@ -180,7 +170,7 @@ function removeCart(type = 1) {
 loadCartHover();
 function loadCartHover() {
     $.ajax({
-        url: 'http://localhost/HCMUESupport/Ajax/loadCartHover',
+        url: http + 'Ajax/loadCartHover',
         method: 'post',
         success: function (response) {
             $('.header .cart').html(response);
@@ -191,12 +181,12 @@ function loadCartHover() {
 /* add cart function */
 function addCart(productID) {
     $.ajax({
-        url: 'http://localhost/HCMUESupport/Ajax/CheckSession',
+        url: http + 'Ajax/CheckSession',
         method: 'post',
         success: function (response) {
             if (response) {
                 $.ajax({
-                    url: 'http://localhost/HCMUESupport/Ajax/addCart',
+                    url: http + 'Ajax/addCart',
                     method: 'post',
                     data: {
                         productID: productID
@@ -229,7 +219,7 @@ function addCart(productID) {
 function loadProducts(type = 0, keyWord = "", category = "Tất cả", status = "Tất cả") {
     if (type == 0) {
         $.ajax({
-            url: 'http://localhost/HCMUESupport/Ajax/loadProducts',
+            url: http + 'Ajax/loadProducts',
             method: 'post',
             data: {
                 keyWord: keyWord,
@@ -246,7 +236,7 @@ function loadProducts(type = 0, keyWord = "", category = "Tất cả", status = 
             if ($(this).val() == type) {
                 var parentDOM = $(this).parent();
                 $.ajax({
-                    url: 'http://localhost/HCMUESupport/Ajax/loadProducts/' + type,
+                    url: http + 'Ajax/loadProducts/' + type,
                     method: 'post',
                     data: {
                         productID: type,

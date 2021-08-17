@@ -1,4 +1,4 @@
-<div class="content" style="height:92%;">
+<div class="content">
     <!-- wrapper start -->
     <div class="order-wrapper">
         <div class="ordered">

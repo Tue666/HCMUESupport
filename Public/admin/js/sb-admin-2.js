@@ -1,3 +1,5 @@
+var http = 'http://localhost/HCMUESupport/';
+
 // print
 function printArea() {
   printElement(document.getElementById("printThis"));
@@ -22,7 +24,7 @@ function printElement(elem) {
 // defalt 0 is order
 function switchStatus(ID, type = 0) {
   $.ajax({
-    url: 'http://localhost/HCMUESupport/Admin/Ajax/switchStatus',
+    url: http + 'Admin/Ajax/switchStatus',
     method: 'post',
     data: {
       ID: ID,
@@ -48,7 +50,7 @@ function loadAccount() {
       "buttons": [
         'excel', 'pdf'
       ],
-      "ajax": "http://localhost/HCMUESupport/Admin/Ajax/accountData",
+      "ajax": http + "Admin/Ajax/accountData",
       "scrollY": 1100,
       "scrollX": true,
       "bDestroy": true,
@@ -110,7 +112,7 @@ function loadProduct() {
         'excel', 'pdf'
       ],
       "order": [[6, 'desc']],
-      "ajax": "http://localhost/HCMUESupport/Admin/Ajax/productData",
+      "ajax": http + "Admin/Ajax/productData",
       "scrollY": 1250,
       "scrollX": true,
       "bDestroy": true,
@@ -172,7 +174,7 @@ function loadOrder() {
         'excel', 'pdf'
       ],
       "order": [[6, 'desc']],
-      "ajax": "http://localhost/HCMUESupport/Admin/Ajax/orderData",
+      "ajax": http + "Admin/Ajax/orderData",
       "scrollY": 1800,
       "scrollX": true,
       "bDestroy": true,
@@ -217,7 +219,7 @@ function updateReceivedDay() {
   var date = $('#date-received').val();
   var orderID = $('#receivedModal input[name="id-received-order"]').val();
   $.ajax({
-    url: 'http://localhost/HCMUESupport/Admin/Ajax/updateReceivedDay',
+    url: http + 'Admin/Ajax/updateReceivedDay',
     method: 'post',
     data: {
       date: date,
@@ -240,7 +242,7 @@ function passDataReceivedDay(orderID) {
 }
 function passDataViewOrder(orderID) {
   $.ajax({
-    url: 'http://localhost/HCMUESupport/Admin/Ajax/dataViewOrder',
+    url: http + 'Admin/Ajax/dataViewOrder',
     method: 'post',
     data: {
       orderID: orderID
@@ -257,7 +259,7 @@ function passDataViewOrder(orderID) {
 function removeItem(type = 0) {
   var itemID = $('#removeModal input[name="id-remove"]').val();
   $.ajax({
-    url: 'http://localhost/HCMUESupport/Admin/Ajax/removeItem',
+    url: http + 'Admin/Ajax/removeItem',
     method: 'post',
     data: {
       itemID: itemID,
@@ -350,7 +352,7 @@ function hideToast() {
     var addPass = $('input[name="add-password"]').val();
     var isAdmin = $('input[name="add-isadmin"]').is(':checked');
     $.ajax({
-      url: 'http://localhost/HCMUESupport/Admin/Ajax/insertUser',
+      url: http + 'Admin/Ajax/insertUser',
       method: 'post',
       data: {
         addName: addName,
@@ -378,7 +380,7 @@ function hideToast() {
     var isAdmin = $('#editModal input[name="edit-isadmin"]').is(':checked');
     var status = $('#editModal input[name="edit-status"]').is(':checked');
     $.ajax({
-      url: 'http://localhost/HCMUESupport/Admin/Ajax/editUser',
+      url: http + 'Admin/Ajax/editUser',
       method: 'post',
       data: {
         id: id,
@@ -405,7 +407,7 @@ function hideToast() {
     var id = $('#resetPassModal input[name="id-resetPass"]').val();
     var newPass = $('#resetPassModal input[name="reset-pass"]').val();
     $.ajax({
-      url: 'http://localhost/HCMUESupport/Admin/Ajax/resetPass',
+      url: http + 'Admin/Ajax/resetPass',
       method: 'post',
       data: {
         id: id,
@@ -436,7 +438,7 @@ function hideToast() {
   $('.add-user-form input').keyup(function () {
     var inputName = $('.add-user-form #checkNameAdmin').val();
     $.ajax({
-      url: 'http://localhost/HCMUESupport/Admin/Ajax/checkNameAdmin',
+      url: http + 'Admin/Ajax/checkNameAdmin',
       method: 'post',
       data: {
         inputName: inputName
@@ -475,7 +477,7 @@ function hideToast() {
     formData.append('inputQuantity', quantity);
     formData.append('inputDescription', description);
     $.ajax({
-      url: 'http://localhost/HCMUESupport/Admin/Ajax/addProduct',
+      url: http + 'Admin/Ajax/addProduct',
       method: 'post',
       data: formData,
       contentType: false,
@@ -511,7 +513,7 @@ function hideToast() {
     formData.append('description', description);
     formData.append('status', !status);
     $.ajax({
-      url: 'http://localhost/HCMUESupport/Admin/Ajax/editProduct',
+      url: http + 'Admin/Ajax/editProduct',
       method: 'post',
       data: formData,
       contentType: false,
