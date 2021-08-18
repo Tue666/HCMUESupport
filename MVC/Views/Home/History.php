@@ -1,4 +1,4 @@
-<div class="content history" style="height:92%;">
+<div class="content history" style="height:100%;">
     <div class="history-wrapper">
         <table id="historyTable" class="table table-striped table-bordered table-hover" style="width:100%">
             <thead>

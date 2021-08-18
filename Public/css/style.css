@@ -455,6 +455,9 @@ body::-webkit-scrollbar {
     .order {
         height: auto !important;
     }
+    .ordered {
+        height: auto !important;
+    }
     .content .logo {
         height: 315px;
     }
