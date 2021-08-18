@@ -152,11 +152,8 @@ class Ajax extends ViewModel
                         <i class="fas fa-edit"></i>
                     </button>
                     <button
-                        data-toggle="modal"
-                        data-target="#removeModal"
-                        class="btn btn-danger mb-1"
+                        class="btn btn-danger mb-1 disabled"
                         title="Xóa"
-                        onclick="passDataRemove(' . $item['ID'] . ',\'' . $item['UserName'] . '\');"
                     >
                         <i class="fas fa-trash-alt"></i>
                     </button>

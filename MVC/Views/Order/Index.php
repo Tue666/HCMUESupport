@@ -1,4 +1,4 @@
-<div class="content" style="height:92%;">
+<div class="content order" style="height:92%;">
     <!-- wrapper start -->
     <div class="order-wrapper">
         <div class="carts">

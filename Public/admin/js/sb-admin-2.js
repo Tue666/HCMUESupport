@@ -1,5 +1,122 @@
 var http = 'http://localhost/HCMUESupport/';
 
+/* Initialize accounts, products, orders data */
+var accountData, productData, orderData;
+$(document).ready(function () {
+  accountData = $('#accountTable').DataTable({
+    "dom": 'Bfrtip',
+    "buttons": [
+      'excel', 'pdf'
+    ],
+    "ajax": http + "Admin/Ajax/accountData",
+    "autoWidth": true,
+    "columns": [{
+      "data": "ID"
+    },
+    {
+      "data": "MSSV"
+    },
+    {
+      "data": "Họ tên"
+    },
+    {
+      "data": "Email"
+    },
+    {
+      "data": "Điện thoại"
+    },
+    {
+      "data": "Loại"
+    },
+    {
+      "data": "Trạng thái"
+    },
+    {
+      "data": "Hành động"
+    }
+    ]
+  });
+
+  productData = $('#productTable').DataTable({
+    "dom": 'Bfrtip',
+    "buttons": [
+      'excel', 'pdf'
+    ],
+    "order": [[6, 'desc']],
+    "ajax": http + "Admin/Ajax/productData",
+    "autoWidth": true,
+    "columns": [{
+      "data": "ID"
+    },
+    {
+      "data": "Tên"
+    },
+    {
+      "data": "Hình"
+    },
+    {
+      "data": "Loại"
+    },
+    {
+      "data": "Mô tả"
+    },
+    {
+      "data": "Số lượng"
+    },
+    {
+      "data": "Ngày tạo"
+    },
+    {
+      "data": "Trạng thái"
+    },
+    {
+      "data": "Hành động"
+    }
+    ]
+  });
+
+  orderData = $('#orderTable').DataTable({
+    "dom": 'Bfrtip',
+    "buttons": [
+      'excel', 'pdf'
+    ],
+    "order": [[6, 'desc']],
+    "ajax": http + "Admin/Ajax/orderData",
+    "autoWidth": true,
+    "columns": [{
+      "data": "ID"
+    },
+    {
+      "data": "Mã"
+    },
+    {
+      "data": "Tên"
+    },
+    {
+      "data": "Điện thoại"
+    },
+    {
+      "data": "Nơi nhận"
+    },
+    {
+      "data": "Vị trí"
+    },
+    {
+      "data": "Ngày tạo"
+    },
+    {
+      "data": "Ngày nhận"
+    },
+    {
+      "data": "Trạng thái"
+    },
+    {
+      "data": "Hành động"
+    }
+    ]
+  });
+});
+
 // print
 function printArea() {
   printElement(document.getElementById("printThis"));
@@ -32,58 +149,13 @@ function switchStatus(ID, type = 0) {
     },
     success: function (response) {
       if (response) {
-        loadOrder();
+        orderData.ajax.reload(null, false);
         showToast('Thành công', 'Cập nhật trạng thái thành công');
       }
     }
   });
 }
 
-/* Start Accounts Manager */
-
-/* load accounts admin function */
-loadAccount();
-function loadAccount() {
-  $(document).ready(function () {
-    $('#accountTable').DataTable({
-      "dom": 'Bfrtip',
-      "buttons": [
-        'excel', 'pdf'
-      ],
-      "ajax": http + "Admin/Ajax/accountData",
-      "scrollY": 1100,
-      "scrollX": true,
-      "bDestroy": true,
-      "stateSave": true,
-      "autoWidth": true,
-      "columns": [{
-        "data": "ID"
-      },
-      {
-        "data": "MSSV"
-      },
-      {
-        "data": "Họ tên"
-      },
-      {
-        "data": "Email"
-      },
-      {
-        "data": "Điện thoại"
-      },
-      {
-        "data": "Loại"
-      },
-      {
-        "data": "Trạng thái"
-      },
-      {
-        "data": "Hành động"
-      }
-      ]
-    });
-  });
-}
 // pass data to reset pass modal function
 function passDataReset(id) {
   $('#resetPassModal input[name="id-resetPass"]').val(id);
@@ -101,55 +173,6 @@ function passDataEditAccount(id, name, email, phone, address, type, status) {
 /* End Accounts Manager */
 
 /* Start Products Manager */
-
-/* load accounts admin function */
-loadProduct();
-function loadProduct() {
-  $(document).ready(function () {
-    $('#productTable').DataTable({
-      "dom": 'Bfrtip',
-      "buttons": [
-        'excel', 'pdf'
-      ],
-      "order": [[6, 'desc']],
-      "ajax": http + "Admin/Ajax/productData",
-      "scrollY": 1250,
-      "scrollX": true,
-      "bDestroy": true,
-      "stateSave": true,
-      "autoWidth": true,
-      "columns": [{
-        "data": "ID"
-      },
-      {
-        "data": "Tên"
-      },
-      {
-        "data": "Hình"
-      },
-      {
-        "data": "Loại"
-      },
-      {
-        "data": "Mô tả"
-      },
-      {
-        "data": "Số lượng"
-      },
-      {
-        "data": "Ngày tạo"
-      },
-      {
-        "data": "Trạng thái"
-      },
-      {
-        "data": "Hành động"
-      }
-      ]
-    });
-  });
-}
-
 // pass data to edit modal product function
 function passDataEditProduct(id, name, cateName, quantity, image, description, status) {
   $('#editModal input[name="id-edit"]').val(id);
@@ -163,57 +186,6 @@ function passDataEditProduct(id, name, cateName, quantity, image, description, s
 /* End Products Manager */
 
 /* Start Orders Manager */
-
-/* load orders admin function */
-loadOrder();
-function loadOrder() {
-  $(document).ready(function () {
-    $('#orderTable').DataTable({
-      "dom": 'Bfrtip',
-      "buttons": [
-        'excel', 'pdf'
-      ],
-      "order": [[6, 'desc']],
-      "ajax": http + "Admin/Ajax/orderData",
-      "scrollY": 1800,
-      "scrollX": true,
-      "bDestroy": true,
-      "stateSave": true,
-      "autoWidth": true,
-      "columns": [{
-        "data": "ID"
-      },
-      {
-        "data": "Mã"
-      },
-      {
-        "data": "Tên"
-      },
-      {
-        "data": "Điện thoại"
-      },
-      {
-        "data": "Nơi nhận"
-      },
-      {
-        "data": "Vị trí"
-      },
-      {
-        "data": "Ngày tạo"
-      },
-      {
-        "data": "Ngày nhận"
-      },
-      {
-        "data": "Trạng thái"
-      },
-      {
-        "data": "Hành động"
-      }
-      ]
-    });
-  });
-}
 // update day received order
 function updateReceivedDay() {
   var date = $('#date-received').val();
@@ -227,7 +199,7 @@ function updateReceivedDay() {
     },
     success: function (response) {
       if (response) {
-        loadOrder();
+        orderData.ajax.reload(null, false);
         showToast('Thành công', 'Cập nhật ngày nhận thành công');
       }
       else {
@@ -268,12 +240,12 @@ function removeItem(type = 0) {
     success: function (response) {
       if (response) {
         if (type == 0) {
+          accountData.ajax.reload(null, false);
           showToast('Thành công', 'Xóa tài khoản thành công');
-          loadAccount();
         }
         else if (type == 1) {
+          productData.ajax.reload(null, false);
           showToast('Thành công', 'Xóa hàng hóa thành công');
-          loadProduct();
         }
       }
       else {
@@ -361,7 +333,7 @@ function hideToast() {
       },
       success: function (response) {
         if (response) {
-          loadAccount();
+          accountData.ajax.reload(null, false);
           showToast('Thành công', 'Thêm thành công');
         }
         else {
@@ -393,7 +365,7 @@ function hideToast() {
       },
       success: function (response) {
         if (response) {
-          loadAccount();
+          accountData.ajax.reload(null, false);
           showToast('Thành công', 'Sửa thành công');
         }
         else {
@@ -415,7 +387,7 @@ function hideToast() {
       },
       success: function (response) {
         if (response) {
-          loadAccount();
+          accountData.ajax.reload(null, false);
           showToast('Thành công', 'Đổi mật khẩu thành công');
         }
         else {
@@ -484,7 +456,7 @@ function hideToast() {
       processData: false,
       success: function (response) {
         if (response) {
-          loadProduct();
+          productData.ajax.reload(null, false);
           showToast('Thành công', 'Thêm hàng hóa thành công');
         }
         else {
@@ -520,7 +492,7 @@ function hideToast() {
       processData: false,
       success: function (response) {
         if (response) {
-          loadProduct();
+          productData.ajax.reload(null, false);
           showToast('Thành công', 'Sửa sản phẩm thành công');
         }
         else {

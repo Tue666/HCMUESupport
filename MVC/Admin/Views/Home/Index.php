@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Quản lí</li>
                     </ol>
                 </div>
             </div>
@@ -64,8 +64,8 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="footer">
-                    <p>Bản quyền <?php echo date("Y"); ?> thuộc về Đoàn - Hội khoa Công nghệ Thông tin</p>
+                <div class="footer d-flex justify-content-center align-items-center">
+                    <p class="text-center">Bản quyền <?php echo date("Y"); ?> thuộc về Đoàn - Hội khoa Công nghệ Thông tin</p>
                 </div>
             </div>
         </div>

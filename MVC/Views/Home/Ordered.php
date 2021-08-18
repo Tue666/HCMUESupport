@@ -3,7 +3,7 @@
     <div class="order-wrapper">
         <div class="ordered">
             <?php foreach ($model['listOrdered'] as $key => $value) : ?>
-                <div class="item appear">
+                <div class="item">
                     <div class="item-image">
                         <img style="width:90%;height:90%;background-size:100% auto;border-radius:5px;" src="<?php echo IMAGE_URL . '/' . $value['Image']; ?>" />
                     </div>

@@ -330,6 +330,7 @@ body::-webkit-scrollbar {
 }
 .content .order-wrapper .ordered .item {
     margin: 5px 0px;
+    height: 120px;
 }
 .content .wrapper-carts .item:hover,
 .content .order-wrapper .ordered .item:hover,
@@ -354,11 +355,14 @@ body::-webkit-scrollbar {
 .content .order-wrapper .carts .item .item-name {
     width: 95%;
     max-width: 95%;
+    height: 45px;
+    max-height: 45px;
     margin: 0;
     font-weight: bold;
     overflow: hidden;
 }
 .content .wrapper-carts .item .item-description,
+.content .order-wrapper .ordered .item .item-description,
 .content .order-wrapper .carts .item .item-description {
     width:95%;
     max-width:95%;
@@ -447,6 +451,12 @@ body::-webkit-scrollbar {
     /* Start Layout CSS */
     .header {
         padding-inline: 10px;
+    }
+    .history {
+        height: auto !important;
+    }
+    .order {
+        height: auto !important;
     }
     .content .logo {
         height: 315px;
