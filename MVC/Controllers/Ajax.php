@@ -10,7 +10,7 @@ class Ajax extends ViewModel
 		$accounts = $this->getModel('AccountsDAL');
 		$userName = $_POST['userName'];
 		if (json_decode($accounts->checkExist($userName))) {
-			echo "Tên tài khoản này đã tồn tại :D";
+			echo "Tên tài khoản này đã tồn tại";
 		}
 	}
 	public function addOrder()
@@ -245,7 +245,7 @@ class Ajax extends ViewModel
 						<label title="' . $item['ProductName'] . '" class="name">' . $item['ProductName'] . '</label>
 						<label class="category">Loại: ' . $item['CateName'] . '</label>
 						<label class="quantity">Số lượng: ' . $item['Quantity'] . '</label>
-						<label title="' . ($item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D")  . '" class="descrip">' . ($item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D") . '</label>
+						<label title="' . ($item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này")  . '" class="descrip">' . ($item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này") . '</label>
 					</div>
 					<div class="action">
 				';
@@ -282,7 +282,7 @@ class Ajax extends ViewModel
 				<label title="' . $product['ProductName'] . '" class="name">' . $product['ProductName'] . '</label>
 				<label class="category">Loại: ' . $cateJSON['CateName'] . '</label>
 				<label class="quantity">Số lượng: ' . $product['Quantity'] . '</label>
-				<label title="' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này :D")  . '" class="descrip">' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này :D") . '</label>
+				<label title="' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này")  . '" class="descrip">' . ($product['Description'] ? $product['Description'] : "Chưa có mô tả cho sản phẩm này") . '</label>
 			</div>
 			<div class="action">
 		';

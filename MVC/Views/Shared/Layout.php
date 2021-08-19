@@ -63,7 +63,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Nhấn 'Thoát' để thoát :D</div>
+				<div class="modal-body">Nhấn 'Thoát' để thoát</div>
 				<div class="modal-footer">
 					<a class="btn btn-danger" href="<?php echo BASE_URL; ?>Login/Logout">Thoát</a>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>

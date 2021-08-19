@@ -52,7 +52,7 @@
                             <label title="<?php echo $item['ProductName']; ?>" class="name"><?php echo $item['ProductName']; ?></label>
                             <label class="category">Loại: <?php echo $item['CateName']; ?></label>
                             <label class="quantity">Số lượng: <?php echo $item['Quantity']; ?></label>
-                            <label title="<?php echo $item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D"; ?>" class="descrip"><?php echo $item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này :D"; ?></label>
+                            <label title="<?php echo $item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này"; ?>" class="descrip"><?php echo $item['Description'] ? $item['Description'] : "Chưa có mô tả cho sản phẩm này"; ?></label>
                         </div>
                         <div class="action">
                             <?php if ($item['Quantity'] < 1) : ?>
@@ -134,7 +134,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <label style="color:black;">Đăng nhập để sử dụng. Cảm ơn :D</label>
+                <label style="color:black;">Đăng nhập để sử dụng. Cảm ơn</label>
             </div>
             <div class="modal-footer">
                 <button onclick="window.location.href='<?php echo BASE_URL; ?>Login/Index'" type="button" class="btn btn-danger" data-dismiss="modal">Đăng nhập</button>
@@ -180,7 +180,7 @@
             </div>
             <div class="modal-body">
                 <label>
-                    Bạn đã đặt hàng rồi. Hãy đợi đến lượt tiếp theo nhé :D.
+                    Bạn đã đặt hàng rồi. Hãy đợi đến lượt tiếp theo nhé.
                 </label>
             </div>
             <div class="modal-footer">

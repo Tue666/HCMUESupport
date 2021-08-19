@@ -21,14 +21,14 @@ class Login extends ViewModel
 			if ($passWord != $confirmPassword) {
 				$this->loadView('Login', 'Index', [
 					'title' => 'Đăng nhập/Đăng ký',
-					'message' => 'Mật khẩu không giống nhau :D',
+					'message' => 'Mật khẩu không giống nhau',
 					'type' => 'error'
 				]);
 			} else {
 				if (json_decode($this->accounts->checkExist($userName))) {
 					$this->loadView('Login', 'Index', [
 						'title' => 'Đăng nhập/Đăng ký',
-						'message' => 'Tên tài khoản đã được sử dụng :D',
+						'message' => 'Tên tài khoản đã được sử dụng',
 						'type' => 'error'
 					]);
 				} else {
@@ -36,13 +36,13 @@ class Login extends ViewModel
 					if (json_decode($this->accounts->insertAccount($userName, $passWord))) {
 						$this->loadView('Login', 'Index', [
 							'title' => 'Đăng nhập/Đăng ký',
-							'message' => 'Đăng ký thành công :D',
+							'message' => 'Đăng ký thành công',
 							'type' => 'success'
 						]);
 					} else {
 						$this->loadView('Login', 'Index', [
 							'title' => 'Đăng nhập/Đăng ký',
-							'message' => 'Đăng ký thất bại :D',
+							'message' => 'Đăng ký thất bại',
 							'type' => 'error'
 						]);
 					}
@@ -75,14 +75,14 @@ class Login extends ViewModel
 				} else {
 					$this->loadView('Login', 'Index', [
 						'title' => 'Đăng nhập/Đăng ký',
-						'message' => 'Tên đăng nhập hoặc mật khẩu sai :D',
+						'message' => 'Tên đăng nhập hoặc mật khẩu sai',
 						'type' => 'error'
 					]);
 				}
 			} else {
 				$this->loadView('Login', 'Index', [
 					'title' => 'Đăng nhập/Đăng ký',
-					'message' => 'Tên đăng nhập không tồn tại :D',
+					'message' => 'Tên đăng nhập không tồn tại',
 					'type' => 'error'
 				]);
 			}

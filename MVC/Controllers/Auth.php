@@ -23,7 +23,7 @@ class Auth extends ViewModel
 			else{
 				$this->loadView('Auth', 'Index', [
 					'title' => 'Cập nhật thông tin',
-					'message' => 'Lỗi. Liên hệ BCH để hỗ trợ :D',
+					'message' => 'Lỗi. Liên hệ BCH để hỗ trợ',
 					'type' => 'error'
 				]);
 			}

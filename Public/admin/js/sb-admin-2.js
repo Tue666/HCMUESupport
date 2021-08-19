@@ -180,6 +180,7 @@ function passDataEditProduct(id, name, cateName, quantity, image, description, s
   $('#editModal select').val(cateName);
   $('#editModal input[name="edit-quantity"]').val(quantity);
   $('#editImage').attr('src', image);
+  $('#editFileID').val(null);
   $('#edit-description').val(description);
   status == 0 ? $('#editModal input[name="edit-status"]').prop('checked', true) : $('#editModal input[name="edit-status"]').prop('checked', false);
 }
