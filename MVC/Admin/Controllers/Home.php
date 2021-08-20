@@ -19,9 +19,23 @@ class Home extends ViewModel
         $totalAdmin = json_decode($this->accounts->countAccount(1), true);
         $totalUser = json_decode($this->accounts->countAccount(0), true);
         $totalProduct = json_decode($this->products->countProduct(), true);
-        $totalSuccessOrder = json_decode($this->orders->countOrder(2), true);
-        $totalDoingOrder = json_decode($this->orders->countOrder(1), true);
-        $totalProcessOrder = json_decode($this->orders->countOrder(0), true);
+        $totalSuccessOrder = 0;
+        $totalDoingOrder = 0;
+        $totalProcessOrder = 0;
+        $listOrder = json_decode($this->orders->getListOrders(),true);
+        foreach ($listOrder as $item) {
+            switch ($item['Status']) {
+                case 0:
+                    $totalProcessOrder = $totalProcessOrder + 1;
+                    break;
+                case 1:
+                    $totalDoingOrder = $totalDoingOrder + 1;
+                    break;
+                case 2:
+                    $totalSuccessOrder = $totalSuccessOrder + 1;
+                    break;
+            }
+        }
         $this->loadView('Shared', 'Layout', [
             'title' => 'Quản lí',
             'page' => 'Home/Index',

@@ -33,7 +33,7 @@
                     <li><a href="<?php echo BASE_URL; ?>"><i class="fas fa-house-user mb-2"></i> Trang chủ</a></li>
 
                     <li class="label">Quản lý</li>
-                    <li><a href="<?php echo ADMIN_BASE_URL; ?>"><i class="fas fa-tachometer-alt mb-2"></i> Quản lí</a></li>
+                    <li><a href="<?php echo ADMIN_BASE_URL; ?>"><i class="fas fa-tachometer-alt mb-2"></i> Quản lý</a></li>
                     <li><a href="<?php echo ADMIN_BASE_URL . 'Account/Index'; ?>"><i class="fas fa-user mb-2"></i> Tài khoản</a></li>
                     <li><a href="<?php echo ADMIN_BASE_URL . 'Product/Index'; ?>"><i class="fab fa-product-hunt mb-2"></i> Hàng hóa</a></li>
                     <li><a href="<?php echo ADMIN_BASE_URL . 'Order/Index'; ?>"><i class="fas fa-luggage-cart mb-2"></i> Hóa đơn</a></li>

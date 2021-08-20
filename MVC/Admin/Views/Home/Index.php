@@ -29,7 +29,7 @@
                         </div>
                         <div class="stat-content dib">
                             <div class="stat-digit">Tài khoản</div>
-                            <div class="stat-text">(<?php echo $model['totalAdmin']; ?> Admins - <?php echo $model['totalUser']; ?> Users)</div>
+                            <div class="stat-text">(<?php echo $model['totalAdmin']; ?> Quản lý - <?php echo $model['totalUser']; ?> Người dùng)</div>
                         </div>
                     </div>
                 </div>

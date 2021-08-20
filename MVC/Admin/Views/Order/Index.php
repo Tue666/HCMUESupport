@@ -33,6 +33,7 @@
                                         <th>Mã</th>
                                         <th>Tên</th>
                                         <th>Điện thoại</th>
+                                        <th>Email</th>
                                         <th>Nơi nhận</th>
                                         <th>Vị trí</th>
                                         <th>Ngày tạo</th>
@@ -80,6 +81,33 @@
     </div>
 </div>
 <!-- end view modal -->
+
+<!-- remove modal -->
+<div class="modal fade" id="removeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hủy đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id-remove" />
+                <label style="font-weight:bold;color:red;"></label>
+                <div class="form-group">
+                    <span>Lý do</span>
+                    <textarea class="form-control" id="remove-reason" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="cancelOrder();" type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end remove modal -->
 
 <!-- received modal -->
 <div class="modal fade" id="receivedModal">

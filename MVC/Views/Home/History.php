@@ -14,29 +14,31 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($model['ordersByUser'] as $item) : ?>
-                    <tr>
-                        <td><?php echo $item['ID']; ?></td>
-                        <td><?php echo $item['CustomerName']; ?></td>
-                        <td><?php echo $item['Place']; ?></td>
-                        <td><?php echo $item['Note']; ?></td>
-                        <td><?php echo $item['CreatedDay']; ?></td>
-                        <td><?php echo $item['ReceivedDay']; ?></td>
-                        <td>
-                            <?php if ($item['Status'] == 2) : ?>
-                                <label class="text-success" style="font-weight:bold;">Đã nhận</label>
-                            <?php elseif ($item['Status'] == 0) : ?>
-                                <label class="text-danger"  style="font-weight:bold;">Đang xử lý</label>
-                            <?php else: ?>
-                                <label class="text-danger"  style="font-weight:bold;">Đang soạn hàng</label>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <button onclick="window.location.href='<?php echo BASE_URL . 'Home/Ordered/' . $item['ID']; ?>'" class="btn btn-secondary" title="Xem"><i class="far fa-eye"></i></button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+                
             </tbody>
         </table>
     </div>
 </div>
+
+<!-- remove modal -->
+<div class="modal fade" id="removeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hủy đơn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id-remove" />
+                <label style="font-weight:bold;color:red;"></label>. Bấm 'Hủy' để hủy đơn hàng.
+            </div>
+            <div class="modal-footer">
+                <button onclick="cancelOrder();" type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end remove modal -->

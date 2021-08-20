@@ -12,6 +12,12 @@ class AccountsDAL extends Database
 		$result = mysqli_query($this->connectionString, $query);
 		return json_encode(mysqli_num_rows($result) > 0);
 	}
+	public function checkExistID($userID)
+	{
+		$query = "SELECT ID FROM accounts WHERE ID = $userID";
+		$result = mysqli_query($this->connectionString, $query);
+		return json_encode(mysqli_num_rows($result) > 0);
+	}
 	public function checkLogin($userName)
 	{
 		$query = "SELECT PassWord,Status FROM accounts WHERE UserName = '$userName' LIMIT 1";

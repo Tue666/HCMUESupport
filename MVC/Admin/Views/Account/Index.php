@@ -164,8 +164,8 @@
                 Bạn có chắc muốn xóa <label style="font-weight:bold;color:red;"></label> ?
             </div>
             <div class="modal-footer">
-                <button onclick="removeItem()" type="button" class="btn btn-danger" data-dismiss="modal">Remove</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button onclick="removeItem()" type="button" class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
             </div>
         </div>
     </div>

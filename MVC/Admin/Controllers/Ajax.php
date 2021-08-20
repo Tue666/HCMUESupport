@@ -22,11 +22,11 @@ class Ajax extends ViewModel
         $button = '';
         if ($orderByID['Status'] == 0) {
             $button = '
-            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="switchStatus(' . $orderByID['ID'] . ');">Chuyển sang soạn hàng</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="switchStatus(' . $orderByID['ID'] . ', 1);">Chuyển sang soạn hàng</button>
         ';
         } else if ($orderByID['Status'] == 1) {
             $button = '
-            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="switchStatus(' . $orderByID['ID'] . ');">Chuyển sang đã nhận</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="switchStatus(' . $orderByID['ID'] . ', 1);">Chuyển sang đã nhận</button>
         ';
         }
         $address = $orderByID['Address'] ? $orderByID['Address'] : '---------';
@@ -116,8 +116,7 @@ class Ajax extends ViewModel
     {
         $type = $_POST['type'];
         if ($type == 0) {
-            $orderByID = json_decode($this->orders->getOrderByID($_POST['ID']), true);
-            echo json_decode($this->orders->updateStatus($orderByID['ID'], $orderByID['Status'] + 1));
+            echo json_decode($this->orders->updateStatus($_POST['ID'], $_POST['amount']));
         }
     }
 
@@ -152,8 +151,11 @@ class Ajax extends ViewModel
                         <i class="fas fa-edit"></i>
                     </button>
                     <button
-                        class="btn btn-danger mb-1 disabled"
+                        data-toggle="modal"
+                        data-target="#removeModal"
+                        class="btn btn-danger mb-1"
                         title="Xóa"
+                        onclick="passDataRemove(' . $item['ID'] . ',\'' . $item['Name'] . '\');"
                     >
                         <i class="fas fa-trash-alt"></i>
                     </button>
@@ -287,67 +289,107 @@ class Ajax extends ViewModel
 
     public function orderData()
     {
+        $accounts = $this->getModel('AccountsDAL');
+
         $listOrders = json_decode($this->orders->getListOrders(), true);
         $data = [];
         foreach ($listOrders as $item) {
-            $button = '';
-            if ($item['Status'] == 0) {
-                $button = '
-                    <button
-                        class="btn btn-danger mb-1"
-                        title="Chuyển sang soạn hàng"
-                        onclick="switchStatus(' . $item['ID'] . ');"
-                    >
-                        <i class="fas fa-gifts"></i>
-                    </button>
-                ';
-            } else if ($item['Status'] == 1) {
-                $button = '
-                    <button
-                        class="btn btn-success mb-1"
-                        title="Chuyển sang đã nhận"
-                        onclick="switchStatus(' . $item['ID'] . ');"
-                    >
-                        <i class="fas fa-check-double"></i>
-                    </button>
+            if (json_decode($accounts->checkExistID($item['CustomerID']), true) && $item['Status'] != -1) {
+                $button = '';
+                if ($item['Status'] == 0) {
+                    $button = '
+                        <button
+                            class="btn btn-success mb-1"
+                            title="Chuyển trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', 1);"
+                        >
+                            <i class="fas fa-angle-double-right"></i>
+                        </button>
+                        <button
+                            data-toggle="modal"
+                            data-target="#removeModal"
+                            class="btn btn-danger mb-1"
+                            title="Hủy đơn"
+                            onclick="passDataRemove(' . $item['ID'] . ',\'Hủy đơn hàng chưa nhận sẽ trả lại toàn bộ hàng hóa đã đặt\');"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
                     ';
+                } else if ($item['Status'] == 1) {
+                    $button = '
+                        <button
+                            class="btn btn-success mb-1"
+                            title="Chuyển trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', 1);"
+                        >
+                            <i class="fas fa-angle-double-right"></i>
+                        </button>
+                        <button
+                            class="btn btn-warning mb-1"
+                            title="Trả trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', -1);"
+                        >
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                        <button
+                            data-toggle="modal"
+                            data-target="#removeModal"
+                            class="btn btn-danger mb-1"
+                            title="Hủy đơn"
+                            onclick="passDataRemove(' . $item['ID'] . ',\'Hủy đơn hàng chưa nhận sẽ trả lại toàn bộ hàng hóa đã đặt\');"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        ';
+                } else if ($item['Status'] == 2) {
+                    $button = '
+                        <button
+                            class="btn btn-warning mb-1"
+                            title="Trả trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', -1);"
+                        >
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                    ';
+                }
+                $status = '';
+                if ($item['Status'] == 0) {
+                    $status = '<label style="color:red;font-weight:bold;">Đang xử lý</label>';
+                } else if ($item['Status'] == 1) {
+                    $status = '<label style="color:red;font-weight:bold;">Đang soạn hàng</label>';
+                } else if ($item['Status'] == 2) {
+                    $status = '<label style="color:green;font-weight:bold;">Đã nhận</label>';
+                }
+                $data[] = (object)array(
+                    'ID' => $item['ID'],
+                    'Mã' => $item['MSSV'],
+                    'Tên' => $item['CustomerName'],
+                    'Điện thoại' => $item['CustomerPhone'],
+                    'Email' => $item['CustomerEmail'],
+                    'Nơi nhận' => $item['Place'],
+                    'Vị trí' => $item['Address'],
+                    'Ngày tạo' => $item['CreatedDay'],
+                    'Ngày nhận' => $item['ReceivedDay'] ? $item['ReceivedDay'] : '
+                        <button
+                            class="btn btn-primary mb-1"
+                            title="Cập nhật ngày nhận"
+                            onclick="passDataReceivedDay(' . $item['ID'] . ')"
+                        >
+                            <i class="far fa-calendar-plus"></i>
+                        </button>
+                    ',
+                    'Trạng thái' => $status,
+                    'Hành động' => '
+                        <button
+                            class="btn btn-secondary mb-1"
+                            title="Xem"
+                            onclick="passDataViewOrder(' . $item['ID'] . ');"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    ' . $button
+                );
             }
-            $status = '';
-            if ($item['Status'] == 0) {
-                $status = '<label style="color:red;font-weight:bold;">Đang xử lý</label>';
-            } else if ($item['Status'] == 1) {
-                $status = '<label style="color:red;font-weight:bold;">Đang soạn hàng</label>';
-            } else if ($item['Status'] == 2) {
-                $status = '<label style="color:green;font-weight:bold;">Đã nhận</label>';
-            }
-            $data[] = (object)array(
-                'ID' => $item['ID'],
-                'Mã' => $item['MSSV'],
-                'Tên' => $item['CustomerName'],
-                'Điện thoại' => $item['CustomerPhone'],
-                'Nơi nhận' => $item['Place'],
-                'Vị trí' => $item['Address'],
-                'Ngày tạo' => $item['CreatedDay'],
-                'Ngày nhận' => $item['ReceivedDay'] ? $item['ReceivedDay'] : '
-                    <button
-                        class="btn btn-primary mb-1"
-                        title="Cập nhật ngày nhận"
-                        onclick="passDataReceivedDay(' . $item['ID'] . ')"
-                    >
-                        <i class="far fa-calendar-plus"></i>
-                    </button>
-                ',
-                'Trạng thái' => $status,
-                'Hành động' => '
-                    <button
-                        class="btn btn-secondary mb-1"
-                        title="Xem"
-                        onclick="passDataViewOrder(' . $item['ID'] . ');"
-                    >
-                        <i class="fas fa-eye"></i>
-                    </button>
-                ' . $button
-            );
         }
         $result = (object)array('data' => $data);
         echo json_encode($result);
@@ -362,6 +404,23 @@ class Ajax extends ViewModel
         }
         echo json_decode($this->orders->updateReceivedDay($_POST['orderID'], $receivedDay));
     }
+    public function cancelOrder()
+    {
+        $orderdetails = $this->getModel('OrderDetailsDAL');
+
+        $orderByID = json_decode($this->orders->getOrderByID($_POST['orderID']), true);
+        if ($orderByID['Status'] == 0 || $orderByID['Status'] == 1) {
+            $listOrderDetail = json_decode($orderdetails->getOrderDetailByOrderID($_POST['orderID']), true);
+            foreach ($listOrderDetail as $item) {
+                json_decode($this->products->updateQuantity($item['ProductID'], 1));
+            }
+            if (json_decode($this->orders->updateNote($_POST['orderID'], $_POST['reason']), true)) {
+                json_decode($this->orders->updateCreatedDay($_POST['orderID'],'2021-1-1'),true);
+                $amount = $orderByID['Status'] == 0 ? -1 : -2;
+                echo json_decode($this->orders->updateStatus($_POST['orderID'], $amount), true);
+            }
+        }
+    }
 
 
     public function removeItem()
@@ -373,6 +432,7 @@ class Ajax extends ViewModel
         $type = $_POST['type'];
 
         if ($type == 0) {
+            // recall products if carts exist
             $listCartByUser = json_decode($carts->getCartsByUserID($_POST['itemID']), true);
             foreach ($listCartByUser as $item) {
                 if (json_decode($carts->removeItem($_POST['itemID'], $item['ProductID']), true)) {
@@ -380,6 +440,19 @@ class Ajax extends ViewModel
                 }
             }
             json_decode($stored->clearStored($_POST['itemID']));
+
+            //recall products if order has't been shipped
+            $orderDetail = $this->getModel('OrderDetailsDAL');
+
+            $listOrderByUser = json_decode($this->orders->getOrderByUserID($_POST['itemID']), true);
+            foreach ($listOrderByUser as $order) {
+                if ($order['Status'] == 0 || $order['Status'] == 1) {
+                    $listOrderDetail = json_decode($orderDetail->getOrderDetailByOrderID($order['ID']), true);
+                    foreach ($listOrderDetail as $detail) {
+                        json_decode($this->products->updateQuantity($detail['ProductID'], 1));
+                    }
+                }
+            }
             echo json_decode($this->accounts->removeAccount($_POST['itemID']));
         } else if ($type == 1) {
             echo json_decode($this->products->removeProduct($_POST['itemID']));

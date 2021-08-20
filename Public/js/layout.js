@@ -1,5 +1,44 @@
 var http = 'http://localhost/HCMUESupport/';
 
+/* Initialize accounts, products, orders data */
+var historyData;
+$(document).ready(function () {
+    historyData = $('#historyTable').DataTable({
+        "dom": 'Bfrtip',
+        "buttons": [
+            'excel', 'pdf'
+        ],
+        "order": [[4, 'desc']],
+        "ajax": http + "Ajax/accountHistory",
+        "autoWidth": true,
+        "columns": [{
+            "data": "ID"
+        },
+        {
+            "data": "Họ và tên"
+        },
+        {
+            "data": "Nơi nhận"
+        },
+        {
+            "data": "Ghi chú"
+        },
+        {
+            "data": "Ngày tạo"
+        },
+        {
+            "data": "Ngày nhận"
+        },
+        {
+            "data": "Trạng thái"
+        },
+        {
+            "data": "Hành động"
+        }
+        ]
+    });
+});
+
 $(window).scroll(function () {
     if (window.scrollY > 600) {
         showHomeCart();
@@ -68,6 +107,19 @@ function addOrder() {
             else {
                 window.location.href = http + "Home/Failed";
             }
+        }
+    });
+}
+function cancelOrder() {
+    var orderID = $('#removeModal input[name="id-remove"]').val();
+    $.ajax({
+        url: http + 'Ajax/cancelOrder',
+        method: 'post',
+        data: {
+            orderID: orderID
+        },
+        success: function () {
+            historyData.ajax.reload(null, false);
         }
     });
 }
@@ -193,9 +245,9 @@ function addCart(productID) {
                     },
                     dataType: 'json',
                     success: function (response) {
+                        loadProducts(productID);
                         if (response.type == 1) {
                             loadCartHover();
-                            loadProducts(productID);
                             $('.content .wrapper-carts').prepend(response.item);
                             showHomeCart();
                         }
@@ -252,3 +304,19 @@ function loadProducts(type = 0, keyWord = "", category = "Tất cả", status = 
         });
     }
 }
+
+/* scroll to top */
+var scroll_Top = $('#scroll-to-top');
+$(window).scroll(function () {
+    if (window.scrollY > 600) {
+        scroll_Top.addClass('active');
+    }
+    else {
+        scroll_Top.removeClass('active');
+    }
+});
+scroll_Top.click(function () {
+    $('html,body').animate({
+        scrollTop: 0,
+    }, 'slow');
+});

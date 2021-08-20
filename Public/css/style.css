@@ -21,6 +21,28 @@ body::-webkit-scrollbar {
     width: 220px;
     height: 120px;
 }
+#scroll-to-top {
+    width: 50px;
+    height: 50px;
+    background-color: #808080d4;
+    position: fixed;
+    bottom: 10px;
+    right: -200px;
+    z-index: 999;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+#scroll-to-top.active {
+    right: 65px;
+}
+#scroll-to-top:hover i {
+    transition: 0.5s;
+    margin-bottom: 10px;
+}
 
 @keyframes show-cart-item {
     0% {
@@ -446,6 +468,9 @@ body::-webkit-scrollbar {
 
 @media only screen and (max-width: 500px) {
     /* Start Layout CSS */
+    #scroll-to-top.active {
+        right: 10px;
+    }
     .header {
         padding-inline: 10px;
     }

@@ -13,6 +13,62 @@ class Ajax extends ViewModel
 			echo "Tên tài khoản này đã tồn tại";
 		}
 	}
+	public function accountHistory()
+	{
+		$orders = $this->getModel('OrdersDAL');
+
+		$listOrdersByUser = json_decode($orders->getOrderByUserID($_SESSION['USER_ID_SESSION']), true);
+		$data = [];
+		foreach ($listOrdersByUser as $item) {
+			$button = '';
+			$status = '';
+			if ($item['Status'] == -1) {
+				$status = '<label style="color:red;font-weight:bold;background-color:#ff000029;padding:10px;border-radius:10px;">Đơn bị hủy</label>';
+				$button = '
+					<button
+						data-toggle="modal"
+						data-target="#removeModal"
+						class="btn btn-danger"
+						title="Hủy đơn"
+						onclick="passDataRemove(' . $item['ID'] . ',\'Chỉ có thể hủy đơn đang xử lý!\');"
+					>
+						<i class="fas fa-trash mb-1"></i>
+					</button>
+				';
+			} else if ($item['Status'] == 0) {
+				$status = '<label style="color:red;font-weight:bold;">Đang xử lý</label>';
+				$button = '
+					<button
+						data-toggle="modal"
+						data-target="#removeModal"
+						class="btn btn-danger"
+						title="Hủy đơn"
+						onclick="passDataRemove(' . $item['ID'] . ',\'Chỉ có thể hủy đơn đang xử lý!\');"
+					>
+						<i class="fas fa-trash mb-1"></i>
+					</button>
+				';
+			} else if ($item['Status'] == 1) {
+				$status = '<label style="color:red;font-weight:bold;">Đang soạn hàng</label>';
+			} else if ($item['Status'] == 2) {
+				$status = '<label style="color:green;font-weight:bold;background-color:#0080004d;padding:10px;border-radius:10px;">Đã nhận</label>';
+			}
+			$data[] = (object)array(
+				'ID' => $item['ID'],
+				'Họ và tên' => $item['CustomerName'],
+				'Nơi nhận' => $item['Place'],
+				'Ghi chú' => $item['Status'] == -1 ? '<label style="color:red;font-weight:bold;">' . $item['Note'] . '</label>' : $item['Note'],
+				'Ngày tạo' => $item['CreatedDay'],
+				'Ngày nhận' => $item['ReceivedDay'],
+				'Trạng thái' => $status,
+				'Hành động' => '
+					<button onclick="window.location.href=\'' . BASE_URL . 'Home/Ordered/' . $item['ID'] . '\'" class="btn btn-secondary mb-1" title="Xem"><i class="far fa-eye"></i></button>
+				' . $button
+			);
+		}
+		$result = (object)array('data' => $data);
+		echo json_encode($result);
+	}
 	public function addOrder()
 	{
 		$orders = $this->getModel('OrdersDAL');
@@ -45,6 +101,25 @@ class Ajax extends ViewModel
 				echo true;
 			} else echo false;
 		} else echo false;
+	}
+	public function cancelOrder()
+	{
+		$products = $this->getModel('ProductsDAL');
+		$orders = $this->getModel('OrdersDAL');
+		$orderdetails = $this->getModel('OrderDetailsDAL');
+
+		$orderByID = json_decode($orders->getOrderByID($_POST['orderID']), true);
+		if ($orderByID['Status'] == 0 || $orderByID['Status'] == -1) {
+			$listOrderDetail = json_decode($orderdetails->getOrderDetailByOrderID($_POST['orderID']), true);
+			foreach ($listOrderDetail as $item) {
+				if (json_decode($orderdetails->removeOrderDetail($_POST['orderID'], $item['ProductID']), true)) {
+					if ($orderByID['Status'] == 0) {
+						json_decode($products->updateQuantity($item['ProductID'], 1));
+					}
+				}
+			}
+			echo json_decode($orders->removeOrder($_POST['orderID']), true);
+		}
 	}
 	public function loadCart()
 	{

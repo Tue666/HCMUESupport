@@ -64,7 +64,11 @@
                 <label style="width:70%;"><?php echo $model['orderByID']['ReceivedDay'] ? $model['orderByID']['ReceivedDay'] : '-------'; ?></label>
             </div>
             <label style="font-weight:bold">Ghi chú</label>
-            <label><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>
+            <?php if ($model['orderByID']['Status'] == -1) :  ?>
+                <label style="color:red;font-weight:bold"><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>
+            <?php else: ?>
+                <label><?php echo $model['orderByID']['Note'] ? $model['orderByID']['Note'] : '-------'; ?></label>
+            <?php endif; ?>
         </div>
         <div class="status scroll-down">
             <?php if ($model['orderByID']['Status'] == 2) : ?>
@@ -73,9 +77,11 @@
             <?php elseif ($model['orderByID']['Status'] == 0) : ?>
                 <label style="color:red;font-weight:bold">Đang xử lý</label>
                 <img style="width:300px;height:300px" src="<?php echo IMAGE_URL . '/process.gif'; ?>" />
-            <?php else : ?>
+            <?php elseif ($model['orderByID']['Status'] == 1) : ?>
                 <label style="color:red;font-weight:bold">Đang soạn hàng</label>
                 <img style="width:300px;height:300px" src="<?php echo IMAGE_URL . '/process.gif'; ?>" />
+            <?php else: ?>
+                <label style="color:red;font-weight:bold">Đơn bị hủy</label>
             <?php endif; ?>
         </div>
     </div>

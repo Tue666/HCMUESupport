@@ -80,9 +80,14 @@ $(document).ready(function () {
     "buttons": [
       'excel', 'pdf'
     ],
-    "order": [[6, 'desc']],
     "ajax": http + "Admin/Ajax/orderData",
     "autoWidth": true,
+    "aoColumnDefs": [{
+      "aTargets": [1, 3, 4],
+      "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+        $(nTd).css('word-break', 'break-all');
+      }
+    }],
     "columns": [{
       "data": "ID"
     },
@@ -94,6 +99,9 @@ $(document).ready(function () {
     },
     {
       "data": "Điện thoại"
+    },
+    {
+      "data": "Email"
     },
     {
       "data": "Nơi nhận"
@@ -139,13 +147,14 @@ function printElement(elem) {
 }
 
 // defalt 0 is order
-function switchStatus(ID, type = 0) {
+function switchStatus(ID, amount, type = 0) {
   $.ajax({
     url: http + 'Admin/Ajax/switchStatus',
     method: 'post',
     data: {
       ID: ID,
-      type: type
+      type: type,
+      amount: amount
     },
     success: function (response) {
       if (response) {
@@ -187,6 +196,27 @@ function passDataEditProduct(id, name, cateName, quantity, image, description, s
 /* End Products Manager */
 
 /* Start Orders Manager */
+function cancelOrder() {
+  var reason = $('#removeModal #remove-reason').val();
+  var orderID = $('#removeModal input[name="id-remove"]').val();
+  $.ajax({
+    url: http + 'Admin/Ajax/cancelOrder',
+    method: 'post',
+    data: {
+      orderID: orderID,
+      reason: reason
+    },
+    success: function (response) {
+      if (response) {
+        orderData.ajax.reload(null, false);
+        showToast('Thành công', 'Hủy đơn hàng thành công');
+      }
+      else {
+        showToast('Thất bại', 'Hủy đơn hàng thất bại', 0);
+      }
+    }
+  });
+}
 // update day received order
 function updateReceivedDay() {
   var date = $('#date-received').val();
@@ -204,7 +234,7 @@ function updateReceivedDay() {
         showToast('Thành công', 'Cập nhật ngày nhận thành công');
       }
       else {
-        showToast('Thất bại', 'Cập nhật ngày nhận thất bại');
+        showToast('Thất bại', 'Cập nhật ngày nhận thất bại', 0);
       }
     }
   });
@@ -461,7 +491,7 @@ function hideToast() {
           showToast('Thành công', 'Thêm hàng hóa thành công');
         }
         else {
-          showToast('Thất bại', 'Thêm hàng hóa thất bại', 1);
+          showToast('Thất bại', 'Thêm hàng hóa thất bại', 0);
         }
       }
     });
@@ -497,7 +527,7 @@ function hideToast() {
           showToast('Thành công', 'Sửa sản phẩm thành công');
         }
         else {
-          showToast('Thất bại', 'Sửa sản phẩm thất bại', 1);
+          showToast('Thất bại', 'Sửa sản phẩm thất bại', 0);
         }
       }
     });

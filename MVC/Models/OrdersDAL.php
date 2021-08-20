@@ -75,14 +75,28 @@ class OrdersDAL extends Database
 			return json_encode(mysqli_insert_id($this->connectionString));
 		}
 	}
+	public function removeOrder($orderID){
+		$query = "DELETE FROM orders WHERE ID = $orderID";
+		return json_encode(mysqli_query($this->connectionString,$query));
+	}
 	public function updateReceivedDay($orderID, $receivedDay)
 	{
 		$query = "UPDATE orders SET ReceivedDay = '$receivedDay' WHERE ID = $orderID";
 		return (mysqli_query($this->connectionString, $query));
 	}
-	public function updateStatus($orderID, $status)
+	public function updateStatus($orderID, $amount)
 	{
-		$query = "UPDATE orders SET Status = $status WHERE ID = $orderID";
+		$query = "UPDATE orders SET Status = Status + $amount WHERE ID = $orderID";
+		return (mysqli_query($this->connectionString, $query));
+	}
+	public function updateNote($orderID, $newNote)
+	{
+		$query = "UPDATE orders SET Note = '$newNote' WHERE ID = $orderID";
+		return (mysqli_query($this->connectionString, $query));
+	}
+	public function updateCreatedDay($orderID, $newDate)
+	{
+		$query = "UPDATE orders SET CreatedDay = '$newDate' WHERE ID = $orderID";
 		return (mysqli_query($this->connectionString, $query));
 	}
 }
