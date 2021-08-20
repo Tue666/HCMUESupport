@@ -38,7 +38,7 @@
         <!-- products start -->
         <div class="products">
             <?php if (count($model['listProducts']) < 1) : ?>
-                <label>Không có sản phẩm nào hehe</label>
+                <label>Hệ thống đang được cập nhật - Xin mời quay lại sau</label>
             <?php else : ?>
                 <?php foreach ($model['listProducts'] as $item) : ?>
                     <div class="product-card">

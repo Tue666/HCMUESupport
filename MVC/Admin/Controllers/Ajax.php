@@ -294,71 +294,69 @@ class Ajax extends ViewModel
         $listOrders = json_decode($this->orders->getListOrders(), true);
         $data = [];
         foreach ($listOrders as $item) {
-            if (json_decode($accounts->checkExistID($item['CustomerID']), true) && $item['Status'] != -1) {
+            if (json_decode($accounts->checkExistID($item['CustomerID']), true) || $item['Status'] != -1) {
                 $button = '';
-                if ($item['Status'] == 0) {
-                    $button = '
-                        <button
-                            class="btn btn-success mb-1"
-                            title="Chuyển trạng thái"
-                            onclick="switchStatus(' . $item['ID'] . ', 1);"
-                        >
-                            <i class="fas fa-angle-double-right"></i>
-                        </button>
-                        <button
-                            data-toggle="modal"
-                            data-target="#removeModal"
-                            class="btn btn-danger mb-1"
-                            title="Hủy đơn"
-                            onclick="passDataRemove(' . $item['ID'] . ',\'Hủy đơn hàng chưa nhận sẽ trả lại toàn bộ hàng hóa đã đặt\');"
-                        >
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    ';
-                } else if ($item['Status'] == 1) {
-                    $button = '
-                        <button
-                            class="btn btn-success mb-1"
-                            title="Chuyển trạng thái"
-                            onclick="switchStatus(' . $item['ID'] . ', 1);"
-                        >
-                            <i class="fas fa-angle-double-right"></i>
-                        </button>
-                        <button
-                            class="btn btn-warning mb-1"
-                            title="Trả trạng thái"
-                            onclick="switchStatus(' . $item['ID'] . ', -1);"
-                        >
-                            <i class="fas fa-undo-alt"></i>
-                        </button>
-                        <button
-                            data-toggle="modal"
-                            data-target="#removeModal"
-                            class="btn btn-danger mb-1"
-                            title="Hủy đơn"
-                            onclick="passDataRemove(' . $item['ID'] . ',\'Hủy đơn hàng chưa nhận sẽ trả lại toàn bộ hàng hóa đã đặt\');"
-                        >
-                            <i class="fas fa-trash"></i>
-                        </button>
-                        ';
-                } else if ($item['Status'] == 2) {
-                    $button = '
-                        <button
-                            class="btn btn-warning mb-1"
-                            title="Trả trạng thái"
-                            onclick="switchStatus(' . $item['ID'] . ', -1);"
-                        >
-                            <i class="fas fa-undo-alt"></i>
-                        </button>
-                    ';
-                }
                 $status = '';
                 if ($item['Status'] == 0) {
                     $status = '<label style="color:red;font-weight:bold;">Đang xử lý</label>';
+                    $button = '
+                        <button
+                            class="btn btn-success mb-1"
+                            title="Chuyển trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', 1);"
+                        >
+                            <i class="fas fa-angle-double-right"></i>
+                        </button>
+                        <button
+                            data-toggle="modal"
+                            data-target="#removeModal"
+                            class="btn btn-danger mb-1"
+                            title="Hủy đơn"
+                            onclick="passDataRemove(' . $item['ID'] . ',\'Hủy đơn hàng chưa nhận sẽ trả lại toàn bộ hàng hóa đã đặt\');"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    ';
                 } else if ($item['Status'] == 1) {
                     $status = '<label style="color:red;font-weight:bold;">Đang soạn hàng</label>';
+                    $button = '
+                        <button
+                            class="btn btn-success mb-1"
+                            title="Chuyển trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', 1);"
+                        >
+                            <i class="fas fa-angle-double-right"></i>
+                        </button>
+                        <button
+                            class="btn btn-warning mb-1"
+                            title="Trả trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', -1);"
+                        >
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                        <button
+                            data-toggle="modal"
+                            data-target="#removeModal"
+                            class="btn btn-danger mb-1"
+                            title="Hủy đơn"
+                            onclick="passDataRemove(' . $item['ID'] . ',\'Hủy đơn hàng chưa nhận sẽ trả lại toàn bộ hàng hóa đã đặt\');"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    ';
                 } else if ($item['Status'] == 2) {
                     $status = '<label style="color:green;font-weight:bold;">Đã nhận</label>';
+                    $button = '
+                        <button
+                            class="btn btn-warning mb-1"
+                            title="Trả trạng thái"
+                            onclick="switchStatus(' . $item['ID'] . ', -1);"
+                        >
+                            <i class="fas fa-undo-alt"></i>
+                        </button>
+                    ';
+                } else {
+                    $status = '<label style="color:red;font-weight:bold;">Lỗi đơn</label>';
                 }
                 $data[] = (object)array(
                     'ID' => $item['ID'],
