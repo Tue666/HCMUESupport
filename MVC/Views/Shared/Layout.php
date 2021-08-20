@@ -8,7 +8,7 @@
 	<title><?php echo $model['title']; ?></title>
 	<!-- <link rel="icon" href="https://dkhp.hcmue.edu.vn/Content/images/logo_HCMUP.png"> -->
 	<link rel="icon" href="https://upload.wikimedia.org/wikipedia/vi/5/59/Logo_HCMUP.png">
-	<link rel="stylesheet" href="<?php echo CSS_URL; ?>/style.css">
+	<link rel="stylesheet" href="<?php echo CSS_URL; ?>/style.css?v=4">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
@@ -81,7 +81,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="<?php echo JS_URL; ?>/layout.js"></script>
+	<script src="<?php echo JS_URL; ?>/layout.js?v=4"></script>
 	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 

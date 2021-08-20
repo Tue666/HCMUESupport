@@ -8,11 +8,11 @@
     <title><?php echo $model['title']; ?></title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/vi/5/59/Logo_HCMUP.png">
     <!-- Styles -->
-    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/menubar/sidebar.css" rel="stylesheet">
-    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/toastr/toastr.min.css" rel="stylesheet">
-    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo ADMIN_CSS_URL; ?>/style.css" rel="stylesheet">
+    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/owl.carousel.min.css?v=4" rel="stylesheet" />
+    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/menubar/sidebar.css?v=4" rel="stylesheet">
+    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/toastr/toastr.min.css?v=4" rel="stylesheet">
+    <link href="<?php echo ADMIN_CSS_URL; ?>/lib/bootstrap.min.css?v=4" rel="stylesheet">
+    <link href="<?php echo ADMIN_CSS_URL; ?>/style.css?v=4" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
@@ -111,14 +111,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="<?php echo ADMIN_JS_URL; ?>/lib/jquery.nanoscroller.min.js"></script>
+    <script src="<?php echo ADMIN_JS_URL; ?>/lib/jquery.nanoscroller.min.js?v=4"></script>
     <!-- nano scroller -->
-    <script src="<?php echo ADMIN_JS_URL; ?>/lib/menubar/sidebar.js"></script>
+    <script src="<?php echo ADMIN_JS_URL; ?>/lib/menubar/sidebar.js?v=4"></script>
     <!-- sidebar -->
     <!-- <script src="<?php echo ADMIN_JS_URL; ?>/lib/toastr/toastr.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- toastr -->
-    <script src="<?php echo ADMIN_JS_URL; ?>/sb-admin-2.js"></script>
+    <script src="<?php echo ADMIN_JS_URL; ?>/sb-admin-2.js?v=4"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 
