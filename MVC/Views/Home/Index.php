@@ -1,7 +1,7 @@
 <div class="content">
     <!-- logo start -->
     <div class="logo">
-        <img class="img-logo" src="<?php echo IMAGE_URL . '/main_poster.png'; ?>" alt="">
+        <img class="img-logo" src="<?php echo BASE_URL . 'Constant/images/main_poster.png'; ?>" alt="">
     </div>
     <!-- logo end -->
 
