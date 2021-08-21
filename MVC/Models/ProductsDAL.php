@@ -55,7 +55,7 @@ class ProductsDAL extends Database
             if ($keyWord == "") {
                 $query = "SELECT * FROM products WHERE IDCate = $category AND Quantity > 0 AND Status = true";
             } else {
-                $query = "SELECT * FROM products WHERE ProductName LIKE '%$keyWord%' AND IDCate = $category AND Quantity > 0";
+                $query = "SELECT * FROM products WHERE ProductName LIKE '%$keyWord%' AND IDCate = $category AND Quantity > 0 AND Status = true";
             }
         }
         $result = mysqli_query($this->connectionString, $query);
